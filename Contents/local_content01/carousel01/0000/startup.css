@@ -33,7 +33,7 @@ p{font-family:"丸ゴシック";}
 #button_green_on { left:0px; top:4px; width:202px; height:55px; visibility:hidden;}
 #button_yellow_off { left:0px; top:0px; width:203px; height:57px; visibility:visible;}
 #button_yellow_on { left:0px; top:4px; width:203px; height:53px; visibility:hidden;}
-#button_back_housou { left:0px; top:0px; width:67px; height:36px; visibility:hidden;}
+#button_back_housou { left:0px; top:0px; width:70px; height:35px; visibility:hidden;}
 #button_back_top { left:0px; top:0px; width:70px; height:35px; visibility:visible;}
 
 /** top画面 **/
@@ -171,6 +171,8 @@ p{font-family:"丸ゴシック";}
 #regi_button_balloon{ left:0px;top:40px; width:203px; height:43px; visibility:hidden; }
 #regi_button_left_focus{ left:31px;top:0px; width:147px; height:53px; visibility:hidden; }
 #regi_button_left_decision{ left:31px;top:0px; width:147px; height:53px; visibility:hidden; }
+#regi_button_right_focus{ left:171px;top:0px; width:147px; height:53px; visibility:hidden; }
+#regi_button_right_decision{ left:171px;top:0px; width:147px; height:53px; visibility:hidden; }
 
 /** ネットにつなごう **/
 #net_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }

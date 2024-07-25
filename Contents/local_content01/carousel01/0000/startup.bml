@@ -37,17 +37,17 @@
 				if(buttonKey == 21 || buttonKey == 22 || buttonKey == 23 || buttonKey == 24)
 				{
 					footer_button_change(buttonKey);
+				}else if(buttonKey == 19){
+					footer_button_return();
+
+					gStatusView.STATE_TOP = true;
+					showTop(gStatusView.STATE_TOP);
 				}
 			}
 
 			function footer_button_change(key)
 			{
 				//todo: 現在のページと同じボタンならreturn
-				
-				if(gStatusView.STATE_TOP){
-					gStatusView.STATE_TOP = false;
-					showTop(gStatusView.STATE_TOP);
-				}
 				footer_button_return();
 
 				if(key == 21){
@@ -74,6 +74,8 @@
 
 					gStatusView.STATE_URGE = true;
 					showNet(gStatusView.STATE_URGE);
+				}else if(key == 19){
+
 				}
 			}
 
@@ -103,16 +105,28 @@
 
 					gStatusView.STATE_URGE = false;
 					showNet(gStatusView.STATE_URGE);
+				}else if(gStatusView.STATE_TOP){
+					undisp("button_back_housou");
+					disp("button_back_top");
+
+					gStatusView.STATE_TOP = false;
+					showTop(gStatusView.STATE_TOP);
 				}
 			}
 
 			function showTop(flag){
 				debugN("showTop: " + flag);
 				if(flag){
+					disp("button_back_top");
+					undisp("button_back_housou");
+
 					disp("top_base");
 					disp("top_title_text");
 					disp("top_desc_text");
 				}else{
+					undisp("button_back_top");
+					disp("button_back_housou");
+
 					undisp("top_base");
 					undisp("top_title_text");
 					undisp("top_desc_text");
@@ -355,7 +369,7 @@
 			<object id= "button_yellow_off" class ="button_yellow" type="image/X-arib-png" data="futter-y-button-off.png"/>
 		</div>
 		<div id="footer_button_top" style="left:836px;top:475px;width:70px;height:35px;visibility:visible;">
-		<!-- <object id= "button_back_housou" class ="button_top" type="image/X-arib-png" data="back-housou-top.png"/> -->
+			<object id= "button_back_housou" class ="button_top" type="image/X-arib-png" data="back-housou-top.png"/>
 			<object id= "button_back_top" class ="button_top" type="image/X-arib-png" data="back-top.png"/>
 		</div>
 
