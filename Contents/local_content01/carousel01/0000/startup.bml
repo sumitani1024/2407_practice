@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="EUC-JP" ?>
+<!DOCTYPE bml PUBLIC "+//ARIB STD-B24:1999//DTD BML Document//JA" "http://www.arib.or.jp/B24/DTD/bml_1_1.dtd">
+<?bml bml-version="3.0" ?>
+<bml>
+	<head>
+		<title>12seg startup.bml[TEMPLATE]</title>
+
+		<link href="startup.css" />
+		<script src = "functions.ecm"/>
+		<script>
+			<![CDATA[
+			function init(){
+				disp("pDebug");
+				debugFlg = true;
+
+				showInit();
+				return;
+			}
+
+			function showInit(){
+				showTop(true);
+			}
+
+			//共通
+			var gStatusView = new Object();
+			gStatusView.STATE_TOP = true;
+			gStatusView.STATE_JOINHOW = false;
+			gStatusView.STATE_PROFILE = false;
+			gStatusView.STATE_REGI = false;
+			gStatusView.STATE_URGE = false;
+
+			// フッターボタン押下
+			function kd()
+			{
+				var buttonKey = getKey();
+
+				if(buttonKey == 21 || buttonKey == 22 || buttonKey == 23 || buttonKey == 24)
+				{
+					footer_button_change(buttonKey);
+				}
+			}
+
+			function footer_button_change(key)
+			{
+				//todo: 現在のページと同じボタンならreturn
+				
+				if(gStatusView.STATE_TOP){
+					gStatusView.STATE_TOP = false;
+					showTop(gStatusView.STATE_TOP);
+				}
+				footer_button_return();
+
+				if(key == 21){
+					undisp("button_blue_off");
+					disp("button_blue_on");
+
+					gStatusView.STATE_JOINHOW = true;
+					showJoinhow(gStatusView.STATE_JOINHOW);
+				}else if(key == 22){
+					undisp("button_red_off");
+					disp("button_red_on");
+
+					gStatusView.STATE_PROFILE = true;
+					showProf(gStatusView.STATE_PROFILE);
+				}else if(key == 23){
+					undisp("button_green_off");
+					disp("button_green_on");
+
+					gStatusView.STATE_REGI = true;
+					showRegi(gStatusView.STATE_REGI);
+				}else if(key == 24){
+					undisp("button_yellow_off");
+					disp("button_yellow_on");
+
+					gStatusView.STATE_URGE = true;
+					showNet(gStatusView.STATE_URGE);
+				}
+			}
+
+			function footer_button_return()
+			{
+				if(gStatusView.STATE_JOINHOW){
+					undisp("button_blue_on");
+					disp("button_blue_off");
+
+					gStatusView.STATE_JOINHOW = false;
+					showJoinhow(gStatusView.STATE_JOINHOW);
+				}else if(gStatusView.STATE_PROFILE){
+					undisp("button_red_on");
+					disp("button_red_off");
+
+					gStatusView.STATE_PROFILE = false;
+					showProf(gStatusView.STATE_PROFILE);
+				}else if(gStatusView.STATE_REGI){
+					undisp("button_green_on");
+					disp("button_green_off");
+
+					gStatusView.STATE_REGI = false;
+					showRegi(gStatusView.STATE_REGI);
+				}else if(gStatusView.STATE_URGE){
+					undisp("button_yellow_on");
+					disp("button_yellow_off");
+
+					gStatusView.STATE_URGE = false;
+					showNet(gStatusView.STATE_URGE);
+				}
+			}
+
+			function showTop(flag){
+				debugN("showTop: " + flag);
+				if(flag){
+					disp("top_base");
+					disp("top_title_text");
+					disp("top_desc_text");
+				}else{
+					undisp("top_base");
+					undisp("top_title_text");
+					undisp("top_desc_text");
+				}
+			}
+
+			function showJoinhow(flag){
+				debugN("showJoinhow: " + flag);
+				if(flag){
+					disp("how_join_base");
+					disp("how_join_desc_text");
+					disp("how_join_page_right");
+					disp("how_join_page_left");
+					disp("how_join_page_focus");
+					disp("how_join_page_text");
+				}else{
+					undisp("how_join_base");
+					undisp("how_join_desc_text");
+					undisp("how_join_page_right");
+					undisp("how_join_page_left");
+					undisp("how_join_page_focus");
+					undisp("how_join_page_text");
+				}
+			}
+
+			function showProf(flag){
+				debugN("showProf: " + flag);
+				if(flag){
+					disp("prof_base");
+					disp("prof_desc_text");
+					disp("prof_page_right");
+					disp("prof_page_left");
+					disp("prof_page_focus");
+					disp("prof_page_text");
+				}else{
+					undisp("prof_base");
+					undisp("prof_desc_text");
+					undisp("prof_page_right");
+					undisp("prof_page_left");
+					undisp("prof_page_focus");
+					undisp("prof_page_text");
+				}
+			}
+
+			function showRegi(flag){
+				debugN("showRegi: " + flag);
+				if(flag){
+					disp("regi_base");
+					disp("regi_name_text");
+					disp("regi_enagy_text");
+					disp("regi_level_text");
+					disp("regi_age_text");
+					disp("regi_address_text");
+					disp("regi_button_reset");
+					disp("regi_button_change");
+					disp("regi_button_complete");
+					disp("regi_button_balloon");
+				}else{
+					undisp("regi_base");
+					undisp("regi_name_text");
+					undisp("regi_enagy_text");
+					undisp("regi_level_text");
+					undisp("regi_age_text");
+					undisp("regi_address_text");
+					undisp("regi_button_reset");
+					undisp("regi_button_change");
+					undisp("regi_button_complete");
+					undisp("regi_button_balloon");
+				}
+			}
+
+			function showNet(flag){
+				debugN("showNet: " + flag);
+				if(flag){
+					disp("net_base");
+					disp("net_desc_text");
+					disp("net_page_right");
+					disp("net_page_left");
+					disp("net_page_focus");
+					disp("net_page_text");
+				}else{
+					undisp("net_base");
+					undisp("net_desc_text");
+					undisp("net_page_right");
+					undisp("net_page_left");
+					undisp("net_page_focus");
+					undisp("net_page_text");
+				}
+			}
+
+			]]>
+		</script>
+
+		<bevent>
+			<beitem id="mu01" type="ModuleUpdated" onoccur="MU01();" />
+			<beitem id="ml01" type="ModuleLocked"  onoccur="ML01();" />
+			<beitem id="EvtChange" type="DataEventChanged"  onoccur="dataEvtChanged();" subscribe="subscribe"/>
+			<beitem id="Dpress"    type="DataButtonPressed" onoccur="Dpressed();"       subscribe="subscribe"/>
+			<beitem id="EventMsg_176"  type="EventMessageFired" onoccur="EventMsgProc_176();" message_id="176" subscribe="subscribe" />
+			<beitem id="EventMsg_146"  type="EventMessageFired" onoccur="EventMsgProc_146();" message_id="146" es_ref="arib-dc://-1.-1.-1/60" message_group_id="1" />
+		</bevent>
+
+	</head>
+	<body id="Body" onload="init();">
+		<div id="AVarea" style="left:0px;top:0px;width:960px;height:540px;">
+			<object id="bg" type="image/jpeg" data="BG.jpg" style="left:0px;top:0px;width:960px;height:540px;"/>
+			<object id="Vstream" style="left:52px;top:30px;width:480px;height:270px;" type="video/X-arib-mpeg2" data="/-1" remain="remain"/>
+			<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
+		</div>
+
+		<div id="foc0" onkeydown="kd();" style="nav-index:0;" />
+
+		<!-- xxxx -->
+		<div id="d" style="left:45px;top:495px;width:87px;height:21px;visibility:visible;">
+			<!--
+			<object id="o" type="image/X-arib-png" data="com-top-n.png" style="left:0px;top:0px;width:87px;height:21px;"/>
+			-->
+		</div>
+
+		<!-- top画面ベース -->
+		<div id="top_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+			<object id="top_base" type="image/X-arib-png" data="base-top.png"/>
+		</div>
+		<div id="top_scene_title" style="left:609px;top:65px;width:220px;height:43px;visibility:visible;">
+			<p id="top_title_text">
+				<![CDATA[タイトル_TEST〇〇〇〇〇●〇〇〇〇●〇〇〇〇]]>
+			</p>
+		</div>
+		<div id="top_scene_desc" style="left:588px;top:152px;width:270px;height:235px;visibility:visible;">
+			<p id="top_desc_text">
+				<![CDATA[説明文_TEST〇〇〇〇〇●〇〇〇〇●〇〇〇〇]]>
+			</p>
+		</div>
+
+		<!-- 番組参加方法 -->
+		<div id="how_join_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+			<object id="how_join_base" type="image/X-arib-png" data="base-b.png"/>
+			<p id="how_join_desc_text">
+				<![CDATA[説明文_TEST〇〇〇〇〇●〇〇〇〇●〇〇〇〇]]>
+			</p>
+			<div id="how_join_page" style="left:122px;top:351px;width:116px;height:33px;visibility:visible;">
+				<object id="how_join_page_right" type="image/X-arib-png" data="base-b-page-right.png"/>
+				<object id="how_join_page_left" type="image/X-arib-png" data="base-b-page-left.png"/>
+				<object id="how_join_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
+				<p id="how_join_page_text">
+					<![CDATA[1/2]]>
+				</p>
+			</div>
+		</div>
+
+		<!-- てれび戦士紹介 -->
+		<div id="prof_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+			<object id="prof_base" type="image/X-arib-png" data="base-r.png"/>
+			<p id="prof_desc_text">
+				<![CDATA[説明文_TEST〇〇〇〇〇●〇〇〇〇●〇〇〇〇]]>
+			</p>
+			<div id="prof_page" style="left:119px;top:211px;width:116px;height:33px;visibility:visible;">
+				<object id="prof_page_right" type="image/X-arib-png" data="base-r-page-right.png"/>
+				<object id="prof_page_left" type="image/X-arib-png" data="base-r-page-left.png"/>
+				<object id="prof_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
+				<p id="prof_page_text">
+					<![CDATA[1/2]]>
+				</p>
+			</div>
+		</div>
+
+		<!-- 茶の間戦士情報 -->
+		<div id="regi_scene" style="left:543px;top:48px;width:359px;height:408px;visibility:visible;">
+			<object id="regi_base" type="image/X-arib-png" data="base-g.png"/>
+			<p id="regi_name_text">
+				<![CDATA[名前〇〇〇〇〇●〇〇〇〇●〇〇〇〇]]>
+			</p>
+			<p id="regi_enagy_text">
+				<![CDATA[123]]>
+			</p>
+			<p id="regi_level_text">
+				<![CDATA[123]]>
+			</p>
+			<p id="regi_age_text">
+				<![CDATA[123]]>
+			</p>
+			<p id="regi_address_text">
+				<![CDATA[東京都]]>
+			</p>
+			<div id="regi_button" style="left:2px;top:325px;width:318px;height:83px;visibility:visible;">
+				<object id="regi_button_reset" type="image/X-arib-png" data="base-g-button-reset.png"/>
+				<object id="regi_button_change" type="image/X-arib-png" data="base-g-button-fix.png"/>
+				<object id="regi_button_complete" type="image/X-arib-png" data="base-g-button-regi.png"/>
+				<object id="regi_button_balloon" type="image/X-arib-png" data="base-g-ballon.png"/>
+				<object id="regi_button_left_focus" type="image/X-arib-png" data="base-g-button-left-focus.png"/>
+				<object id="regi_button_left_decision" type="image/X-arib-png" data="base-g-button-left-decision.png"/>
+				<object id="regi_button_right_focus" type="image/X-arib-png" data="base-g-button-right-focus.png"/>
+				<object id="regi_button_right_decision" type="image/X-arib-png" data="base-g-button-right-decision.png"/>
+			</div>
+		</div>
+
+
+		<!-- ネットにつなごう -->
+		<div id="net_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+			<object id="net_base" type="image/X-arib-png" data="base-y.png"/>
+			<p id="net_desc_text">
+				<![CDATA[説明文_TEST〇〇〇〇〇●〇〇〇〇●〇〇〇〇]]>
+			</p>
+			<div id="net_page" style="left:122px;top:351px;width:116px;height:33px;visibility:visible;">
+				<object id="net_page_right" type="image/X-arib-png" data="base-y-page-right.png"/>
+				<object id="net_page_left" type="image/X-arib-png" data="base-y-page-left.png"/>
+				<object id="net_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
+				<p id="net_page_text">
+					<![CDATA[1/2]]>
+				</p>
+			</div>
+		</div>
+
+		<!-- 各シーン共通部分 -->
+		<div id="menu_logo" style="left:48px;top:341px;width:249px;height:77px;visibility:visible;">
+			<object id="logo" type="image/X-arib-png" data="logo.png"/>
+		</div>
+		<div id="menu_date" style="left:301px;top:346px;width:249px;height:77px;visibility:visible;">
+			<object id= "date" type="image/X-arib-png" data="housou-date.png"/>
+		</div>
+		<div id="menu_zionoko" style="left:445px;top:336px;width:87px;height:88px;visibility:visible;">
+			<object id= "zionoko" type="image/X-arib-png" data="zionoko-1.png"/>
+		</div>
+		
+		<!-- フッターボタン -->
+		<div id="footer_button_blue" style="left:38px;top:454px;width:205px;height:56px;visibility:visible;">
+			<object id= "button_blue_on" class ="button_blue" type="image/X-arib-png" data="futter-b-button-on.png"/>
+			<object id= "button_blue_off" class ="button_blue" type="image/X-arib-png" data="futter-b-button-off.png"/>
+		</div>
+		<div id="footer_button_red" style="left:243px;top:453px;width:198px;height:54px;visibility:visible;">
+			<object id= "button_red_on" class ="button_red" type="image/X-arib-png" data="futter-r-button-on.png"/>
+			<object id= "button_red_off" class ="button_red" type="image/X-arib-png" data="futter-r-button-off.png"/>
+		</div>
+		<div id="footer_button_green" style="left:439px;top:453px;width:202px;height:59px;visibility:visible;">
+			<object id= "button_green_on" class ="button_green" type="image/X-arib-png" data="futter-g-button-on.png"/>
+			<object id= "button_green_off" class ="button_green" type="image/X-arib-png" data="futter-g-button-off.png"/>
+		</div>
+		<div id="footer_button_yellow" style="left:635px;top:454px;width:203px;height:57px;visibility:visible;">
+			<object id= "button_yellow_on" class ="button_yellow" type="image/X-arib-png" data="futter-y-button-on.png"/>
+			<object id= "button_yellow_off" class ="button_yellow" type="image/X-arib-png" data="futter-y-button-off.png"/>
+		</div>
+		<div id="footer_button_top" style="left:836px;top:475px;width:70px;height:35px;visibility:visible;">
+		<!-- <object id= "button_back_housou" class ="button_top" type="image/X-arib-png" data="back-housou-top.png"/> -->
+			<object id= "button_back_top" class ="button_top" type="image/X-arib-png" data="back-top.png"/>
+		</div>
+
+		<!-- デバッグ用 -->
+		<div id="d_debug" style="left:52px;top:30px;width:900px;height:400px;" >
+			<p id="pDebug" ><![CDATA[]]></p>
+		</div>
+	</body>
+</bml>

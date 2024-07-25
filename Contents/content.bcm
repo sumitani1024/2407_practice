@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="EUC-JP" ?>
+<!DOCTYPE bcml PUBLIC "-//ARIB//DTD BCML 1.0//JA" "http://www.arib.or.jp/B35/DTD/bcml_1_0.dtd">
+<bcml version="1.0">
+
+  <content_info bcml_content_id="001" content_layer="CORNER">
+    <order_info X_NHK_min_bitrate="32" program_content_id="C1001000-000"/>
+  </content_info>
+
+  <!-- ▼▼▼▼▼納品時は削除すること▼▼▼▼▼ -->
+  <!-- ES40 --> 
+	<data_es auto_start_flag="TRUE" component_tag="40" document_resolution="960x540_16v9" entry_point_flag="TRUE" file_storable_flag="FALSE" format_type="BML" format_version="3.0" independent_flag="TRUE" name="local_content00" ondemand_retrieval_flag="TRUE" style_for_tv_flag="TRUE">
+		<carousel data_event_changed_flag="TRUE" name="carousel01" return_to_entry_flag="FALSE" start_time="00:00:00">
+			<module module_id="0000" name="0000" version_up_flag="FALSE">
+				<resource name="common.clt" type="application/X-arib-bmlclut"/>
+				<resource name="startup.bml" type="text/X-arib-bml;charset=&quot;euc-jp&quot;"/>
+			</module>
+		</carousel>
+	</data_es>
+	<!-- ▲▲▲▲▲納品時は削除すること▲▲▲▲▲ -->
+
+	<data_es component_tag="50" document_resolution="960x540_16v9" duration="01:00:00" entry_point_flag="FALSE" file_storable_flag="FALSE" format_version="3.0" name="local_content01" ondemand_retrieval_flag="TRUE">
+		<carousel name="carousel01" start_time="00:00:00">
+			<module compress="FORCE" compression_type="ZLIB" module_id="0000" name="0000" original_size="1024000" priority="1" version_up_flag="FALSE">
+				<resource name="back.jpg" type="image/jpeg"/>
+				<resource name="bln.png" type="image/X-arib-png"/>
+				<resource name="charge-ok.png" type="image/X-arib-png"/>
+				<resource name="charge.bml" type="text/X-arib-bml;charset=&quot;euc-jp&quot;">
+					<editable name="charge.bml" type="text/X-arib-bml;charset=&quot;Shift_JIS&quot;"/>
+				</resource>
+				<resource name="charge.png" type="image/X-arib-png"/>
+				<resource name="com-b-base.png" type="image/X-arib-png"/>
+				<resource name="com-b-m-1.png" type="image/X-arib-png"/>
+				<resource name="com-b-m-2.png" type="image/X-arib-png"/>
+				<resource name="com-b-m-3.png" type="image/X-arib-png"/>
+				<resource name="com-b-m-4.png" type="image/X-arib-png"/>
+				<resource name="com-b-waku.png" type="image/X-arib-png"/>
+				<resource name="com-bln-1.png" type="image/X-arib-png"/>
+				<resource name="com-bln-2.png" type="image/X-arib-png"/>
+				<resource name="com-d-a.png" type="image/X-arib-png"/>
+				<resource name="com-d-n.png" type="image/X-arib-png"/>
+				<resource name="com-level.png" type="image/X-arib-png"/>
+				<resource name="com-message.png" type="image/X-arib-png"/>
+				<resource name="com-name.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-1-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-1-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-2-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-2-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-3-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-3-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-4-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-1-4-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-1-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-1-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-2-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-2-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-3-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-3-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-4-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-2-4-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-1-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-1-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-2-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-2-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-3-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-3-1.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-4-0.png" type="image/X-arib-png"/>
+				<resource name="com-sea-3-4-1.png" type="image/X-arib-png"/>
+				<resource name="com-top-a.png" type="image/X-arib-png"/>
+				<resource name="com-top-n.png" type="image/X-arib-png"/>
+				<resource name="common.clt" type="application/X-arib-bmlclut"/>
+				<resource name="entry-a.png" type="image/X-arib-png"/>
+				<resource name="entry-bg.png" type="image/X-arib-png"/>
+				<resource name="entry-g.png" type="image/X-arib-png"/>
+				<resource name="entry-n.png" type="image/X-arib-png"/>
+				<resource name="entry.aif" type="audio/X-arib-aiff"/>
+				<resource name="exp.aif" type="audio/X-arib-aiff"/>
+				<resource name="exp.png" type="image/X-arib-png"/>
+				<resource name="frame6.png" type="image/X-arib-png"/>
+				<resource name="frame7.png" type="image/X-arib-png"/>
+				<resource name="give.aif" type="audio/X-arib-aiff"/>
+				<resource name="h.png" type="image/X-arib-png"/>
+				<resource name="hilight.png" type="image/X-arib-png"/>
+				<resource name="levelup.png" type="image/X-arib-png"/>
+				<resource name="message.png" type="image/X-arib-png"/>
+				<resource name="notice-ip.png" type="image/X-arib-png"/>
+				<resource name="notice-rec.png" type="image/X-arib-png"/>
+				<resource name="num-1.png" type="image/X-arib-png"/>
+				<resource name="num-2.png" type="image/X-arib-png"/>
+				<resource name="num-3.png" type="image/X-arib-png"/>
+				<resource name="num-4.png" type="image/X-arib-png"/>
+				<resource name="num-5.png" type="image/X-arib-png"/>
+				<resource name="ranking.png" type="image/X-arib-png"/>
+				<resource name="rimokon.png" type="image/X-arib-png"/>
+				<resource name="roulette.aif" type="audio/X-arib-aiff"/>
+				<resource name="roulette.png" type="image/X-arib-png"/>
+				<resource name="sea-mini.png" type="image/X-arib-png"/>
+				<resource name="startup.bml" type="text/X-arib-bml;charset=&quot;euc-jp&quot;">
+					<editable name="startup.bml" type="text/X-arib-bml;charset=&quot;Shift_JIS&quot;"/>
+				</resource>
+				<resource name="tofu.bml" type="text/X-arib-bml;charset=&quot;euc-jp&quot;">
+					<editable name="tofu.bml" type="text/X-arib-bml;charset=&quot;Shift_JIS&quot;"/>
+				</resource>
+				<resource name="warning.png" type="image/X-arib-png"/>
+				<resource name="x.png" type="image/X-arib-png"/>
+				<resource name="y-base.png" type="image/X-arib-png"/>
+				<resource name="y-btn-a.png" type="image/X-arib-png"/>
+				<resource name="y-btn-n.png" type="image/X-arib-png"/>
+				<resource name="you-com.ecm" type="text/X-arib-ecmascript;charset=&quot;euc-jp&quot;"/>
+				<resource name="you-sea.ecm" type="text/X-arib-ecmascript;charset=&quot;euc-jp&quot;"/>
+			</module>
+			<module compress="FORCE" compression_type="ZLIB" module_id="0001" name="0001" original_size="1024000" priority="1" version_up_flag="FALSE">
+				<resource name="you-com.btb" type="application/X-arib-btable">
+					<editable name="you-com.btf" type="text/plain;charset=&quot;Shift_JIS&quot;"/>
+				</resource>
+				<resource name="you-text-com.btb" type="application/X-arib-btable">
+					<editable name="you-text-com.btf" type="text/plain;charset=&quot;Shift_JIS&quot;"/>
+				</resource>
+				<resource name="you-text-game.btb" type="application/X-arib-btable">
+					<editable name="you-text-game.btf" type="text/plain;charset=&quot;Shift_JIS&quot;"/>
+				</resource>
+				<resource name="you-text-sea.btb" type="application/X-arib-btable">
+					<editable name="you-text-sea.btf" type="text/plain;charset=&quot;Shift_JIS&quot;"/>
+				</resource>
+			</module>
+
+		</carousel>
+	    <!-- EM -->
+	    <event_msg_es component_tag="50" name="PDB">
+	      <take_event_msg name="PDB">
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="1" name="you_game_standby" private_data_byte="you_game_standby" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="2" name="you_game_standby_1" private_data_byte="you_game_standby_1" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="2" name="you_game_standby_2" private_data_byte="you_game_standby_2" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="2" name="you_game_standby_3" private_data_byte="you_game_standby_3" time_mode="IMMEDIATE"/>
+            <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="5" name="you_game_sea_0" private_data_byte="you_game_sea_0" time_mode="IMMEDIATE"/>
+            <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="50" name="you_game_sea_1" private_data_byte="you_game_sea_1" time_mode="IMMEDIATE"/>
+        
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="6" name="you_deep_Z_preopen_01_1_0_00" private_data_byte="you_deep_Z_preopen_01_1_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="7" name="you_deep_Z_open_01_1_0_00" private_data_byte="you_deep_Z_open_01_1_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="8" name="you_deep_Z_judge_01_1_0_00" private_data_byte="you_deep_Z_judge_01_1_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="9" name="you_deep_Z_preopen_02_0_0_00" private_data_byte="you_deep_Z_preopen_02_0_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="10" name="you_deep_Z_open_02_0_0_00" private_data_byte="you_deep_Z_open_02_0_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="11" name="you_deep_Z_judge_02_0_0_00" private_data_byte="you_deep_Z_judge_02_0_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="12" name="you_deep_Z_preopen_03_0_0_00" private_data_byte="you_deep_Z_preopen_03_0_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="13" name="you_deep_Z_open_03_0_0_00" private_data_byte="you_deep_Z_open_03_0_0_00" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="14" name="you_deep_Z_judge_03_0_0_00" private_data_byte="you_deep_Z_judge_03_0_0_00" time_mode="IMMEDIATE"/>
+
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="15" name="you_deep_B_preopen_01_1_0_01" private_data_byte="you_deep_B_preopen_01_1_0_01" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="150" name="you_deep_B_preopen_01_1_1_01" private_data_byte="you_deep_B_preopen_01_1_1_01" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="151" name="you_deep_B_preopen_01_1_2_01" private_data_byte="you_deep_B_preopen_01_1_2_01" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="16" name="you_deep_B_open_01_1_0_01" private_data_byte="you_deep_B_open_01_1_0_01" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="17" name="you_deep_B_judge_01_1_0_01" private_data_byte="you_deep_B_judge_01_1_0_01" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="18" name="you_deep_B_preopen_02_1_0_02" private_data_byte="you_deep_B_preopen_02_1_0_02" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="19" name="you_deep_B_open_02_1_0_02" private_data_byte="you_deep_B_open_02_1_0_02" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="20" name="you_deep_B_judge_02_1_0_02" private_data_byte="you_deep_B_judge_02_1_0_02" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="21" name="you_deep_B_preopen_03_1_0_03" private_data_byte="you_deep_B_preopen_03_1_0_03" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="22" name="you_deep_B_open_03_1_0_03" private_data_byte="you_deep_B_open_03_1_0_03" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="23" name="you_deep_B_judge_03_1_0_03" private_data_byte="you_deep_B_judge_03_1_0_03" time_mode="IMMEDIATE"/>
+
+
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="15" name="you_com_standby" private_data_byte="you_com_standby" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="16" name="you_com_standby_1" private_data_byte="you_com_standby_1" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="17" name="you_com_standby_2" private_data_byte="you_com_standby_2" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="18" name="you_com_standby_3" private_data_byte="you_com_standby_3" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="19" name="you_com_ex1" private_data_byte="you_com_ex1" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="20" name="you_com_ex1_send" private_data_byte="you_com_ex1_send" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="21" name="you_com_win" private_data_byte="you_com_win" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="22" name="you_com_lose" private_data_byte="you_com_lose" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="23" name="you_com_result" private_data_byte="you_com_result" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="24" name="you_com_message" private_data_byte="you_com_message" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="25" name="you_com_off" private_data_byte="you_com_off" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="26" name="you_com_test" private_data_byte="you_com_test" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="27" name="you_com_uregclear" private_data_byte="you_com_uregclear" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="28" name="you_com_nvclear" private_data_byte="you_com_nvclear" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="DEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="176" message_version="29" name="you_com_fullscreen" private_data_byte="you_com_fullscreen" time_mode="IMMEDIATE"/>
+	        <event_msg duration="00:00:01" event_msg_group_id="INDEPENDENT_GENERAL" event_msg_type="1" interval="1.0" message_id="146" message_version="29" name="JISHIN_12SEG" private_data_byte="JISHIN_12SEG" time_mode="IMMEDIATE"/>
+	      </take_event_msg>
+	    </event_msg_es>
+
+	</data_es>
+</bcml>

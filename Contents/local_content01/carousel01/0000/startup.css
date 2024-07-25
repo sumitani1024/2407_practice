@@ -1,0 +1,202 @@
+body
+{
+	clut:url(common.clt);
+	resolution:960x540;
+	display-aspect-ratio:16v9;
+	background-color-index:7;
+}
+p{font-family:"丸ゴシック";}
+
+.p_debg
+{
+	left:0px;
+	top:0px;
+	width:500px;
+	height:335px;
+	font-size:16px;
+	color-index:7;
+	grayscale-color-index:25 26;
+	background-color-index:2;
+}
+
+/** 共通部分 **/
+#logo { left:0px; top:0px; width:249px; height:77px; visibility: visible;}
+#date { left:0px; top:0px; width:132px; height:69px; visibility: visible;}
+#zionoko { left:0px; top:0px; width:87px; height:88px; visibility: visible;}
+
+/** footerボタン **/
+#button_blue_off { left:0px; top:0px; width:205px; height:56px; visibility:visible;}
+#button_blue_on { left:0px; top:3px; width:205px; height:53px; visibility:hidden;}
+#button_red_off { left:0px; top:0px; width:198px; height:54px; visibility:visible;}
+#button_red_on { left:0px; top:2px; width:198px; height:52px; visibility:hidden;}
+#button_green_off { left:0px; top:0px; width:202px; height:59px; visibility:visible;}
+#button_green_on { left:0px; top:4px; width:202px; height:55px; visibility:hidden;}
+#button_yellow_off { left:0px; top:0px; width:203px; height:57px; visibility:visible;}
+#button_yellow_on { left:0px; top:4px; width:203px; height:53px; visibility:hidden;}
+#button_back_housou { left:0px; top:0px; width:67px; height:36px; visibility:hidden;}
+#button_back_top { left:0px; top:0px; width:70px; height:35px; visibility:visible;}
+
+/** top画面 **/
+#top_base { left:0px;top:0px;width:352px;height:398px; visibility: hidden;}
+#top_title_text{ 
+	left:0px;
+	top:0px;
+	width:220px;
+	height:43px;
+	font-size: 20px;
+	color-index:7;
+	grayscale-color-index:18 19;
+	visibility: hidden;
+}
+#top_desc_text{ 
+	left:0px;
+	top:0px;
+	width:270px;
+	height:235px;
+	font-size: 20px;
+	color-index:22;
+	grayscale-color-index:23 24;
+	visibility: hidden;
+}
+
+/** 番組参加方法 **/
+#how_join_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#how_join_desc_text{
+	left:46px;
+	top:90px;
+	width:269px;
+	height:235px;
+	font-size: 20px;
+	color-index: 36;
+	grayscale-color-index:37 38;
+	visibility:hidden;
+}
+
+#how_join_page_right{ left:95px;top:4px; width:18px; height:26px; visibility:hidden; }
+#how_join_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
+#how_join_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
+#how_join_page_text{
+	left:45px;
+	top:9px;
+	width:25px;
+	height:18px;
+	font-size: 20px;
+	color-index: 39;
+	grayscale-color-index:40 41;
+	visibility:hidden;
+}
+
+/** てれび戦士紹介 **/
+#prof_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#prof_desc_text{
+	left:46px;
+	top: 91px;
+	width:259px;
+	height:114px;
+	font-size: 20px;
+	color-index: 31;
+	grayscale-color-index:32 33;
+	visibility:hidden;
+}
+
+#prof_page_right{ left:95px;top:4px; width:18px; height:26px; visibility:hidden; }
+#prof_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
+#prof_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
+#prof_page_text{
+	left:43px;
+	top:9px;
+	width:25px;
+	height:18px;
+	font-size: 20px;
+	color-index: 31;
+	grayscale-color-index:34 35;
+	visibility:hidden;
+}
+
+/** 茶の間戦士情報 **/
+#regi_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#regi_name_text{
+	left:207px;
+	top: 79px;
+	width:73px;
+	height:15px;
+	font-size: 16px;
+	color-index: 7;
+	grayscale-color-index:20 21;
+	visibility:hidden;
+}
+#regi_enagy_text{
+	left:221px;
+	top: 116px;
+	width:44px;
+	height:12px;
+	font-size: 16px;
+	color-index: 7;
+	grayscale-color-index:20 21;
+	visibility:hidden;
+}
+#regi_level_text{
+	left:221px;
+	top: 151px;
+	width:44px;
+	height:12px;
+	font-size: 16px;
+	color-index: 7;
+	grayscale-color-index:20 21;
+	visibility:hidden;
+}
+#regi_age_text{
+	left:235px;
+	top: 255px;
+	width:14px;
+	height:12px;
+	font-size: 16px;
+	color-index: 7;
+	grayscale-color-index:20 21;
+	visibility:hidden;
+}
+#regi_address_text{
+	left:218px;
+	top: 288px;
+	width:49px;
+	height:16px;
+	font-size: 16px;
+	color-index: 7;
+	grayscale-color-index:20 21;
+	visibility:hidden;
+}
+#regi_button_reset{ left:34px;top:13px; width:133px; height:39px; visibility:hidden; }
+#regi_button_change{ left:184px;top:13px; width:133px; height:39px; visibility:hidden; }
+#regi_button_complete{ left:184px;top:13px; width:133px; height:39px; visibility:hidden; }
+#regi_button_balloon{ left:0px;top:40px; width:203px; height:43px; visibility:hidden; }
+#regi_button_left_focus{ left:31px;top:0px; width:147px; height:53px; visibility:hidden; }
+#regi_button_left_decision{ left:31px;top:0px; width:147px; height:53px; visibility:hidden; }
+
+/** ネットにつなごう **/
+#net_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#net_desc_text{
+	left:46px;
+	top: 91px;
+	width:259px;
+	height:114px;
+	font-size: 20px;
+	color-index: 31;
+	grayscale-color-index:32 33;
+	visibility:hidden;
+}
+
+#net_page_right{ left:95px;top:4px; width:18px; height:26px; visibility:hidden; }
+#net_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
+#net_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
+#net_page_text{
+	left:43px;
+	top:9px;
+	width:25px;
+	height:18px;
+	font-size: 20px;
+	color-index: 31;
+	grayscale-color-index:34 35;
+	visibility:hidden;
+}
+
+#pDebug{left:0px;top:0px;width:600px;height:400px;font-size:16px;color-index:7;grayscale-color-index:218 219;visibility:hidden;}

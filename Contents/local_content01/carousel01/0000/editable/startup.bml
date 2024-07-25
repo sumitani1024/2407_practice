@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!DOCTYPE bml PUBLIC "+//ARIB STD-B24:1999//DTD BML Document//JA" "http://www.arib.or.jp/B24/DTD/bml_1_1.dtd">
+<?bml bml-version="3.0" ?>
+<bml>
+	<head>
+		<title>12seg startup.bml[TEMPLATE]</title>
+
+		<style>
+			<![CDATA[
+				body
+				{
+					clut:url(common.clt);
+					resolution:960x540;
+					display-aspect-ratio:16v9;
+					background-color-index:7;
+				}
+				p{font-family:"丸ゴシック";}
+
+				/* バッテリーdiv */
+				.c_d_btry { top:0px;width:55px;height:24px;visibility:hidden; }
+
+				/* デバッグ（変動） */
+				.p_debg
+				{
+					left:0px;
+					font-size:16px;
+					color-index:7;
+					grayscale-color-index:25 26;
+				}
+			]]>
+		</style>
+		
+		<script src = "functions.ecm"/>
+		<script>
+			<![CDATA[
+			
+			function init(){
+				return;
+			}
+			
+			]]>
+		</script>
+
+		<bevent>
+			<beitem id="mu01" type="ModuleUpdated" onoccur="MU01();" />
+			<beitem id="ml01" type="ModuleLocked"  onoccur="ML01();" />
+			<beitem id="EvtChange" type="DataEventChanged"  onoccur="dataEvtChanged();" subscribe="subscribe"/>
+			<beitem id="Dpress"    type="DataButtonPressed" onoccur="Dpressed();"       subscribe="subscribe"/>
+			<beitem id="EventMsg_176"  type="EventMessageFired" onoccur="EventMsgProc_176();" message_id="176" subscribe="subscribe" />
+			<beitem id="EventMsg_146"  type="EventMessageFired" onoccur="EventMsgProc_146();" message_id="146" es_ref="arib-dc://-1.-1.-1/60" message_group_id="1" />
+		</bevent>
+
+	</head>
+	<body id="Body" onload="init();">
+		<div id="AVarea" style="left:0px;top:0px;width:960px;height:540px;">
+			<object id="Vstream" style="left:0px;top:0px;width:960px;height:540px;" type="video/X-arib-mpeg2" data="/-1" remain="remain"/>
+			<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
+		</div>
+
+		<div id="foc0" onkeydown="kd();" style="nav-index:0;" />
+
+		<!-- xxxx -->
+		<div id="d_etv" style="left:45px;top:495px;width:87px;height:21px;visibility:visible;">
+			<!--
+			<object id="o_etv" type="image/X-arib-png" data="com-top-n.png" style="left:0px;top:0px;width:87px;height:21px;"/>
+			-->
+			<p id="pDebug" class="p_debg" style="left:0px;top:0px;width:500px;height:335px;"><![CDATA[TEST]]></p>
+		</div>
+	
+		<!-- 音声ファイル -->
+		<div>
+			<object id="aif_b7" type="audio/X-arib-aiff" data="btn7.aif" streamstatus="stop"/>
+		</div>
+	</body>
+</bml>

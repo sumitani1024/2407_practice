@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="EUC-JP" standalone="no" ?><project name="test" root=".\Contents" version="2.0">
+<bcml name="content.bcm" path=".\content.bcm"/>
+<com/>
+</project>

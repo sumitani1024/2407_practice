@@ -1,0 +1,5 @@
+game-conf.btf,2
+コメント,ID,内容
+S:1V,S:1V,S:2V
+//----ゲームID---,,
+ゲームID,wd-gameId,4
