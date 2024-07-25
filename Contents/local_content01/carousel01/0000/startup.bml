@@ -17,10 +17,6 @@
 				return;
 			}
 
-			function showInit(){
-				showTop(true);
-			}
-
 			//共通
 			var gStatusView = new Object();
 			gStatusView.STATE_TOP = true;
@@ -29,27 +25,39 @@
 			gStatusView.STATE_REGI = false;
 			gStatusView.STATE_URGE = false;
 
+			var gStatusNum = 19;
+
+			function showInit(){
+				showTop(true);
+			}
+
 			// フッターボタン押下
 			function kd()
 			{
 				var buttonKey = getKey();
 
+				debugN( "番組ボタン押下: " + buttonKey);
 				if(buttonKey == 21 || buttonKey == 22 || buttonKey == 23 || buttonKey == 24)
 				{
 					footer_button_change(buttonKey);
 				}else if(buttonKey == 19){
-					footer_button_return();
-
-					gStatusView.STATE_TOP = true;
-					showTop(gStatusView.STATE_TOP);
+					//todo: else ifでNHKトップへ戻る処理追加
+					if(gStatusNum != 19){
+						footer_button_change(buttonKey);
+					}else{
+						debugN( "NHKトップへ戻る");
+					}
 				}
 			}
 
 			function footer_button_change(key)
 			{
-				//todo: 現在のページと同じボタンならreturn
-				footer_button_return();
+				if(gStatusNum == key){
+					debugN( "同ボタン押下");
+					return;
+				}
 
+				footer_button_return();
 				if(key == 21){
 					undisp("button_blue_off");
 					disp("button_blue_on");
@@ -75,8 +83,11 @@
 					gStatusView.STATE_URGE = true;
 					showNet(gStatusView.STATE_URGE);
 				}else if(key == 19){
-
+					gStatusView.STATE_TOP = true;
+					showTop(gStatusView.STATE_TOP);
 				}
+
+				gStatusNum = key;
 			}
 
 			function footer_button_return()
@@ -115,7 +126,6 @@
 			}
 
 			function showTop(flag){
-				debugN("showTop: " + flag);
 				if(flag){
 					disp("button_back_top");
 					undisp("button_back_housou");
@@ -134,7 +144,6 @@
 			}
 
 			function showJoinhow(flag){
-				debugN("showJoinhow: " + flag);
 				if(flag){
 					disp("how_join_base");
 					disp("how_join_desc_text");
@@ -153,7 +162,6 @@
 			}
 
 			function showProf(flag){
-				debugN("showProf: " + flag);
 				if(flag){
 					disp("prof_base");
 					disp("prof_desc_text");
@@ -172,7 +180,6 @@
 			}
 
 			function showRegi(flag){
-				debugN("showRegi: " + flag);
 				if(flag){
 					disp("regi_base");
 					disp("regi_name_text");
@@ -199,7 +206,6 @@
 			}
 
 			function showNet(flag){
-				debugN("showNet: " + flag);
 				if(flag){
 					disp("net_base");
 					disp("net_desc_text");

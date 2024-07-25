@@ -146,7 +146,7 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 }
 #regi_enagy_text{
 	left:221px;
-	top: 116px;
+	top: 115px;
 	width:44px;
 	height:16px;
 	font-size: 16px;
@@ -157,7 +157,7 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 }
 #regi_level_text{
 	left:221px;
-	top: 151px;
+	top: 150px;
 	width:44px;
 	height:16px;
 	font-size: 16px;
@@ -167,9 +167,9 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 	visibility:hidden;
 }
 #regi_age_text{
-	left:235px;
-	top: 255px;
-	width:14px;
+	left:230px;
+	top: 254px;
+	width:24px;
 	height:16px;
 	font-size: 16px;
 	text-align: center;
