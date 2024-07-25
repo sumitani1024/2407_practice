@@ -39,25 +39,28 @@
 				debugN( "番組ボタン押下: " + buttonKey);
 				if(buttonKey == 21 || buttonKey == 22 || buttonKey == 23 || buttonKey == 24)
 				{
-					footer_button_change(buttonKey);
+					footerButtonChange(buttonKey);
 				}else if(buttonKey == 19){
 					//todo: else ifでNHKトップへ戻る処理追加
 					if(gStatusNum != 19){
-						footer_button_change(buttonKey);
+						footerButtonChange(buttonKey);
 					}else{
 						debugN( "NHKトップへ戻る");
+						playSound(7);
+						//gotoNHKTop();
 					}
 				}
 			}
 
-			function footer_button_change(key)
+			function footerButtonChange(key)
 			{
 				if(gStatusNum == key){
 					debugN( "同ボタン押下");
 					return;
 				}
 
-				footer_button_return();
+				footerButtonReturn();
+				playSound(7);
 				if(key == 21){
 					undisp("button_blue_off");
 					disp("button_blue_on");
@@ -90,7 +93,7 @@
 				gStatusNum = key;
 			}
 
-			function footer_button_return()
+			function footerButtonReturn()
 			{
 				if(gStatusView.STATE_JOINHOW){
 					undisp("button_blue_on");
