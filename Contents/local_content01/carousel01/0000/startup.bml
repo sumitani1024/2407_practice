@@ -297,7 +297,7 @@
 		<div id="regi_scene" style="left:543px;top:48px;width:359px;height:408px;visibility:visible;">
 			<object id="regi_base" type="image/X-arib-png" data="base-g.png"/>
 			<p id="regi_name_text">
-				<![CDATA[Ì¾Á°¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
+				<![CDATA[Ì¾Á°¡»¡»¡»¡»¡»]]>
 			</p>
 			<p id="regi_enagy_text">
 				<![CDATA[123]]>
@@ -311,6 +311,10 @@
 			<p id="regi_address_text">
 				<![CDATA[ÅìµþÅÔ]]>
 			</p>
+			<!-- <object id="regi_list_focus_top" type="image/X-arib-png" data="base-g-list-focus-top.png"/> -->
+			<!-- <object id="regi_list_decision_focus_top" type="image/X-arib-png" data="base-g-list-decision-top.png"/> -->
+			<!-- <object id="regi_list_focus" type="image/X-arib-png" data="base-g-list-focus.png"/> -->
+			<!-- <object id="regi_list_decision_focus" type="image/X-arib-png" data="base-g-list-decision.png"/> -->
 			<div id="regi_button" style="left:2px;top:325px;width:318px;height:83px;visibility:visible;">
 				<object id="regi_button_reset" type="image/X-arib-png" data="base-g-button-reset.png"/>
 				<object id="regi_button_change" type="image/X-arib-png" data="base-g-button-fix.png"/>

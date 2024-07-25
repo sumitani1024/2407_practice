@@ -76,11 +76,12 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 #how_join_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
 #how_join_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
 #how_join_page_text{
-	left:45px;
-	top:9px;
-	width:25px;
-	height:18px;
+	left:42px;
+	top:7px;
+	width:30px;
+	height:20px;
 	font-size: 20px;
+	text-align: center;
 	color-index: 39;
 	grayscale-color-index:40 41;
 	visibility:hidden;
@@ -103,11 +104,12 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 #prof_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
 #prof_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
 #prof_page_text{
-	left:43px;
-	top:9px;
-	width:25px;
-	height:18px;
+	left:42px;
+	top:7px;
+	width:30px;
+	height:20px;
 	font-size: 20px;
+	text-align: center;
 	color-index: 31;
 	grayscale-color-index:34 35;
 	visibility:hidden;
@@ -116,11 +118,12 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 /** √„§Œ¥÷¿ÔªŒæ Û **/
 #regi_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
 #regi_name_text{
-	left:207px;
+	left:187px;
 	top: 79px;
-	width:73px;
-	height:15px;
+	width:112px;
+	height:16px;
 	font-size: 16px;
+	text-align: center;
 	color-index: 7;
 	grayscale-color-index:20 21;
 	visibility:hidden;
@@ -129,8 +132,9 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 	left:221px;
 	top: 116px;
 	width:44px;
-	height:12px;
+	height:16px;
 	font-size: 16px;
+	text-align: center;
 	color-index: 7;
 	grayscale-color-index:20 21;
 	visibility:hidden;
@@ -139,8 +143,9 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 	left:221px;
 	top: 151px;
 	width:44px;
-	height:12px;
+	height:16px;
 	font-size: 16px;
+	text-align: center;
 	color-index: 7;
 	grayscale-color-index:20 21;
 	visibility:hidden;
@@ -149,8 +154,9 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 	left:235px;
 	top: 255px;
 	width:14px;
-	height:12px;
+	height:16px;
 	font-size: 16px;
+	text-align: center;
 	color-index: 7;
 	grayscale-color-index:20 21;
 	visibility:hidden;
@@ -161,6 +167,7 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 	width:49px;
 	height:16px;
 	font-size: 16px;
+	text-align: center;
 	color-index: 7;
 	grayscale-color-index:20 21;
 	visibility:hidden;
@@ -191,10 +198,10 @@ p{font-family:"¥›•¥•∑•√•Ø";}
 #net_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
 #net_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
 #net_page_text{
-	left:43px;
-	top:9px;
-	width:25px;
-	height:18px;
+	left:42px;
+	top:7px;
+	width:30px;
+	height:20px;
 	font-size: 20px;
 	color-index: 31;
 	grayscale-color-index:34 35;
