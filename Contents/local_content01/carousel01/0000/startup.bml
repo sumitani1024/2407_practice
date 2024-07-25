@@ -28,6 +28,7 @@
 			var gStatusNum = 19;
 
 			function showInit(){
+				readBtbData();
 				showTop(true);
 			}
 
@@ -224,6 +225,51 @@
 					undisp("net_page_focus");
 					undisp("net_page_text");
 				}
+			}
+
+			//btb読み込み
+			function readBtbData(){
+				readbtbtop();
+				readbtbJoinhow();
+				readbtbProf();
+				readbtbNet();
+			}
+
+			var topBtbData = new Array();
+			function readbtbtop(){
+					var btb = readBtb("top.btb", "2,U:1B,U:1B,S:2V");
+					for(var i = 0; i < btb.length; i++ ){
+						topBtbData[btb[i][1]] = btb[i][2];
+					}
+					setData("top_title_text", topBtbData[0]);
+					setData("top_desc_text", topBtbData[1]);	
+			}
+
+			var joinhowBtbData = new Array();
+			function readbtbJoinhow(){
+				var btb = readBtb("joinhow.btb", "2,U:1B,S:2V");
+				for(var i = 0; i < btb.length; i++ ){
+					joinhowBtbData = btb[i][1];
+				}
+			setData("how_join_desc_text", joinhowBtbData);
+			}
+
+			var profBtbData = new Array();
+			function readbtbProf(){
+				var btb = readBtb("prof.btb", "1,U:1B,S:1V");
+				for(var i = 0; i < btb.length; i++ ){
+					profBtbData[btb[i][0]] = btb[i][1];
+				}
+				setData("prof_desc_text", profBtbData);
+			}
+
+			var netBtbData = new Array();
+			function readbtbNet(){
+				var btb = readBtb("net.btb", "2,U:1B,S:2V");
+				for(var i = 0; i < btb.length; i++ ){
+					netBtbData = btb[i][1];
+				}
+				setData("net_desc_text", netBtbData);
 			}
 
 			]]>
