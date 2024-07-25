@@ -20,27 +20,38 @@ p{font-family:"丸ゴシック";}
 }
 
 /** 共通部分 **/
-#logo { left:0px; top:0px; width:249px; height:77px; visibility: visible;}
-#date { left:0px; top:0px; width:132px; height:69px; visibility: visible;}
-#zionoko { left:0px; top:0px; width:87px; height:88px; visibility: visible;}
+#menu_common_area { left:48px; top:336px; width:484px; height:88px; visibility:visible;}
+#logo { left:0px; top:5px; width:249px; height:77px; visibility: visible;}
+#date { left:253px; top:10px; width:132px; height:69px; visibility: visible;}
+#zionoko { left:397px; top:0px; width:87px; height:88px; visibility: visible;}
 
 /** footerボタン **/
+#footer_button_blue{ left:38px; top:454px; width:205px; height:56px; visibility:visible; }
 #button_blue_off { left:0px; top:0px; width:205px; height:56px; visibility:visible;}
 #button_blue_on { left:0px; top:3px; width:205px; height:53px; visibility:hidden;}
+
+#footer_button_red{ left:243px; top:453px; width:198px; height:54px; visibility:visible; }
 #button_red_off { left:0px; top:0px; width:198px; height:54px; visibility:visible;}
 #button_red_on { left:0px; top:2px; width:198px; height:52px; visibility:hidden;}
+
+#footer_button_green{ left:439px; top:453px; width:202px; height:59px; visibility:visible; }
 #button_green_off { left:0px; top:0px; width:202px; height:59px; visibility:visible;}
 #button_green_on { left:0px; top:4px; width:202px; height:55px; visibility:hidden;}
+
+#footer_button_yellow{ left:635px; top:454px; width:203px; height:57px; visibility:visible; }
 #button_yellow_off { left:0px; top:0px; width:203px; height:57px; visibility:visible;}
 #button_yellow_on { left:0px; top:4px; width:203px; height:53px; visibility:hidden;}
+
+#footer_button_top{ left:836px; top:475px; width:70px; height:35px; visibility:visible; }
 #button_back_housou { left:0px; top:0px; width:70px; height:35px; visibility:hidden;}
 #button_back_top { left:0px; top:0px; width:70px; height:35px; visibility:visible;}
 
 /** top画面 **/
-#top_base { left:0px;top:0px;width:352px;height:398px; visibility: hidden;}
+#top_scene{ left:543px; top:48px; width:352px; height:398px; visibility:visible; }
+#top_base { left:0px; top:0px; width:352px; height:398px; visibility: hidden;}
 #top_title_text{ 
-	left:0px;
-	top:0px;
+	left:66px;
+	top:17px;
 	width:220px;
 	height:43px;
 	font-size: 20px;
@@ -49,8 +60,8 @@ p{font-family:"丸ゴシック";}
 	visibility: hidden;
 }
 #top_desc_text{ 
-	left:0px;
-	top:0px;
+	left:45px;
+	top:104px;
 	width:270px;
 	height:235px;
 	font-size: 20px;
@@ -60,7 +71,8 @@ p{font-family:"丸ゴシック";}
 }
 
 /** 番組参加方法 **/
-#how_join_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#how_join_scene{ left:543px; top:48px; width:352px; height:398px; visibility:visible; }
+#how_join_base{ left:0px; top:0px; width:352px; height:398px; visibility:hidden; }
 #how_join_desc_text{
 	left:46px;
 	top:90px;
@@ -72,9 +84,10 @@ p{font-family:"丸ゴシック";}
 	visibility:hidden;
 }
 
-#how_join_page_right{ left:95px;top:4px; width:18px; height:26px; visibility:hidden; }
-#how_join_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
-#how_join_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
+#how_join_page{ left:122px; top:351px; width:116px; height:33px; visibility:visible; }
+#how_join_page_right{ left:95px; top:4px; width:18px; height:26px; visibility:hidden; }
+#how_join_page_left{ left:0px; top:4px; width:18px; height:26px; visibility:hidden; }
+#how_join_page_focus{ left:91px; top:0px; width:25px; height:33px; visibility:hidden; }
 #how_join_page_text{
 	left:42px;
 	top:7px;
@@ -88,7 +101,8 @@ p{font-family:"丸ゴシック";}
 }
 
 /** てれび戦士紹介 **/
-#prof_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#prof_scene{ left:543px; top:48px; width:352px; height:398px; visibility:visible; }
+#prof_base{ left:0px; top:0px; width:352px; height:398px; visibility:hidden; }
 #prof_desc_text{
 	left:46px;
 	top: 91px;
@@ -100,9 +114,10 @@ p{font-family:"丸ゴシック";}
 	visibility:hidden;
 }
 
+#prof_page{ left:119px; top:211px; width:116px; height:33px; visibility:visible; }
 #prof_page_right{ left:95px;top:4px; width:18px; height:26px; visibility:hidden; }
-#prof_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
-#prof_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
+#prof_page_left{ left:0px; top:4px; width:18px; height:26px; visibility:hidden; }
+#prof_page_focus{ left:91px; top:0px; width:25px; height:33px; visibility:hidden; }
 #prof_page_text{
 	left:42px;
 	top:7px;
@@ -116,7 +131,8 @@ p{font-family:"丸ゴシック";}
 }
 
 /** 茶の間戦士情報 **/
-#regi_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#regi_scene{ left:543px; top:48px; width:359px; height:408px; visibility:visible; }
+#regi_base{ left:0px; top:0px; width:352px; height:398px; visibility:hidden; }
 #regi_name_text{
 	left:187px;
 	top: 79px;
@@ -172,17 +188,19 @@ p{font-family:"丸ゴシック";}
 	grayscale-color-index:20 21;
 	visibility:hidden;
 }
-#regi_button_reset{ left:34px;top:13px; width:133px; height:39px; visibility:hidden; }
-#regi_button_change{ left:184px;top:13px; width:133px; height:39px; visibility:hidden; }
-#regi_button_complete{ left:184px;top:13px; width:133px; height:39px; visibility:hidden; }
-#regi_button_balloon{ left:0px;top:40px; width:203px; height:43px; visibility:hidden; }
-#regi_button_left_focus{ left:31px;top:0px; width:147px; height:53px; visibility:hidden; }
-#regi_button_left_decision{ left:31px;top:0px; width:147px; height:53px; visibility:hidden; }
-#regi_button_right_focus{ left:171px;top:0px; width:147px; height:53px; visibility:hidden; }
-#regi_button_right_decision{ left:171px;top:0px; width:147px; height:53px; visibility:hidden; }
+#regi_button{ left:2px; top:325px; width:318px; height:83px; visibility:visible; }
+#regi_button_reset{ left:34px; top:13px; width:133px; height:39px; visibility:hidden; }
+#regi_button_change{ left:184px; top:13px; width:133px; height:39px; visibility:hidden; }
+#regi_button_complete{ left:184px; top:13px; width:133px; height:39px; visibility:hidden; }
+#regi_button_balloon{ left:0px; top:40px; width:203px; height:43px; visibility:hidden; }
+#regi_button_left_focus{ left:31px; top:0px; width:147px; height:53px; visibility:hidden; }
+#regi_button_left_decision{ left:31px; top:0px; width:147px; height:53px; visibility:hidden; }
+#regi_button_right_focus{ left:171px; top:0px; width:147px; height:53px; visibility:hidden; }
+#regi_button_right_decision{ left:171px; top:0px; width:147px; height:53px; visibility:hidden; }
 
 /** ネットにつなごう **/
-#net_base{ left:0px;top:0px; width:352px; height:398px; visibility:hidden; }
+#net_scene{ left:543px; top:48px; width:352px; height:398px; visibility:visible; }
+#net_base{ left:0px; top:0px; width:352px; height:398px; visibility:hidden; }
 #net_desc_text{
 	left:46px;
 	top: 91px;
@@ -194,9 +212,10 @@ p{font-family:"丸ゴシック";}
 	visibility:hidden;
 }
 
-#net_page_right{ left:95px;top:4px; width:18px; height:26px; visibility:hidden; }
-#net_page_left{ left:0px;top:4px; width:18px; height:26px; visibility:hidden; }
-#net_page_focus{ left:91px;top:0px; width:25px; height:33px; visibility:hidden; }
+#net_page{ left:122px; top:351px; width:116px; height:33px; visibility:visible; }
+#net_page_right{ left:95px; top:4px; width:18px; height:26px; visibility:hidden; }
+#net_page_left{ left:0px; top:4px; width:18px; height:26px; visibility:hidden; }
+#net_page_focus{ left:91px; top:0px; width:25px; height:33px; visibility:hidden; }
 #net_page_text{
 	left:42px;
 	top:7px;

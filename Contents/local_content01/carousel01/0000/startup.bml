@@ -247,27 +247,23 @@
 		</div>
 
 		<!-- top²èÌÌ¥Ù¡¼¥¹ -->
-		<div id="top_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+		<div id="top_scene">
 			<object id="top_base" type="image/X-arib-png" data="base-top.png"/>
-		</div>
-		<div id="top_scene_title" style="left:609px;top:65px;width:220px;height:43px;visibility:visible;">
 			<p id="top_title_text">
 				<![CDATA[¥¿¥¤¥È¥ë_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
 			</p>
-		</div>
-		<div id="top_scene_desc" style="left:588px;top:152px;width:270px;height:235px;visibility:visible;">
 			<p id="top_desc_text">
 				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
 			</p>
 		</div>
 
 		<!-- ÈÖÁÈ»²²ÃÊýË¡ -->
-		<div id="how_join_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+		<div id="how_join_scene">
 			<object id="how_join_base" type="image/X-arib-png" data="base-b.png"/>
 			<p id="how_join_desc_text">
 				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
 			</p>
-			<div id="how_join_page" style="left:122px;top:351px;width:116px;height:33px;visibility:visible;">
+			<div id="how_join_page">
 				<object id="how_join_page_right" type="image/X-arib-png" data="base-b-page-right.png"/>
 				<object id="how_join_page_left" type="image/X-arib-png" data="base-b-page-left.png"/>
 				<object id="how_join_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
@@ -278,12 +274,12 @@
 		</div>
 
 		<!-- ¤Æ¤ì¤ÓÀï»Î¾Ò²ð -->
-		<div id="prof_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+		<div id="prof_scene">
 			<object id="prof_base" type="image/X-arib-png" data="base-r.png"/>
 			<p id="prof_desc_text">
 				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
 			</p>
-			<div id="prof_page" style="left:119px;top:211px;width:116px;height:33px;visibility:visible;">
+			<div id="prof_page">
 				<object id="prof_page_right" type="image/X-arib-png" data="base-r-page-right.png"/>
 				<object id="prof_page_left" type="image/X-arib-png" data="base-r-page-left.png"/>
 				<object id="prof_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
@@ -294,7 +290,7 @@
 		</div>
 
 		<!-- Ãã¤Î´ÖÀï»Î¾ðÊó -->
-		<div id="regi_scene" style="left:543px;top:48px;width:359px;height:408px;visibility:visible;">
+		<div id="regi_scene">
 			<object id="regi_base" type="image/X-arib-png" data="base-g.png"/>
 			<p id="regi_name_text">
 				<![CDATA[Ì¾Á°¡»¡»¡»¡»¡»]]>
@@ -315,7 +311,7 @@
 			<!-- <object id="regi_list_decision_focus_top" type="image/X-arib-png" data="base-g-list-decision-top.png"/> -->
 			<!-- <object id="regi_list_focus" type="image/X-arib-png" data="base-g-list-focus.png"/> -->
 			<!-- <object id="regi_list_decision_focus" type="image/X-arib-png" data="base-g-list-decision.png"/> -->
-			<div id="regi_button" style="left:2px;top:325px;width:318px;height:83px;visibility:visible;">
+			<div id="regi_button">
 				<object id="regi_button_reset" type="image/X-arib-png" data="base-g-button-reset.png"/>
 				<object id="regi_button_change" type="image/X-arib-png" data="base-g-button-fix.png"/>
 				<object id="regi_button_complete" type="image/X-arib-png" data="base-g-button-regi.png"/>
@@ -329,12 +325,12 @@
 
 
 		<!-- ¥Í¥Ã¥È¤Ë¤Ä¤Ê¤´¤¦ -->
-		<div id="net_scene" style="left:543px;top:48px;width:352px;height:398px;visibility:visible;">
+		<div id="net_scene">
 			<object id="net_base" type="image/X-arib-png" data="base-y.png"/>
 			<p id="net_desc_text">
 				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
 			</p>
-			<div id="net_page" style="left:122px;top:351px;width:116px;height:33px;visibility:visible;">
+			<div id="net_page">
 				<object id="net_page_right" type="image/X-arib-png" data="base-y-page-right.png"/>
 				<object id="net_page_left" type="image/X-arib-png" data="base-y-page-left.png"/>
 				<object id="net_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
@@ -345,34 +341,30 @@
 		</div>
 
 		<!-- ³Æ¥·¡¼¥ó¶¦ÄÌÉôÊ¬ -->
-		<div id="menu_logo" style="left:48px;top:341px;width:249px;height:77px;visibility:visible;">
+		<div id="menu_common_area">
 			<object id="logo" type="image/X-arib-png" data="logo.png"/>
-		</div>
-		<div id="menu_date" style="left:301px;top:346px;width:249px;height:77px;visibility:visible;">
 			<object id= "date" type="image/X-arib-png" data="housou-date.png"/>
-		</div>
-		<div id="menu_zionoko" style="left:445px;top:336px;width:87px;height:88px;visibility:visible;">
 			<object id= "zionoko" type="image/X-arib-png" data="zionoko-1.png"/>
 		</div>
 		
 		<!-- ¥Õ¥Ã¥¿¡¼¥Ü¥¿¥ó -->
-		<div id="footer_button_blue" style="left:38px;top:454px;width:205px;height:56px;visibility:visible;">
+		<div id="footer_button_blue">
 			<object id= "button_blue_on" class ="button_blue" type="image/X-arib-png" data="futter-b-button-on.png"/>
 			<object id= "button_blue_off" class ="button_blue" type="image/X-arib-png" data="futter-b-button-off.png"/>
 		</div>
-		<div id="footer_button_red" style="left:243px;top:453px;width:198px;height:54px;visibility:visible;">
+		<div id="footer_button_red">
 			<object id= "button_red_on" class ="button_red" type="image/X-arib-png" data="futter-r-button-on.png"/>
 			<object id= "button_red_off" class ="button_red" type="image/X-arib-png" data="futter-r-button-off.png"/>
 		</div>
-		<div id="footer_button_green" style="left:439px;top:453px;width:202px;height:59px;visibility:visible;">
+		<div id="footer_button_green">
 			<object id= "button_green_on" class ="button_green" type="image/X-arib-png" data="futter-g-button-on.png"/>
 			<object id= "button_green_off" class ="button_green" type="image/X-arib-png" data="futter-g-button-off.png"/>
 		</div>
-		<div id="footer_button_yellow" style="left:635px;top:454px;width:203px;height:57px;visibility:visible;">
+		<div id="footer_button_yellow">
 			<object id= "button_yellow_on" class ="button_yellow" type="image/X-arib-png" data="futter-y-button-on.png"/>
 			<object id= "button_yellow_off" class ="button_yellow" type="image/X-arib-png" data="futter-y-button-off.png"/>
 		</div>
-		<div id="footer_button_top" style="left:836px;top:475px;width:70px;height:35px;visibility:visible;">
+		<div id="footer_button_top">
 			<object id= "button_back_housou" class ="button_top" type="image/X-arib-png" data="back-housou-top.png"/>
 			<object id= "button_back_top" class ="button_top" type="image/X-arib-png" data="back-top.png"/>
 		</div>
