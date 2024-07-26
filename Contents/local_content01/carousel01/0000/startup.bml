@@ -287,7 +287,7 @@
 		</script>
 
 		<bevent>
-			<beitem id="mu00" type="ModuleUpdated" onoccur="MU00();" />
+			<beitem id="mu00" type="ModuleUpdated" onoccur="srcUpdated();" />
 			<beitem id="ml01" type="ModuleLocked"  onoccur="ML01();" />
 			<beitem id="EvtChange" type="DataEventChanged"  onoccur="dataEvtChanged();" subscribe="subscribe"/>
 			<beitem id="Dpress"    type="DataButtonPressed" onoccur="Dpressed();"       subscribe="subscribe"/>
