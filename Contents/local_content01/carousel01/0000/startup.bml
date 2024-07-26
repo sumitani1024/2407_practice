@@ -258,7 +258,11 @@
 			function readbtbProf(){
 				var btb = readBtb("prof.btb", "1,U:1B,S:1V");
 				for(var i = 0; i < btb.length; i++ ){
-					profBtbData[btb[i][0]] = btb[i][1];
+					profBtbData += btb[i][1];
+
+					if(i+1 != btb.length){
+						profBtbData += "\r\n";
+					}
 				}
 				setData("prof_desc_text", profBtbData);
 			}
