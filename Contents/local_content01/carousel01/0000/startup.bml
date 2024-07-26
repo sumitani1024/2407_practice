@@ -315,15 +315,23 @@
 				readbtbNet();
 			}
 
-			var topBtbData = new Array();
+			var topBtbTitle = "";
+			var topBtbDisp = "";
 			function readbtbtop(){
 					var topbtbPath = ES + "0001/top.btb";
 					var btb = readBtb(topbtbPath, "2,U:1B,U:1B,S:2V");
 					for(var i = 0; i < btb.length; i++ ){
-						topBtbData[btb[i][1]] = btb[i][2];
+						if(btb[i][1] == 0){
+							topBtbTitle += btb[i][2];
+						}else if(btb[i][1] == 1){
+							topBtbDisp += btb[i][2];
+							if(i+1 != btb.length){
+								topBtbDisp += "\r\n";
+							}
+						}
 					}
-					setData("top_title_text", topBtbData[0]);
-					setData("top_desc_text", topBtbData[1]);
+					setData("top_title_text", topBtbTitle);
+					setData("top_desc_text", topBtbDisp);
 			}
 
 			var joinhowBtbData = "";
@@ -334,6 +342,9 @@
 				joinhowLengthNum = btb.length;
 				for(var i = 0; i < btb.length; i++ ){
 					joinhowBtbData += btb[i][1];
+					if(i+1 != btb.length){
+						joinhowBtbData += "\r\n";
+					}
 				}
 			setData("how_join_desc_text", joinhowBtbData);
 			}
@@ -344,7 +355,6 @@
 				var btb = readBtb(profbtbPath, "1,U:1B,S:1V");
 				for(var i = 0; i < btb.length; i++ ){
 					profBtbData += btb[i][1];
-
 					if(i+1 != btb.length){
 						profBtbData += "\r\n";
 					}
@@ -358,6 +368,9 @@
 				var btb = readBtb(netbtbPath, "2,U:1B,S:2V");
 				for(var i = 0; i < btb.length; i++ ){
 					netBtbData += btb[i][1];
+					if(i+1 != btb.length){
+						netBtbData += "\r\n";
+					}
 				}
 				setData("net_desc_text", netBtbData);
 			}
