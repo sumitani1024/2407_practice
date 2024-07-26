@@ -245,6 +245,9 @@
 				var pageNum = 1;
 				var currentNum = 1;
 				var maxPage = 9;
+				
+				debugN("文字数:" + joinhowBtbData.length);
+
 				if(pageNum > maxPage){
 					pageNum = maxPage;
 				}
@@ -306,7 +309,6 @@
 
 			//btb読み込み
 			function readBtbData(){
-				debugN("btb読み込み開始");
 				readbtbtop();
 				readbtbJoinhow();
 				readbtbProf();
@@ -321,13 +323,15 @@
 						topBtbData[btb[i][1]] = btb[i][2];
 					}
 					setData("top_title_text", topBtbData[0]);
-					setData("top_desc_text", topBtbData[1]);	
+					setData("top_desc_text", topBtbData[1]);
 			}
 
 			var joinhowBtbData = "";
+			var joinhowLengthNum = 0;
 			function readbtbJoinhow(){
 				var joinhowbtbPath = ES + "0001/joinhow.btb";
 				var btb = readBtb(joinhowbtbPath, "2,U:1B,S:2V");
+				joinhowLengthNum = btb.length;
 				for(var i = 0; i < btb.length; i++ ){
 					joinhowBtbData += btb[i][1];
 				}
@@ -361,11 +365,13 @@
 			function mLocked0001(){
 				var eventStatus = document.currentEvent.status;
 				if(eventStatus == 0){
+					lock();
 					readBtbData();
 					if(firstShowFlag){
 						showTop(gStatusView.STATE_TOP);
 						firstShowFlag = false;
 					}
+					unlock();
 				}
 			}
 
