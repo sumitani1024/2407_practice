@@ -303,6 +303,15 @@
 				}
 			}
 
+			function mUpdated0001(){
+				var eventStatus = document.currentEvent.status;
+				if(eventStatus == 0){
+					var moduleRef = (ES + "0001").toString();
+					browser.unlockModuleOnMemory(moduleRef);
+					browser.lockModuleOnMemory(moduleRef);
+				}
+			}
+
 			]]>
 		</script>
 
