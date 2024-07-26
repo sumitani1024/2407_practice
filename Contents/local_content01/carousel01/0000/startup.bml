@@ -32,6 +32,14 @@
 				var ele = g("mu00");
 				ele.moduleRef = ES + MODULE;
 				ele.subscribe = true;
+
+				var eleMu0001 = g("mu0001");
+				eleMu0001.moduleRef = (ES + "0001").toString();
+				eleMu0001.subscribe = true;
+
+				var eleMl0001 = g("ml0001");
+				eleMl0001.moduleRef = (ES + "0001").toString();
+				eleMl0001.subscribe = true;
 			}
 
 			function showInit(){
@@ -236,6 +244,7 @@
 
 			//btb読み込み
 			function readBtbData(){
+				debugN("btb読み込み開始");
 				readbtbtop();
 				readbtbJoinhow();
 				readbtbProf();
@@ -287,11 +296,20 @@
 				setData("net_desc_text", netBtbData);
 			}
 
+			function mLocked0001(){
+				var eventStatus = document.currentEvent.status;
+				if(eventStatus == 0){
+					readBtbData();
+				}
+			}
+
 			]]>
 		</script>
 
 		<bevent>
-			<beitem id="mu00" type="ModuleUpdated" onoccur="srcUpdated();" />
+			<beitem id="mu00" type="ModuleUpdated" onoccur="srcUpdated();"/>
+			<beitem id="mu0001" type="ModuleUpdated" onoccur="mUpdated0001();" />
+			<beitem id="ml0001" type="ModuleLocked" onoccur="mLocked0001();" />
 			<beitem id="ml01" type="ModuleLocked"  onoccur="ML01();" />
 			<beitem id="EvtChange" type="DataEventChanged"  onoccur="dataEvtChanged();" subscribe="subscribe"/>
 			<beitem id="Dpress"    type="DataButtonPressed" onoccur="Dpressed();"       subscribe="subscribe"/>
