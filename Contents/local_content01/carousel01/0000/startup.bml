@@ -14,6 +14,7 @@
 				debugFlg = true;
 
 				updateModule();
+
 				showInit();
 				return;
 			}
@@ -34,16 +35,18 @@
 				ele.subscribe = true;
 
 				var eleMu0001 = g("mu0001");
-				eleMu0001.moduleRef = (ES + "0001").toString();
+				eleMu0001.moduleRef = ES + "0001";
 				eleMu0001.subscribe = true;
 
 				var eleMl0001 = g("ml0001");
-				eleMl0001.moduleRef = (ES + "0001").toString();
+				eleMl0001.moduleRef = ES + "0001";
 				eleMl0001.subscribe = true;
 			}
 
 			function showInit(){
-				readBtbData();
+				lock();
+				mLocked0001();
+				unlock();
 				showTop(true);
 			}
 
@@ -253,7 +256,7 @@
 
 			var topBtbData = new Array();
 			function readbtbtop(){
-					var topbtbPath = (ES + "0001/top.btb").toString();
+					var topbtbPath = ES + "0001/top.btb";
 					var btb = readBtb(topbtbPath, "2,U:1B,U:1B,S:2V");
 					for(var i = 0; i < btb.length; i++ ){
 						topBtbData[btb[i][1]] = btb[i][2];
@@ -264,7 +267,7 @@
 
 			var joinhowBtbData = "";
 			function readbtbJoinhow(){
-				var joinhowbtbPath = (ES + "0001/joinhow.btb").toString();
+				var joinhowbtbPath = ES + "0001/joinhow.btb";
 				var btb = readBtb(joinhowbtbPath, "2,U:1B,S:2V");
 				for(var i = 0; i < btb.length; i++ ){
 					joinhowBtbData += btb[i][1];
@@ -274,7 +277,7 @@
 
 			var profBtbData = "";
 			function readbtbProf(){
-				var profbtbPath = (ES + "0001/prof.btb").toString();
+				var profbtbPath = ES + "0001/prof.btb";
 				var btb = readBtb(profbtbPath, "1,U:1B,S:1V");
 				for(var i = 0; i < btb.length; i++ ){
 					profBtbData += btb[i][1];
@@ -288,7 +291,7 @@
 
 			var netBtbData = "";
 			function readbtbNet(){
-				var netbtbPath = (ES + "0001/net.btb").toString();
+				var netbtbPath = ES + "0001/net.btb";
 				var btb = readBtb(netbtbPath, "2,U:1B,S:2V");
 				for(var i = 0; i < btb.length; i++ ){
 					netBtbData += btb[i][1];
@@ -298,15 +301,15 @@
 
 			function mLocked0001(){
 				var eventStatus = document.currentEvent.status;
-				if(eventStatus == 0){
+				if(eventStatus == 0 || eventStatus == 2){
 					readBtbData();
 				}
 			}
 
 			function mUpdated0001(){
 				var eventStatus = document.currentEvent.status;
-				if(eventStatus == 0){
-					var moduleRef = (ES + "0001").toString();
+				if(eventStatus == 0 ){
+					var moduleRef = ES + "0001";
 					browser.unlockModuleOnMemory(moduleRef);
 					browser.lockModuleOnMemory(moduleRef);
 				}
