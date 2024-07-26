@@ -28,6 +28,9 @@
 			gStatusView.STATE_URGE = false;
 
 			var gStatusNum = 19;
+			var moduleRef01 = ES + "0001";
+
+			var firstShowFlag = true;
 
 			function updateModule(){
 				var ele = g("mu00");
@@ -35,19 +38,17 @@
 				ele.subscribe = true;
 
 				var eleMu0001 = g("mu0001");
-				eleMu0001.moduleRef = ES + "0001";
+				eleMu0001.moduleRef = moduleRef01;
 				eleMu0001.subscribe = true;
 
 				var eleMl0001 = g("ml0001");
-				eleMl0001.moduleRef = ES + "0001";
+				eleMl0001.moduleRef = moduleRef01;
 				eleMl0001.subscribe = true;
 			}
 
 			function showInit(){
-				lock();
-				mLocked0001();
-				unlock();
-				showTop(true);
+				browser.unlockModuleOnMemory(moduleRef01);
+				browser.lockModuleOnMemory(moduleRef01);
 			}
 
 			// フッターボタン押下
@@ -301,17 +302,20 @@
 
 			function mLocked0001(){
 				var eventStatus = document.currentEvent.status;
-				if(eventStatus == 0 || eventStatus == 2){
+				if(eventStatus == 0){
 					readBtbData();
+					if(firstShowFlag){
+						showTop(gStatusView.STATE_TOP);
+						firstShowFlag = false;
+					}
 				}
 			}
 
 			function mUpdated0001(){
 				var eventStatus = document.currentEvent.status;
-				if(eventStatus == 0 ){
-					var moduleRef = ES + "0001";
-					browser.unlockModuleOnMemory(moduleRef);
-					browser.lockModuleOnMemory(moduleRef);
+				if(eventStatus == 0){
+					browser.unlockModuleOnMemory(moduleRef01);
+					browser.lockModuleOnMemory(moduleRef01);
 				}
 			}
 
