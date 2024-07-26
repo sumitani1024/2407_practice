@@ -29,7 +29,7 @@
 			var gStatusNum = 19;
 
 			function updateModule(){
-				var ele = g("mu01");
+				var ele = g("mu00");
 				ele.moduleRef = ES + MODULE;
 				ele.subscribe = true;
 			}
