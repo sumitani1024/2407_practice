@@ -13,6 +13,7 @@
 				disp("pDebug");
 				debugFlg = true;
 
+				updateModule();
 				showInit();
 				return;
 			}
@@ -26,6 +27,12 @@
 			gStatusView.STATE_URGE = false;
 
 			var gStatusNum = 19;
+
+			function updateModule(){
+				var ele = g("mu01");
+				ele.moduleRef = ES + MODULE;
+				ele.subscribe = true;
+			}
 
 			function showInit(){
 				readBtbData();
@@ -280,7 +287,7 @@
 		</script>
 
 		<bevent>
-			<beitem id="mu01" type="ModuleUpdated" onoccur="MU01();" />
+			<beitem id="mu00" type="ModuleUpdated" onoccur="MU00();" />
 			<beitem id="ml01" type="ModuleLocked"  onoccur="ML01();" />
 			<beitem id="EvtChange" type="DataEventChanged"  onoccur="dataEvtChanged();" subscribe="subscribe"/>
 			<beitem id="Dpress"    type="DataButtonPressed" onoccur="Dpressed();"       subscribe="subscribe"/>
