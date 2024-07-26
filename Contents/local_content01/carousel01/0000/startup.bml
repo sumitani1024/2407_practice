@@ -245,8 +245,16 @@
 				var pageNum = 1;
 				var currentNum = 1;
 				var maxPage = 9;
+				var maxPageLength = 10;
 				
-				debugN("文字数:" + joinhowBtbData.length);
+				debugN("行数:" + joinhowLengthNum);
+				while(joinhowLengthNum > maxPageLength ){
+					if(joinhowLengthNum > maxPageLength){
+						joinhowLengthNum = joinhowLengthNum - maxPageLength;
+						pageNum++;
+					}
+				}
+				debugN("行数(計算後):" + joinhowLengthNum);
 
 				if(pageNum > maxPage){
 					pageNum = maxPage;
@@ -339,12 +347,12 @@
 			function readbtbJoinhow(){
 				var joinhowbtbPath = ES + "0001/joinhow.btb";
 				var btb = readBtb(joinhowbtbPath, "2,U:1B,S:2V");
-				joinhowLengthNum = btb.length;
 				for(var i = 0; i < btb.length; i++ ){
 					joinhowBtbData += btb[i][1];
 					if(i+1 != btb.length){
 						joinhowBtbData += "\r\n";
 					}
+					joinhowLengthNum++;
 				}
 			setData("how_join_desc_text", joinhowBtbData);
 			}
