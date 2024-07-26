@@ -170,10 +170,8 @@
 				if(flag){
 					disp("how_join_base");
 					disp("how_join_desc_text");
-					disp("how_join_page_right");
-					disp("how_join_page_left");
-					disp("how_join_page_focus");
 					disp("how_join_page_text");
+					joinhowPageChange();
 				}else{
 					undisp("how_join_base");
 					undisp("how_join_desc_text");
@@ -188,10 +186,8 @@
 				if(flag){
 					disp("prof_base");
 					disp("prof_desc_text");
-					disp("prof_page_right");
-					disp("prof_page_left");
-					disp("prof_page_focus");
 					disp("prof_page_text");
+					profPageChange();
 				}else{
 					undisp("prof_base");
 					undisp("prof_desc_text");
@@ -232,10 +228,8 @@
 				if(flag){
 					disp("net_base");
 					disp("net_desc_text");
-					disp("net_page_right");
-					disp("net_page_left");
-					disp("net_page_focus");
 					disp("net_page_text");
+					netPageChange();
 				}else{
 					undisp("net_base");
 					undisp("net_desc_text");
@@ -244,6 +238,70 @@
 					undisp("net_page_focus");
 					undisp("net_page_text");
 				}
+			}
+
+			//ページ送り
+			function joinhowPageChange(){
+				var pageNum = 1;
+				var currentNum = 1;
+				var maxPage = 9;
+				if(pageNum > maxPage){
+					pageNum = maxPage;
+				}
+
+				if(pageNum == 1){
+					undisp("how_join_page_right");
+					undisp("how_join_page_left");
+					undisp("how_join_page_focus");
+				}else{
+					disp("how_join_page_right");
+					disp("how_join_page_left");
+					disp("how_join_page_focus");	
+				}
+				var page = currentNum + "/" + pageNum;
+				setData("how_join_page_text", page);
+			}
+
+			function profPageChange(){
+				var pageNum = 1;
+				var currentNum = 1;
+				var maxPage = 9;
+				if(pageNum > maxPage){
+					pageNum = maxPage;
+				}
+
+				if(pageNum == 1){
+					undisp("prof_page_right");
+					undisp("prof_page_left");
+					undisp("prof_page_focus");
+				}else{
+					disp("prof_page_right");
+					disp("prof_page_left");
+					disp("prof_page_focus");	
+				}
+				var page = currentNum + "/" + pageNum;
+				setData("prof_page_text", page);
+			}
+
+			function netPageChange(){
+				var pageNum = 1;
+				var currentNum = 1;
+				var maxPage = 9;
+				if(pageNum > maxPage){
+					pageNum = maxPage;
+				}
+
+				if(pageNum == 1){
+					undisp("net_page_right");
+					undisp("net_page_left");
+					undisp("net_page_focus");
+				}else{
+					disp("net_page_right");
+					disp("net_page_left");
+					disp("net_page_focus");	
+				}
+				var page = currentNum + "/" + pageNum;
+				setData("net_page_text", page);
 			}
 
 			//btb読み込み
