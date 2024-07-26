@@ -65,6 +65,7 @@ function srcUpdated(){
   var evtStatus;
   evtStatus = document.currentEvent.status;
   if ( evtStatus == 2 ){//起動直後
+	debugN("moduleUpdate: " + evtStatus);
   }
   else if ( evtStatus == 0 ){// モジュールの更新
     browser.reloadActiveDocument();}
