@@ -70,7 +70,11 @@
 						//gotoNHKTop();
 					}
 				}else if(1<= buttonKey <= 4){
-					controlArrowKey(buttonKey);
+					if(gStatusView.STATE_JOINHOW || gStatusView.STATE_PROFILE || gStatusView.STATE_URGE){
+						controlArrowKey(buttonKey);
+					}else{
+
+					}
 				}
 			}
 
@@ -257,22 +261,23 @@
 			var currentPageNum = 1;
 			var maxPageLength = 0;
 			function controlArrowKey(buttonNum){
+				if(pageNum == 1){
+					return;
+				}
 				if(buttonNum == 3){
-					playSound(9);
 					if(currentPageNum == 1){
 						currentPageNum = pageNum;
 					}else{
 						currentPageNum--;
 					}
 				}else if(buttonNum ==4){
-					playSound(9);
 					if(currentPageNum >= pageNum){
 						currentPageNum = 1;
 					}else{
 						currentPageNum++;
 					}
 				}
-
+				playSound(9);
 				PageArrowFocus(buttonNum);
 
 				if(gStatusView.STATE_JOINHOW){
