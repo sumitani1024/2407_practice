@@ -70,7 +70,7 @@
 						//gotoNHKTop();
 					}
 				}else if(1<= buttonKey <= 4){
-					ControlArrowKey(buttonKey);
+					controlArrowKey(buttonKey);
 				}
 			}
 
@@ -245,14 +245,21 @@
 			var pageNum = 1;
 			var currentPageNum = 1;
 			var maxPageLength = 0;
-			function ControlArrowKey(buttonNum){
-				if(buttonNum == 3 && currentPageNum > 1){
+			function controlArrowKey(buttonNum){
+				if(buttonNum == 3){
 					playSound(9);
-					currentPageNum--;
-
-				}else if(buttonNum ==4 && currentPageNum < pageNum){
+					if(currentPageNum == 1){
+						currentPageNum = pageNum;
+					}else{
+						currentPageNum--;
+					}
+				}else if(buttonNum ==4){
 					playSound(9);
-					currentPageNum++;
+					if(currentPageNum >= pageNum){
+						currentPageNum = 1;
+					}else{
+						currentPageNum++;
+					}
 				}
 
 				if(gStatusView.STATE_JOINHOW){
@@ -268,6 +275,11 @@
 			}
 
 			//ページ送り
+			function PageArrowFocus(button){
+				//how_join_page_focus
+			}
+
+
 			function countPageMax(maxPage, maxPageLength, lengthNum){
 				pageNum = 1;
 				debugN("行数:" + lengthNum);
