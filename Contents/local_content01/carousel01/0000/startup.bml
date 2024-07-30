@@ -249,10 +249,8 @@
 				
 				debugN("行数:" + joinhowLengthNum);
 				while(joinhowLengthNum > maxPageLength ){
-					if(joinhowLengthNum > maxPageLength){
-						joinhowLengthNum = joinhowLengthNum - maxPageLength;
-						pageNum++;
-					}
+					joinhowLengthNum = joinhowLengthNum - maxPageLength;
+					pageNum++;
 				}
 				debugN("行数(計算後):" + joinhowLengthNum);
 
