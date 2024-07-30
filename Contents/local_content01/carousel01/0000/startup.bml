@@ -95,6 +95,7 @@
 
 					gStatusView.STATE_PROFILE = true;
 					showProf(gStatusView.STATE_PROFILE);
+					unlock();
 				}else if(key == 23){
 					undisp("button_green_off");
 					disp("button_green_on");
@@ -174,14 +175,15 @@
 					disp("how_join_desc_text");
 					disp("how_join_page_text");
 					joinhowPageChange();
+					unlock();
 				}else{
+					lock();
 					undisp("how_join_base");
 					undisp("how_join_desc_text");
 					undisp("how_join_page_right");
 					undisp("how_join_page_left");
 					undisp("how_join_page_focus");
 					undisp("how_join_page_text");
-					setJoinhowPageText(true);
 				}
 			}
 
@@ -191,14 +193,15 @@
 					disp("prof_desc_text");
 					disp("prof_page_text");
 					profPageChange();
+					unlock();
 				}else{
+					lock();
 					undisp("prof_base");
 					undisp("prof_desc_text");
 					undisp("prof_page_right");
 					undisp("prof_page_left");
 					undisp("prof_page_focus");
 					undisp("prof_page_text");
-					setProfPageText(true);
 				}
 			}
 
@@ -234,14 +237,15 @@
 					disp("net_desc_text");
 					disp("net_page_text");
 					netPageChange();
+					unlock();
 				}else{
+					lock();
 					undisp("net_base");
 					undisp("net_desc_text");
 					undisp("net_page_right");
 					undisp("net_page_left");
 					undisp("net_page_focus");
 					undisp("net_page_text");
-					setNetPageText(true);
 				}
 			}
 
@@ -266,11 +270,11 @@
 				}
 
 				if(gStatusView.STATE_JOINHOW){
-					setJoinhowPageText(false);
+					setJoinhowPageText();
 				}else if(gStatusView.STATE_PROFILE){
-					setProfPageText(false);
+					setProfPageText();
 				}else if(gStatusView.STATE_URGE){
-					setNetPageText(false);
+					setNetPageText();
 				}
 			}
 
@@ -308,13 +312,10 @@
 					disp("how_join_page_left");
 					disp("how_join_page_focus");	
 				}
-				setJoinhowPageText(false);
+				setJoinhowPageText();
 			}
 
-			function setJoinhowPageText(initFlag){
-				if(initFlag == true){
-					currentPageNum = 1;
-				}
+			function setJoinhowPageText(){
 				var page = currentPageNum + "/" + pageNum;
 				setData("how_join_page_text", page);
 				setHowJoinText(currentPageNum-1);
@@ -337,13 +338,10 @@
 					disp("prof_page_left");
 					disp("prof_page_focus");	
 				}
-				setProfPageText(false);
+				setProfPageText();
 			}
 
-			function setProfPageText(initFlag){
-				if(initFlag == true){
-					currentPageNum = 1;
-				}
+			function setProfPageText(){
 				var page = currentPageNum + "/" + pageNum;
 				setData("prof_page_text", page);
 				setProfText(currentPageNum-1);
@@ -366,13 +364,10 @@
 					disp("net_page_left");
 					disp("net_page_focus");	
 				}
-				setNetPageText(false);
+				setNetPageText();
 			}
 
-			function setNetPageText(initFlag){
-				if(initFlag == true){
-					currentPageNum = 1;
-				}
+			function setNetPageText(){
 				var page = currentPageNum + "/" + pageNum;
 				setData("net_page_text", page);
 				setNetText(currentPageNum-1);
