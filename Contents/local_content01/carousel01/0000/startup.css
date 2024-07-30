@@ -90,7 +90,8 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 #how_join_page{ left:122px; top:351px; width:116px; height:33px; visibility:visible; }
 #how_join_page_right{ left:95px; top:4px; width:18px; height:26px; visibility:hidden; }
 #how_join_page_left{ left:0px; top:4px; width:18px; height:26px; visibility:hidden; }
-#how_join_page_focus{ left:91px; top:0px; width:25px; height:33px; visibility:hidden; }
+#how_join_page_focus_right{ left:91px; top:0px; width:25px; height:33px; visibility:hidden; }
+/** #how_join_page_focus_Left{ left:0px; top:0px; width:25px; height:33px; transform: rotate(180deg); visibility:hidden; } **/
 #how_join_page_text{
 	left:42px;
 	top:7px;

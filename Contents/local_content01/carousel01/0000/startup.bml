@@ -159,7 +159,9 @@
 					disp("top_base");
 					disp("top_title_text");
 					disp("top_desc_text");
+					unlock();
 				}else{
+					lock();
 					undisp("button_back_top");
 					disp("button_back_housou");
 
@@ -182,7 +184,7 @@
 					undisp("how_join_desc_text");
 					undisp("how_join_page_right");
 					undisp("how_join_page_left");
-					undisp("how_join_page_focus");
+					undisp("how_join_page_focus_right");
 					undisp("how_join_page_text");
 				}
 			}
@@ -217,7 +219,9 @@
 					disp("regi_button_change");
 					disp("regi_button_complete");
 					disp("regi_button_balloon");
+					unlock();
 				}else{
+					lock();
 					undisp("regi_base");
 					undisp("regi_name_text");
 					undisp("regi_enagy_text");
@@ -269,6 +273,8 @@
 					}
 				}
 
+				PageArrowFocus(buttonNum);
+
 				if(gStatusView.STATE_JOINHOW){
 					setJoinhowPageText();
 				}else if(gStatusView.STATE_PROFILE){
@@ -280,7 +286,25 @@
 
 			//ページ送り
 			function PageArrowFocus(button){
-				//how_join_page_focus
+				var pageFocusRight = "";
+				var pageFocusLeft = "";
+				if(gStatusView.STATE_JOINHOW){
+					pageFocusRight = "how_join_page_focus_right";
+					//pageFocusLeft = "how_join_page_focus_left";
+				}else if(gStatusView.STATE_PROFILE){
+					pageFocusRight = "prof_page_focus";
+				}else if(gStatusView.STATE_URGE){
+					pageFocusRight = "net_page_focus";
+				}
+
+				if(button == 3){
+					undisp(pageFocusRight);
+					//disp(pageFocusLeft);
+				}else{
+					//undisp(pageFocusLeft);
+					disp(pageFocusRight);
+				}
+				
 			}
 
 			function countPageMax(maxPage, maxPageLength, lengthNum){
@@ -306,11 +330,12 @@
 				if(pageNum == 1){
 					undisp("how_join_page_right");
 					undisp("how_join_page_left");
-					undisp("how_join_page_focus");
+					undisp("how_join_page_focus_right");
+					//undisp("how_join_page_focus_left");
 				}else{
 					disp("how_join_page_right");
 					disp("how_join_page_left");
-					disp("how_join_page_focus");	
+					//disp("how_join_page_focus");	
 				}
 				setJoinhowPageText();
 			}
@@ -569,7 +594,8 @@
 			<div id="how_join_page">
 				<object id="how_join_page_right" type="image/X-arib-png" data="base-b-page-right.png"/>
 				<object id="how_join_page_left" type="image/X-arib-png" data="base-b-page-left.png"/>
-				<object id="how_join_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
+				<object id="how_join_page_focus_right" type="image/X-arib-png" data="page-next-focus.png"/>
+				<!-- <object id="how_join_page_focus_left" type="image/X-arib-png" data="page-next-focus.png"/> -->
 				<p id="how_join_page_text">
 					<![CDATA[1/2]]>
 				</p>
