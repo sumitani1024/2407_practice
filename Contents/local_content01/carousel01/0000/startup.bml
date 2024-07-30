@@ -298,9 +298,10 @@
 				var pageFocusLeft = "";
 				if(gStatusView.STATE_JOINHOW){
 					pageFocusRight = "how_join_page_focus_right";
-					//pageFocusLeft = "how_join_page_focus_left";
+					pageFocusLeft = "how_join_page_focus_left";
 				}else if(gStatusView.STATE_PROFILE){
 					pageFocusRight = "prof_page_focus";
+					pageFocusLeft = "prof_page_focus_left";
 				}else if(gStatusView.STATE_URGE){
 					pageFocusRight = "net_page_focus";
 					pageFocusLeft = "net_page_focus_left";
@@ -346,11 +347,10 @@
 					undisp("how_join_page_right");
 					undisp("how_join_page_left");
 					undisp("how_join_page_focus_right");
-					//undisp("how_join_page_focus_left");
+					undisp("how_join_page_focus_left");
 				}else{
 					disp("how_join_page_right");
 					disp("how_join_page_left");
-					//disp("how_join_page_focus");	
 				}
 				setJoinhowPageText();
 			}
@@ -373,10 +373,10 @@
 					undisp("prof_page_right");
 					undisp("prof_page_left");
 					undisp("prof_page_focus");
+					undisp("prof_page_focus_left");
 				}else{
 					disp("prof_page_right");
 					disp("prof_page_left");
-					disp("prof_page_focus");	
 				}
 				setProfPageText();
 			}
@@ -610,7 +610,7 @@
 				<object id="how_join_page_right" type="image/X-arib-png" data="base-b-page-right.png"/>
 				<object id="how_join_page_left" type="image/X-arib-png" data="base-b-page-left.png"/>
 				<object id="how_join_page_focus_right" type="image/X-arib-png" data="page-next-focus.png"/>
-				<!-- <object id="how_join_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/> -->
+				<object id="how_join_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/>
 				<p id="how_join_page_text">
 					<![CDATA[1/2]]>
 				</p>
@@ -627,6 +627,7 @@
 				<object id="prof_page_right" type="image/X-arib-png" data="base-r-page-right.png"/>
 				<object id="prof_page_left" type="image/X-arib-png" data="base-r-page-left.png"/>
 				<object id="prof_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
+				<object id="prof_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/>
 				<p id="prof_page_text">
 					<![CDATA[1/2]]>
 				</p>
