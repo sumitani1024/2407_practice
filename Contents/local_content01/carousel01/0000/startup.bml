@@ -393,6 +393,7 @@
 					disp("net_page_right");
 					disp("net_page_left");
 					disp("net_page_focus");	
+					disp("net_page_focus_left");
 				}
 				setNetPageText();
 			}
@@ -600,7 +601,7 @@
 				<object id="how_join_page_right" type="image/X-arib-png" data="base-b-page-right.png"/>
 				<object id="how_join_page_left" type="image/X-arib-png" data="base-b-page-left.png"/>
 				<object id="how_join_page_focus_right" type="image/X-arib-png" data="page-next-focus.png"/>
-				<!-- <object id="how_join_page_focus_left" type="image/X-arib-png" data="page-next-focus.png"/> -->
+				<!-- <object id="how_join_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/> -->
 				<p id="how_join_page_text">
 					<![CDATA[1/2]]>
 				</p>
@@ -668,6 +669,7 @@
 				<object id="net_page_right" type="image/X-arib-png" data="base-y-page-right.png"/>
 				<object id="net_page_left" type="image/X-arib-png" data="base-y-page-left.png"/>
 				<object id="net_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
+				<object id="net_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/>
 				<p id="net_page_text">
 					<![CDATA[1/2]]>
 				</p>
