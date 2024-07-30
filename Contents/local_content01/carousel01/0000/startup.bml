@@ -69,6 +69,8 @@
 						playSound(7);
 						//gotoNHKTop();
 					}
+				}else if(1<= buttonKey <= 4){
+					ControlArrowKey(buttonKey);
 				}
 			}
 
@@ -240,6 +242,31 @@
 				}
 			}
 
+			var pageNum = 1;
+			var currentPageNum = 1;
+			var maxPageLength = 0;
+			function ControlArrowKey(buttonNum){
+				if(buttonNum == 3 && currentPageNum > 1){
+					playSound(9);
+					currentPageNum--;
+
+				}else if(buttonNum ==4 && currentPageNum < pageNum){
+					playSound(9);
+					currentPageNum++;
+				}
+
+				if(gStatusView.STATE_JOINHOW){
+					setJoinhowPageText();
+					setHowJoinText(currentPageNum-1);
+				}else if(gStatusView.STATE_PROFILE){
+					setProfPageText();
+					setProfText(currentPageNum-1);
+				}else if(gStatusView.STATE_URGE){
+					setNetPageText();
+					setNetText(currentPageNum-1);
+				}
+			}
+
 			//ページ送り
 			function countPageMax(maxPage, maxPageLength, lengthNum){
 				pageNum = 1;
@@ -257,13 +284,10 @@
 			}
 
 			function joinhowPageChange(){
-				var pageNum = 1;
-				var currentNum = 1;
 				var maxPage = 9;
-				var maxPageLength = 10;
-				
+				maxPageLength = 10;
+				currentPageNum = 1;
 				pageNum = countPageMax(maxPage, maxPageLength, joinhowLengthNum);
-
 				if(pageNum == 1){
 					undisp("how_join_page_right");
 					undisp("how_join_page_left");
@@ -273,15 +297,19 @@
 					disp("how_join_page_left");
 					disp("how_join_page_focus");	
 				}
-				var page = currentNum + "/" + pageNum;
+				setJoinhowPageText();
+			}
+
+			function setJoinhowPageText(){
+				var page = currentPageNum + "/" + pageNum;
 				setData("how_join_page_text", page);
 			}
 
 			function profPageChange(){
-				var pageNum = 1;
-				var currentNum = 1;
 				var maxPage = 9;
-				var maxPageLength = 5;
+				pageNum = 1;
+				currentPageNum = 1;
+				maxPageLength = 5;
 
 				pageNum = countPageMax(maxPage, maxPageLength, profLengthNum);
 
@@ -294,15 +322,19 @@
 					disp("prof_page_left");
 					disp("prof_page_focus");	
 				}
-				var page = currentNum + "/" + pageNum;
+				setProfPageText();
+			}
+
+			function setProfPageText(){
+				var page = currentPageNum + "/" + pageNum;
 				setData("prof_page_text", page);
 			}
 
 			function netPageChange(){
-				var pageNum = 1;
-				var currentNum = 1;
 				var maxPage = 9;
-				var maxPageLength = 10;
+				pageNum = 1;
+				currentPageNum = 1;
+				maxPageLength = 10;
 
 				pageNum = countPageMax(maxPage, maxPageLength, netLengthNum);
 
@@ -315,7 +347,11 @@
 					disp("net_page_left");
 					disp("net_page_focus");	
 				}
-				var page = currentNum + "/" + pageNum;
+				setNetPageText();
+			}
+
+			function setNetPageText(){
+				var page = currentPageNum + "/" + pageNum;
 				setData("net_page_text", page);
 			}
 
@@ -348,47 +384,99 @@
 
 			var joinhowBtbData = "";
 			var joinhowLengthNum = 0;
+			var joinhowArray = new Array;
 			function readbtbJoinhow(){
+				var pageNum = 0;
+				var textLength = 10;
 				var joinhowbtbPath = ES + "0001/joinhow.btb";
 				var btb = readBtb(joinhowbtbPath, "2,U:1B,S:2V");
 				for(var i = 0; i < btb.length; i++ ){
+					if(i+1 > textLength){
+						joinhowArray[pageNum] = joinhowBtbData;
+						joinhowBtbData = "";
+						textLength = textLength * 2;
+						pageNum++;
+					}
+
 					joinhowBtbData += btb[i][1];
 					if(i+1 != btb.length){
 						joinhowBtbData += "\r\n";
+					}else{
+						joinhowArray[pageNum] = joinhowBtbData;
 					}
+
 					joinhowLengthNum++;
 				}
-			setData("how_join_desc_text", joinhowBtbData);
+				setHowJoinText(0);
+			}
+
+			function setHowJoinText(pageId){
+				setData("how_join_desc_text", joinhowArray[pageId]);
 			}
 
 			var profBtbData = "";
 			var profLengthNum = 0;
+			var profArray = new Array;
 			function readbtbProf(){
+				var pageNum = 0;
+				var textLength = 5;
 				var profbtbPath = ES + "0001/prof.btb";
 				var btb = readBtb(profbtbPath, "1,U:1B,S:1V");
 				for(var i = 0; i < btb.length; i++ ){
+					if(i+1 > textLength){
+						profArray[pageNum] = profBtbData;
+						profBtbData = "";
+						textLength = textLength * 2;
+						pageNum++;
+					}
+					
 					profBtbData += btb[i][1];
 					if(i+1 != btb.length){
 						profBtbData += "\r\n";
 					}
+					else{
+						profArray[pageNum] = profBtbData;
+					}
+
 					profLengthNum++;
 				}
-				setData("prof_desc_text", profBtbData);
+				setProfText(0);
+			}
+
+			function setProfText(pageId){
+				setData("prof_desc_text", profArray[pageId]);
 			}
 
 			var netBtbData = "";
 			var netLengthNum = 0;
+			var netArray = new Array;
 			function readbtbNet(){
+				var pageNum = 0;
+				var textLength = 10;
 				var netbtbPath = ES + "0001/net.btb";
 				var btb = readBtb(netbtbPath, "2,U:1B,S:2V");
 				for(var i = 0; i < btb.length; i++ ){
+					if(i+1 > textLength){
+						netArray[pageNum] = netBtbData;
+						netBtbData = "";
+						textLength = textLength * 2;
+						pageNum++;
+					}
+
 					netBtbData += btb[i][1];
 					if(i+1 != btb.length){
 						netBtbData += "\r\n";
+					}else{
+						netArray[pageNum] = netBtbData;
 					}
+
 					netLengthNum++;
 				}
-				setData("net_desc_text", netBtbData);
+				setNetText(0);
+			}
+
+			function setNetText(pageId){
+				setData("net_desc_text", netArray[pageId]);			
 			}
 
 			function mLocked0001(){
