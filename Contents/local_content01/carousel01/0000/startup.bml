@@ -241,22 +241,28 @@
 			}
 
 			//ページ送り
+			function countPageMax(maxPage, maxPageLength, lengthNum){
+				pageNum = 1;
+				debugN("行数:" + lengthNum);
+				while(lengthNum > maxPageLength ){
+					lengthNum = lengthNum - maxPageLength;
+					pageNum++;
+				}
+				debugN("行数(計算後):" + pageNum);
+				if(pageNum > maxPage){
+					pageNum = maxPage;
+				}
+
+				return pageNum;
+			}
+
 			function joinhowPageChange(){
 				var pageNum = 1;
 				var currentNum = 1;
 				var maxPage = 9;
 				var maxPageLength = 10;
 				
-				debugN("行数:" + joinhowLengthNum);
-				while(joinhowLengthNum > maxPageLength ){
-					joinhowLengthNum = joinhowLengthNum - maxPageLength;
-					pageNum++;
-				}
-				debugN("行数(計算後):" + joinhowLengthNum);
-
-				if(pageNum > maxPage){
-					pageNum = maxPage;
-				}
+				pageNum = countPageMax(maxPage, maxPageLength, joinhowLengthNum);
 
 				if(pageNum == 1){
 					undisp("how_join_page_right");
@@ -275,9 +281,9 @@
 				var pageNum = 1;
 				var currentNum = 1;
 				var maxPage = 9;
-				if(pageNum > maxPage){
-					pageNum = maxPage;
-				}
+				var maxPageLength = 5;
+
+				pageNum = countPageMax(maxPage, maxPageLength, profLengthNum);
 
 				if(pageNum == 1){
 					undisp("prof_page_right");
@@ -296,9 +302,9 @@
 				var pageNum = 1;
 				var currentNum = 1;
 				var maxPage = 9;
-				if(pageNum > maxPage){
-					pageNum = maxPage;
-				}
+				var maxPageLength = 10;
+
+				pageNum = countPageMax(maxPage, maxPageLength, netLengthNum);
 
 				if(pageNum == 1){
 					undisp("net_page_right");
@@ -356,6 +362,7 @@
 			}
 
 			var profBtbData = "";
+			var profLengthNum = 0;
 			function readbtbProf(){
 				var profbtbPath = ES + "0001/prof.btb";
 				var btb = readBtb(profbtbPath, "1,U:1B,S:1V");
@@ -364,11 +371,13 @@
 					if(i+1 != btb.length){
 						profBtbData += "\r\n";
 					}
+					profLengthNum++;
 				}
 				setData("prof_desc_text", profBtbData);
 			}
 
 			var netBtbData = "";
+			var netLengthNum = 0;
 			function readbtbNet(){
 				var netbtbPath = ES + "0001/net.btb";
 				var btb = readBtb(netbtbPath, "2,U:1B,S:2V");
@@ -377,6 +386,7 @@
 					if(i+1 != btb.length){
 						netBtbData += "\r\n";
 					}
+					netLengthNum++;
 				}
 				setData("net_desc_text", netBtbData);
 			}
