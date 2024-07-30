@@ -181,6 +181,7 @@
 					undisp("how_join_page_left");
 					undisp("how_join_page_focus");
 					undisp("how_join_page_text");
+					setJoinhowPageText(true);
 				}
 			}
 
@@ -197,6 +198,7 @@
 					undisp("prof_page_left");
 					undisp("prof_page_focus");
 					undisp("prof_page_text");
+					setProfPageText(true);
 				}
 			}
 
@@ -239,6 +241,7 @@
 					undisp("net_page_left");
 					undisp("net_page_focus");
 					undisp("net_page_text");
+					setNetPageText(true);
 				}
 			}
 
@@ -263,14 +266,11 @@
 				}
 
 				if(gStatusView.STATE_JOINHOW){
-					setJoinhowPageText();
-					setHowJoinText(currentPageNum-1);
+					setJoinhowPageText(false);
 				}else if(gStatusView.STATE_PROFILE){
-					setProfPageText();
-					setProfText(currentPageNum-1);
+					setProfPageText(false);
 				}else if(gStatusView.STATE_URGE){
-					setNetPageText();
-					setNetText(currentPageNum-1);
+					setNetPageText(false);
 				}
 			}
 
@@ -278,7 +278,6 @@
 			function PageArrowFocus(button){
 				//how_join_page_focus
 			}
-
 
 			function countPageMax(maxPage, maxPageLength, lengthNum){
 				pageNum = 1;
@@ -309,12 +308,16 @@
 					disp("how_join_page_left");
 					disp("how_join_page_focus");	
 				}
-				setJoinhowPageText();
+				setJoinhowPageText(false);
 			}
 
-			function setJoinhowPageText(){
+			function setJoinhowPageText(initFlag){
+				if(initFlag == true){
+					currentPageNum = 1;
+				}
 				var page = currentPageNum + "/" + pageNum;
 				setData("how_join_page_text", page);
+				setHowJoinText(currentPageNum-1);
 			}
 
 			function profPageChange(){
@@ -334,12 +337,16 @@
 					disp("prof_page_left");
 					disp("prof_page_focus");	
 				}
-				setProfPageText();
+				setProfPageText(false);
 			}
 
-			function setProfPageText(){
+			function setProfPageText(initFlag){
+				if(initFlag == true){
+					currentPageNum = 1;
+				}
 				var page = currentPageNum + "/" + pageNum;
 				setData("prof_page_text", page);
+				setProfText(currentPageNum-1);
 			}
 
 			function netPageChange(){
@@ -359,12 +366,16 @@
 					disp("net_page_left");
 					disp("net_page_focus");	
 				}
-				setNetPageText();
+				setNetPageText(false);
 			}
 
-			function setNetPageText(){
+			function setNetPageText(initFlag){
+				if(initFlag == true){
+					currentPageNum = 1;
+				}
 				var page = currentPageNum + "/" + pageNum;
 				setData("net_page_text", page);
+				setNetText(currentPageNum-1);
 			}
 
 			//btb読み込み
