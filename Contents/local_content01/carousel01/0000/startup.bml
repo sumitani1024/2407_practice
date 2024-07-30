@@ -253,6 +253,7 @@
 					undisp("net_page_right");
 					undisp("net_page_left");
 					undisp("net_page_focus");
+					undisp("net_page_focus_left");
 					undisp("net_page_text");
 				}
 			}
@@ -278,8 +279,8 @@
 					}
 				}
 				playSound(9);
-				PageArrowFocus(buttonNum);
-
+				PageArrowFocus(buttonNum, true);
+				lock();
 				if(gStatusView.STATE_JOINHOW){
 					setJoinhowPageText();
 				}else if(gStatusView.STATE_PROFILE){
@@ -287,10 +288,12 @@
 				}else if(gStatusView.STATE_URGE){
 					setNetPageText();
 				}
+				PageArrowFocus(buttonNum, false);
+				unlock();
 			}
 
 			//ページ送り
-			function PageArrowFocus(button){
+			function PageArrowFocus(button, showFlag){
 				var pageFocusRight = "";
 				var pageFocusLeft = "";
 				if(gStatusView.STATE_JOINHOW){
@@ -300,15 +303,22 @@
 					pageFocusRight = "prof_page_focus";
 				}else if(gStatusView.STATE_URGE){
 					pageFocusRight = "net_page_focus";
+					pageFocusLeft = "net_page_focus_left";
 				}
 
-				if(button == 3){
-					undisp(pageFocusRight);
-					//disp(pageFocusLeft);
+				if(showFlag){
+					if(button == 3){
+						undisp(pageFocusRight);
+						disp(pageFocusLeft);
+					}else{
+						undisp(pageFocusLeft);
+						disp(pageFocusRight);
+					}
 				}else{
-					//undisp(pageFocusLeft);
-					disp(pageFocusRight);
+					undisp(pageFocusRight);
+					undisp(pageFocusLeft);
 				}
+				
 				
 			}
 
@@ -389,11 +399,10 @@
 					undisp("net_page_right");
 					undisp("net_page_left");
 					undisp("net_page_focus");
+					undisp("net_page_focus_left");
 				}else{
 					disp("net_page_right");
 					disp("net_page_left");
-					disp("net_page_focus");	
-					disp("net_page_focus_left");
 				}
 				setNetPageText();
 			}

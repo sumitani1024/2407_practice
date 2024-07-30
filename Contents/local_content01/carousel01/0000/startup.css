@@ -218,14 +218,14 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 	visibility:hidden;
 }
 
-#net_page{ left:122px; top:351px; width:116px; height:33px; visibility:visible; }
-#net_page_right{ left:95px; top:4px; width:18px; height:26px; visibility:hidden; }
-#net_page_left{ left:0px; top:4px; width:18px; height:26px; visibility:hidden; }
-#net_page_focus{ left:91px; top:0px; width:25px; height:33px; visibility:hidden; }
-#net_page_focus_Left{ left:0px; top:0px; width:26px; height:33px; visibility:hidden; }
+#net_page{ left:120px; top:353px; width:116px; height:33px; visibility:visible; }
+#net_page_right{ left:99px; top:4px; width:18px; height:26px; visibility:hidden; }
+#net_page_left{ left:4px; top:4px; width:18px; height:26px; visibility:hidden; }
+#net_page_focus{ left:95px; top:0px; width:25px; height:33px; visibility:hidden; }
+#net_page_focus_left{ left:0px; top:0px; width:25px; height:33px; visibility:hidden; }
 #net_page_text{
 	left:42px;
-	top:7px;
+	top:5px;
 	width:30px;
 	height:20px;
 	font-size: 20px;
