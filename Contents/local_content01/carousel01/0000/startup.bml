@@ -51,7 +51,7 @@
 				browser.lockModuleOnMemory(moduleRef01);
 			}
 
-			// フッターボタン押下
+			// ボタン押下
 			function kd()
 			{
 				var buttonKey = getKey();
@@ -557,6 +557,11 @@
 					browser.unlockModuleOnMemory(moduleRef01);
 					browser.lockModuleOnMemory(moduleRef01);
 				}
+			}
+
+			function Dpressed(){
+				debugN("dボタン押下");
+				gotoTV();
 			}
 
 			]]>
