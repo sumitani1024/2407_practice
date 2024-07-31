@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="EUC-JP" ?>
+<!DOCTYPE bml PUBLIC "+//ARIB STD-B24:1999//DTD BML Document//JA" "http://www.arib.or.jp/B24/DTD/bml_1_1.dtd">
+<?bml bml-version="3.0" ?>
+<bml>
+<head>
+<title>test</title>
+
+<link href="startup.css" />
+<script src = "functions.ecm"/>
+<script><![CDATA[
+function onload(){
+	disp("pDebug");
+	debugFlg = true;
+
+	var moduleRef01 = ES + "0001";
+	browser.unlockModuleOnMemory(moduleRef01);
+	browser.lockModuleOnMemory(moduleRef01);
+
+	getUregData();
+}
+
+function getUregData(){
+	var uregData = getUreg(1);
+	debugN("ureg: " + uregData);
+}
+
+function kd(){
+	var buttonKey = getKey();
+	if(buttonKey == 19){
+		var startScene = ES + MODULE + "/Startup.bml";
+		playSound(7);
+		browser.launchDocument(startScene, "cut");
+	}
+}
+]]></script>
+
+</head>
+<body id="Body" onload="onload();">
+	<div id = "DIV1" style = "width:960px; height:540px;">
+		<object id="bg" type="image/jpeg" data="BG.jpg" style="left:0px;top:0px;width:960px;height:540px;"/>
+		<object id="Vstream" style="left:52px;top:30px;width:480px;height:270px;" type="video/X-arib-mpeg2" data="/-1" remain="remain"/>
+		<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
+	</div>
+	<div id="footer_button_top">
+		<object id= "button_back_housou" class ="button_top" type="image/X-arib-png" data="back-housou-top.png"/>
+		<object id= "button_back_top" class ="button_top" type="image/X-arib-png" data="back-top.png"/>
+	</div>
+
+	<div id="foc0" onkeydown="kd();" style="nav-index:0;" />
+
+	<!-- デバッグ用 -->
+	<div id="d_debug" style="left:52px;top:30px;width:900px;height:400px;" >
+		<p id="pDebug" ><![CDATA[]]></p>
+	</div>
+</body>
+</bml>

@@ -565,6 +565,21 @@
 				gotoTV();
 			}
 
+			function EventMsgProc_176(){
+				var ev = document.currentEvent;
+				var status = ev.status;
+				var pData = ev.privateData;
+				var subScene = ES + MODULE + "/Sub.bml";
+
+				if(status != 0){
+					return;
+				}
+				if(pData == "you_game_standby"){
+					setUreg(1, "startup.bml¤«¤éÁ«°Ü");
+					browser.launchDocument(subScene, "cut");
+				}
+			}
+
 			]]>
 		</script>
 
