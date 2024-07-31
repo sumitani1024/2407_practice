@@ -292,7 +292,7 @@
 			function controlFocusKey(buttonNum){
 				if(buttonNum == 1 && gRegi.focusNum != 1){
 					gRegi.focusNum--;
-						playSound(9);
+					playSound(9);
 				}else if(buttonNum == 2 && gRegi.focusNum != 4){
 					gRegi.focusNum++;
 					playSound(9);
