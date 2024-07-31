@@ -51,9 +51,9 @@ function dataEvtChanged()
   var evtStatus;
   evtStatus = document.currentEvent.status;
   if( evtStatus == 0 ){
-    gotoTV();}
+    gotoNHKTop();}
   else if( evtStatus == 1 ){
-    gotoTV();}
+    gotoNHKTop();}
   else if( evtStatus == -1 ){
     gotoTV();
   }

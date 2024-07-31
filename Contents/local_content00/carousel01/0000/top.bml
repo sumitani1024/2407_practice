@@ -15,10 +15,8 @@ function onload(){
 </head>
 <body id = "BODY1" style = "display-aspect-ratio:16v9;clut:url('common.clt');" onload="onload();">
 <div id = "DIV1" style = "width:960px; height:540px;">
+	<object id="Vstream" style="left:425px;top:30px;width:480px;height:270px;" type="video/X-arib-mpeg2" data="/-1" remain="remain"/>
+	<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
 </div>
-<div id="AVarea" style="left:0px;top:0px;width:960px;height:540px;">
-			<object id="Vstream" style="left:425px;top:30px;width:480px;height:270px;" type="video/X-arib-mpeg2" data="/-1" remain="remain"/>
-			<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
-		</div>
 </body>
 </bml>
