@@ -561,6 +561,7 @@
 
 			function Dpressed(){
 				debugN("dボタン押下");
+				playSound(7);
 				gotoTV();
 			}
 
