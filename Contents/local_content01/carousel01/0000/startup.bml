@@ -565,6 +565,11 @@
 				gotoTV();
 			}
 
+			function dataEvtChanged(){
+				debugN("dataEvtChange");
+				dataEvtChanged();
+			}
+
 			]]>
 		</script>
 

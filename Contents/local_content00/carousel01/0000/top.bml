@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="EUC-JP" ?>
+<!DOCTYPE bml PUBLIC "+//ARIB STD-B24:1999//DTD BML Document//JA" "http://www.arib.or.jp/B24/DTD/bml_1_1.dtd">
+<?bml bml-version="3.0" ?>
+<bml>
+<head>
+<title>test</title>
+
+<script><![CDATA[
+function onload(){
+	browser.lockModuleOnMemoryEx("/50/0000");
+	browser.sleep(2000);
+	browser.launchDocument("/50/0000/startup.bml", "cut");
+}
+]]></script>
+</head>
+<body id = "BODY1" style = "display-aspect-ratio:16v9;clut:url('common.clt');" onload="onload();">
+<div id = "DIV1" style = "width:960px; height:540px;">
+</div>
+<div id="AVarea" style="left:0px;top:0px;width:960px;height:540px;">
+			<object id="Vstream" style="left:425px;top:30px;width:480px;height:270px;" type="video/X-arib-mpeg2" data="/-1" remain="remain"/>
+			<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
+		</div>
+</body>
+</bml>
