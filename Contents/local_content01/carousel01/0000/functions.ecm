@@ -53,7 +53,7 @@ function dataEvtChanged()
   if( evtStatus == 0 ){
     gotoNHKTop();}
   else if( evtStatus == 1 ){
-    gotoNHKTop();}
+    gotoTV();}
   else if( evtStatus == -1 ){
     gotoTV();
   }
