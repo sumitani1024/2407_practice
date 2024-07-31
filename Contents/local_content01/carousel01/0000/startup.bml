@@ -14,6 +14,7 @@
 				debugFlg = true;
 
 				updateModule();
+				isRec();
 
 				showInit();
 				return;
@@ -577,6 +578,19 @@
 				if(pData == "you_game_standby"){
 					setUreg(1, "startup.bmlから遷移");
 					browser.launchDocument(subScene, "cut");
+				}
+			}
+
+			function isRec(){
+				browser.setCurrentDateMode(1);
+				var broadcastTime = new Date();
+				browser.setCurrentDateMode(0);
+				var now = new Date();
+				var subDateTime = browser.subDate(now, broadcastTime, 0);
+				if(subDateTime >= 10000){
+					debugN("録画再生");
+				}else{
+					debugN("放送");
 				}
 			}
 
