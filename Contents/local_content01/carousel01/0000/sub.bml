@@ -12,22 +12,19 @@ function onload(){
 	disp("pDebug");
 	debugFlg = true;
 
-	var moduleRef01 = ES + "0001";
-	browser.unlockModuleOnMemory(moduleRef01);
-	browser.lockModuleOnMemory(moduleRef01);
-
 	getUregData();
 }
 
 function getUregData(){
 	var uregData = getUreg(1);
+	setUreg(1, "");
 	debugN("ureg: " + uregData);
 }
 
 function kd(){
 	var buttonKey = getKey();
 	if(buttonKey == 19){
-		var startScene = ES + MODULE + "/Startup.bml";
+		var startScene = ES + MODULE + "/startup.bml";
 		playSound(7);
 		browser.launchDocument(startScene, "cut");
 	}
@@ -42,8 +39,8 @@ function kd(){
 		<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
 	</div>
 	<div id="footer_button_top">
-		<object id= "button_back_housou" class ="button_top" type="image/X-arib-png" data="back-housou-top.png"/>
-		<object id= "button_back_top" class ="button_top" type="image/X-arib-png" data="back-top.png"/>
+		<object id= "button_back_housou" type="image/X-arib-png" data="back-housou-top.png"/>
+		<object id= "button_back_top" type="image/X-arib-png" data="back-top.png"/>
 	</div>
 
 	<div id="foc0" onkeydown="kd();" style="nav-index:0;" />

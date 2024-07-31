@@ -569,7 +569,7 @@
 				var ev = document.currentEvent;
 				var status = ev.status;
 				var pData = ev.privateData;
-				var subScene = ES + MODULE + "/Sub.bml";
+				var subScene = ES + MODULE + "/sub.bml";
 
 				if(status != 0){
 					return;
@@ -717,24 +717,24 @@
 		
 		<!-- フッターボタン -->
 		<div id="footer_button_blue">
-			<object id= "button_blue_on" class ="button_blue" type="image/X-arib-png" data="futter-b-button-on.png"/>
-			<object id= "button_blue_off" class ="button_blue" type="image/X-arib-png" data="futter-b-button-off.png"/>
+			<object id= "button_blue_on" type="image/X-arib-png" data="futter-b-button-on.png"/>
+			<object id= "button_blue_off" type="image/X-arib-png" data="futter-b-button-off.png"/>
 		</div>
 		<div id="footer_button_red">
-			<object id= "button_red_on" class ="button_red" type="image/X-arib-png" data="futter-r-button-on.png"/>
-			<object id= "button_red_off" class ="button_red" type="image/X-arib-png" data="futter-r-button-off.png"/>
+			<object id= "button_red_on" type="image/X-arib-png" data="futter-r-button-on.png"/>
+			<object id= "button_red_off" type="image/X-arib-png" data="futter-r-button-off.png"/>
 		</div>
 		<div id="footer_button_green">
-			<object id= "button_green_on" class ="button_green" type="image/X-arib-png" data="futter-g-button-on.png"/>
-			<object id= "button_green_off" class ="button_green" type="image/X-arib-png" data="futter-g-button-off.png"/>
+			<object id= "button_green_on" type="image/X-arib-png" data="futter-g-button-on.png"/>
+			<object id= "button_green_off" type="image/X-arib-png" data="futter-g-button-off.png"/>
 		</div>
 		<div id="footer_button_yellow">
-			<object id= "button_yellow_on" class ="button_yellow" type="image/X-arib-png" data="futter-y-button-on.png"/>
-			<object id= "button_yellow_off" class ="button_yellow" type="image/X-arib-png" data="futter-y-button-off.png"/>
+			<object id= "button_yellow_on" type="image/X-arib-png" data="futter-y-button-on.png"/>
+			<object id= "button_yellow_off" type="image/X-arib-png" data="futter-y-button-off.png"/>
 		</div>
 		<div id="footer_button_top">
-			<object id= "button_back_housou" class ="button_top" type="image/X-arib-png" data="back-housou-top.png"/>
-			<object id= "button_back_top" class ="button_top" type="image/X-arib-png" data="back-top.png"/>
+			<object id= "button_back_housou" type="image/X-arib-png" data="back-housou-top.png"/>
+			<object id= "button_back_top" type="image/X-arib-png" data="back-top.png"/>
 		</div>
 
 		<!-- デバッグ用 -->
