@@ -73,8 +73,8 @@
 				}else if(1<= buttonKey <= 4){
 					if(gStatusView.STATE_JOINHOW || gStatusView.STATE_PROFILE || gStatusView.STATE_URGE){
 						controlArrowKey(buttonKey);
-					}else{
-
+					}else if(gStatusView.STATE_REGI){
+						controlFocusKey(buttonKey);
 					}
 				}
 			}
@@ -224,6 +224,9 @@
 					disp("regi_button_change");
 					disp("regi_button_complete");
 					disp("regi_button_balloon");
+					currentFocus = gRegi.focusName;
+					gRegi.focusNum = 1;
+					showRegiFocus();
 					unlock();
 				}else{
 					lock();
@@ -237,6 +240,8 @@
 					undisp("regi_button_change");
 					undisp("regi_button_complete");
 					undisp("regi_button_balloon");
+					currentFocus = null;
+					showRegiFocus();
 				}
 			}
 
@@ -259,6 +264,63 @@
 				}
 			}
 
+			var gRegi = new Object();
+			gRegi.focusName = "regi_list_focus_top";
+			gRegi.decName = "regi_list_decision_focus_top";
+			gRegi.focusAge = "regi_list_focus_age";
+			gRegi.decAge = "regi_list_decision_focus_age";
+			gRegi.focusAddress = "regi_list_focus_address";
+			gRegi.decAddress = "regi_list_decision_focus_address";
+			gRegi.focusReset = "regi_button_left_focus";
+			gRegi.decReset = "regi_button_left_decision";
+			gRegi.focusChange = "regi_button_right_focus";
+			gRegi.decChange = "regi_button_right_decision";
+			gRegi.focusNum = 1;
+			var currentFocus = gRegi.focusName;
+			var beforeFocus = null;
+			function showRegiFocus(){
+				if(beforeFocus != null){
+					undisp(beforeFocus);
+					beforeFocus = null;
+				}
+				if(currentFocus != null){
+					disp(currentFocus);
+					beforeFocus = currentFocus;
+				}
+			}
+
+			function controlFocusKey(buttonNum){
+				if(buttonNum == 1 && gRegi.focusNum != 1){
+					gRegi.focusNum--;
+						playSound(9);
+				}else if(buttonNum == 2 && gRegi.focusNum != 4){
+					gRegi.focusNum++;
+					playSound(9);
+				}
+				else if(buttonNum == 3 && gRegi.focusNum == 4){
+					gRegi.focusNum++;
+					playSound(9);
+				}else if(buttonNum == 4 && gRegi.focusNum == 5){
+					gRegi.focusNum--;
+					playSound(9);
+				}else{
+					return;
+				}
+
+				if(gRegi.focusNum == 1){
+					currentFocus = gRegi.focusName;
+				}else if(gRegi.focusNum == 2){
+					currentFocus = gRegi.focusAge;
+				}else if(gRegi.focusNum == 3){
+					currentFocus = gRegi.focusAddress;
+				}else if(gRegi.focusNum == 4){
+					currentFocus = gRegi.focusChange;
+				}else if(gRegi.focusNum == 5){
+					currentFocus = gRegi.focusReset;
+				}
+				showRegiFocus();
+			}
+
 			var pageNum = 1;
 			var currentPageNum = 1;
 			var maxPageLength = 0;
@@ -267,19 +329,21 @@
 					return;
 				}
 				if(buttonNum == 3){
+					playSound(9);
 					if(currentPageNum == 1){
 						currentPageNum = pageNum;
 					}else{
 						currentPageNum--;
 					}
 				}else if(buttonNum ==4){
+					playSound(9);
 					if(currentPageNum >= pageNum){
 						currentPageNum = 1;
 					}else{
 						currentPageNum++;
 					}
 				}
-				playSound(9);
+				
 				PageArrowFocus(buttonNum, true);
 				lock();
 				if(gStatusView.STATE_JOINHOW){
@@ -688,10 +752,12 @@
 			<p id="regi_address_text">
 				<![CDATA[ÅìµþÅÔ]]>
 			</p>
-			<!-- <object id="regi_list_focus_top" type="image/X-arib-png" data="base-g-list-focus-top.png"/> -->
-			<!-- <object id="regi_list_decision_focus_top" type="image/X-arib-png" data="base-g-list-decision-top.png"/> -->
-			<!-- <object id="regi_list_focus" type="image/X-arib-png" data="base-g-list-focus.png"/> -->
-			<!-- <object id="regi_list_decision_focus" type="image/X-arib-png" data="base-g-list-decision.png"/> -->
+			<object id="regi_list_focus_top" type="image/X-arib-png" data="base-g-list-focus-top.png"/>
+			<object id="regi_list_decision_focus_top" type="image/X-arib-png" data="base-g-list-decision-top.png"/>
+			<object id="regi_list_focus_age" type="image/X-arib-png" data="base-g-list-focus.png"/>
+			<object id="regi_list_decision_focus_age" type="image/X-arib-png" data="base-g-list-decision.png"/>
+			<object id="regi_list_focus_address" type="image/X-arib-png" data="base-g-list-focus.png"/>
+			<object id="regi_list_decision_focus_address" type="image/X-arib-png" data="base-g-list-decision.png"/>
 			<div id="regi_button">
 				<object id="regi_button_reset" type="image/X-arib-png" data="base-g-button-reset.png"/>
 				<object id="regi_button_change" type="image/X-arib-png" data="base-g-button-fix.png"/>

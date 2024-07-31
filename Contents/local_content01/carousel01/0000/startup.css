@@ -199,10 +199,18 @@ p{font-family:"丸ゴシック";}
 #regi_button_change{ left:184px; top:13px; width:133px; height:39px; visibility:hidden; }
 #regi_button_complete{ left:184px; top:13px; width:133px; height:39px; visibility:hidden; }
 #regi_button_balloon{ left:0px; top:40px; width:203px; height:43px; visibility:hidden; }
+
 #regi_button_left_focus{ left:31px; top:0px; width:147px; height:53px; visibility:hidden; }
 #regi_button_left_decision{ left:31px; top:0px; width:147px; height:53px; visibility:hidden; }
 #regi_button_right_focus{ left:171px; top:0px; width:147px; height:53px; visibility:hidden; }
 #regi_button_right_decision{ left:171px; top:0px; width:147px; height:53px; visibility:hidden; }
+
+#regi_list_focus_top{ left:161px; top:66px; width:198px; height:41px; visibility:hidden; }
+#regi_list_decision_focus_top{ left:161px; top:66px; width:198px; height:41px; visibility:hidden; }
+#regi_list_focus_age{ left:161px; top:240px; width:198px; height:41px; visibility:hidden; }
+#regi_list_decision_focus_age{ left:161px; top:240px; width:198px; height:41px; visibility:hidden; }
+#regi_list_focus_address{ left:161px; top:275px; width:198px; height:41px; visibility:hidden; }
+#regi_list_decision_focus_address{ left:161px; top:275px; width:198px; height:41px; visibility:hidden; }
 
 /** ネットにつなごう **/
 #net_scene{ left:543px; top:48px; width:352px; height:398px; visibility:visible; }
