@@ -288,6 +288,7 @@
 				}else if(gStatusView.STATE_URGE){
 					setNetPageText();
 				}
+				sleep(200);
 				PageArrowFocus(buttonNum, false);
 				unlock();
 			}
