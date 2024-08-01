@@ -70,6 +70,8 @@
 						playSound(7);
 						//gotoNHKTop();
 					}
+				}else if(changeRegiFlag){
+					changeRegiInfo(buttonKey);
 				}else if(buttonKey >= 1 && buttonKey <= 4){
 					if(gStatusView.STATE_JOINHOW || gStatusView.STATE_PROFILE || gStatusView.STATE_URGE){
 						controlArrowKey(buttonKey);
@@ -347,17 +349,120 @@
 
 			}
 
-			function changeRegiInfo(){
+			var changeRegiFlag = false;
+			function changeRegiInfo(key){
+				changeRegiFlag = true;
 				if(gRegi.focusNum ==1){
 					//名前入力
 				}else if(gRegi.focusNum ==2){
-					//プルダウン表示
+					RegiAgePullDown(key);
 				}else if(gRegi.focusNum ==3){
 					//プルダウン表示
 				}else if(gRegi.focusNum ==4){
 					//ポップアップ
 				}else if(gRegi.focusNum ==5){
-					//ポップアップ
+					//showRegiResetPopup(true);
+				}
+			}
+
+				var maxNum = 100;
+				var nowStartNum = 1;
+				var tmpJ = 0;
+			function RegiAgePullDown(key){
+				showRegiAgePullDown(true);
+				if(key == 1){
+					playSound(9);
+					nowStartNum--;
+					if(nowStartNum == 0){
+						nowStartNum = maxNum;
+					}	
+				}else if(key == 2){
+					playSound(9);
+					if(nowStartNum > maxNum){
+						nowStartNum = nowStartNum - maxNum;
+					}
+					nowStartNum++;
+				}
+				else if(key == 18){
+					disp("regi_pulldown_decision_age");
+					playSound(7);
+					var ageText = getData("regi_pulldown_item_4");
+					setData("regi_age_text", ageText);
+					sleep(200);
+					undisp("regi_pulldown_decision_age");
+					showRegiAgePullDown(false);
+					changeRegiFlag = false;
+				}
+
+				var j = 0;
+				for(var i = 0; i < 9; i++ ){
+					j = nowStartNum + i;
+					if(j <= 0){
+						j = maxNum + j;
+					}
+					if(j == maxNum){
+						setData("regi_pulldown_item_" + i , j + "以上");
+					}else{
+						if(j > maxNum){
+							j = j - 100;
+						}
+						setData("regi_pulldown_item_" + i , j);
+					}
+				}
+			}
+
+			function showRegiAgePullDown(show){
+				if(show){
+					disp("regi_pulldown");
+					disp("regi_pulldown_item_0");
+					disp("regi_pulldown_item_1");
+					disp("regi_pulldown_item_2");
+					disp("regi_pulldown_item_3");
+					disp("regi_pulldown_item_4");
+					disp("regi_pulldown_item_5");
+					disp("regi_pulldown_item_6");
+					disp("regi_pulldown_item_7");
+					disp("regi_pulldown_item_8");
+					disp("regi_pulldown_focus_age");
+				}else{
+					undisp("regi_pulldown");
+					undisp("regi_pulldown_item_0");
+					undisp("regi_pulldown_item_1");
+					undisp("regi_pulldown_item_2");
+					undisp("regi_pulldown_item_3");
+					undisp("regi_pulldown_item_4");
+					undisp("regi_pulldown_item_5");
+					undisp("regi_pulldown_item_6");
+					undisp("regi_pulldown_item_7");
+					undisp("regi_pulldown_item_8");
+					undisp("regi_pulldown_focus_age");
+					undisp("regi_pulldown_decision_age");
+				}
+			}
+
+			function regiResetPopup(key){
+				if(key == 3){
+					disp("regi_pop_button_reset_focus");
+					undisp("regi_pop_button_reset_cancel_focus");
+				}else if(key == 4){
+					disp("regi_pop_button_reset_cancel_focus");
+					undisp("regi_pop_button_reset_focus");
+				}
+			}
+
+			function showRegiResetPopup(show){
+				if(show){
+					disp("regi_popup_wp");
+					disp("regi_pop_button_reset");
+					disp("regi_pop_button_reset_cancel");
+					disp("regi_pop_reset_text");
+					disp("regi_pop_button_reset_cancel_focus");
+
+				}else{
+					undisp("regi_popup_wp");
+					undisp("regi_pop_button_reset");
+					undisp("regi_pop_button_reset_cancel");
+					undisp("regi_pop_reset_text");
 				}
 			}
 
@@ -808,6 +913,19 @@
 				<object id="regi_button_right_focus" type="image/X-arib-png" data="base-g-button-right-focus.png"/>
 				<object id="regi_button_right_decision" type="image/X-arib-png" data="base-g-button-right-decision.png"/>
 			</div>
+			<div id="regi_pulldown">
+				<p id="regi_pulldown_item_0" style="top:10px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_1" style="top:30px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_2" style="top:50px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_3" style="top:70px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_4" style="top:90px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_5" style="top:110px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_6" style="top:130px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_7" style="top:150px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_8" style="top:170px;"><![CDATA[]]></p>
+			</div>
+			<object id="regi_pulldown_focus_age" type="image/X-arib-png" data="base-g-list-focus.png"/>
+			<object id="regi_pulldown_decision_age" type="image/X-arib-png" data="base-g-list-decision.png"/>
 		</div>
 		<div id="regi_popup">
 			<object id="regi_popup_wp" type="image/X-arib-png" data="popup-regi.png"/>
@@ -833,7 +951,6 @@
 				<![CDATA[情報の書き込みに失敗しました]]>
 			</p>
 		</div>
-
 
 		<!-- ネットにつなごう -->
 		<div id="net_scene">
