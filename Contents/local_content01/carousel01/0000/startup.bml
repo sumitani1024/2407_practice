@@ -359,7 +359,8 @@
 				}else if(gRegi.focusNum ==3){
 					//プルダウン表示
 				}else if(gRegi.focusNum ==4){
-					//ポップアップ
+					//登録
+					changeRegiButton();
 				}else if(gRegi.focusNum ==5){
 					//showRegiResetPopup(true);
 				}
@@ -408,6 +409,17 @@
 						}
 						setData("regi_pulldown_item_" + i , j);
 					}
+				}
+			}
+
+			function changeRegiButton(){
+				var nvUrl = "nvram://local/8";
+				var nvStrct = "U:1V,S:1V";
+				var age = getData("regi_pulldown_item_4");
+				var regiData = new Array(1, age);
+				var value = browser.writePersistentArray( nvUrl, nvStrct, regiData );
+				if(value >0){
+					debugN("書込み完了");
 				}
 			}
 
@@ -530,8 +542,6 @@
 					undisp(pageFocusRight);
 					undisp(pageFocusLeft);
 				}
-				
-				
 			}
 
 			function countPageMax(maxPage, maxPageLength, lengthNum){
