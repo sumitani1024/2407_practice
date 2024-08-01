@@ -341,9 +341,24 @@
 				}
 				showRegiFocus();
 				sleep(200);
+				changeRegiInfo();
 				regiFocus();
 				showRegiFocus();
 
+			}
+
+			function changeRegiInfo(){
+				if(gRegi.focusNum ==1){
+					//名前入力
+				}else if(gRegi.focusNum ==2){
+					//プルダウン表示
+				}else if(gRegi.focusNum ==3){
+					//プルダウン表示
+				}else if(gRegi.focusNum ==4){
+					//ポップアップ
+				}else if(gRegi.focusNum ==5){
+					//ポップアップ
+				}
 			}
 
 			var pageNum = 1;
@@ -793,6 +808,30 @@
 				<object id="regi_button_right_focus" type="image/X-arib-png" data="base-g-button-right-focus.png"/>
 				<object id="regi_button_right_decision" type="image/X-arib-png" data="base-g-button-right-decision.png"/>
 			</div>
+		</div>
+		<div id="regi_popup">
+			<object id="regi_popup_wp" type="image/X-arib-png" data="popup-regi.png"/>
+			<object id="regi_pop_button_reset" type="image/X-arib-png" data="popup-reset-button-ok.png"/>
+			<object id="regi_pop_button_reset_focus" type="image/X-arib-png" data="button-focus.png"/>
+			<object id="regi_pop_button_reset_decision" type="image/X-arib-png" data="button-decision.png"/>
+			<object id="regi_pop_button_reset_cancel" type="image/X-arib-png" data="popup-reset-button-cancel.png"/>
+			<object id="regi_pop_button_reset_cancel_focus" type="image/X-arib-png" data="button-focus.png"/>
+			<object id="regi_pop_button_reset_cancel_decision" type="image/X-arib-png" data="button-decision.png"/>
+			<p id="regi_pop_reset_text">
+				<![CDATA[茶の間戦士情報をリセットします]]>
+			</p>
+			<object id="regi_pop_button_comp_close" type="image/X-arib-png" data="popup-reset-button-cancel.png"/>
+			<object id="regi_pop_button_comp_close_focus" type="image/X-arib-png" data="button-focus.png"/>
+			<object id="regi_pop_button_comp_close_decision" type="image/X-arib-png" data="button-decision.png"/>
+			<p id="regi_pop_comp_text">
+				<![CDATA[登録が完了しました]]>
+			</p>
+		</div>
+		<div id="regi_error_popup">
+			<object id="regi_popup_error_wp" type="image/X-arib-png" data="popup-error.png"/>
+			<p id="regi_pop_error_text">
+				<![CDATA[情報の書き込みに失敗しました]]>
+			</p>
 		</div>
 
 
