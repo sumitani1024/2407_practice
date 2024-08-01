@@ -414,13 +414,14 @@
 
 			function changeRegiButton(){
 				var nvUrl = "nvram://local/8";
-				var nvStrct = "U:1V,S:1V";
+				var nvStrct = "U:1B,S:1V";
 				var age = getData("regi_pulldown_item_4");
 				var regiData = new Array(1, age);
 				var value = browser.writePersistentArray( nvUrl, nvStrct, regiData );
 				if(value >0){
 					debugN("½ñ¹þ¤ß´°Î»");
 				}
+				changeRegiFlag = false;
 			}
 
 			function showRegiAgePullDown(show){
@@ -502,6 +503,7 @@
 				}
 				
 				PageArrowFocus(buttonNum, true);
+				sleep(200);
 				lock();
 				if(gStatusView.STATE_JOINHOW){
 					setJoinhowPageText();
@@ -510,7 +512,6 @@
 				}else if(gStatusView.STATE_URGE){
 					setNetPageText();
 				}
-				sleep(200);
 				PageArrowFocus(buttonNum, false);
 				unlock();
 			}
