@@ -70,12 +70,14 @@
 						playSound(7);
 						//gotoNHKTop();
 					}
-				}else if(1<= buttonKey <= 4){
+				}else if(buttonKey >= 1 && buttonKey <= 4){
 					if(gStatusView.STATE_JOINHOW || gStatusView.STATE_PROFILE || gStatusView.STATE_URGE){
 						controlArrowKey(buttonKey);
 					}else if(gStatusView.STATE_REGI){
 						controlFocusKey(buttonKey);
 					}
+				}else if(buttonKey == 18 && gStatusView.STATE_REGI){
+					decRegiFocus();
 				}
 			}
 
@@ -290,10 +292,10 @@
 			}
 
 			function controlFocusKey(buttonNum){
-				if(buttonNum == 1 && gRegi.focusNum != 1){
+				if(buttonNum == 1 && gRegi.focusNum != 1 && gRegi.focusNum != 5){
 					gRegi.focusNum--;
 					playSound(9);
-				}else if(buttonNum == 2 && gRegi.focusNum != 4){
+				}else if(buttonNum == 2 && gRegi.focusNum != 4 && gRegi.focusNum != 5){
 					gRegi.focusNum++;
 					playSound(9);
 				}
@@ -307,6 +309,11 @@
 					return;
 				}
 
+				regiFocus();
+				showRegiFocus();
+			}
+
+			function regiFocus(){
 				if(gRegi.focusNum == 1){
 					currentFocus = gRegi.focusName;
 				}else if(gRegi.focusNum == 2){
@@ -318,7 +325,25 @@
 				}else if(gRegi.focusNum == 5){
 					currentFocus = gRegi.focusReset;
 				}
+			}
+
+			function decRegiFocus(){
+				if(gRegi.focusNum == 1){
+					currentFocus = gRegi.decName;
+				}else if(gRegi.focusNum == 2){
+					currentFocus = gRegi.decAge;
+				}else if(gRegi.focusNum == 3){
+					currentFocus = gRegi.decAddress;
+				}else if(gRegi.focusNum == 4){
+					currentFocus = gRegi.decChange;
+				}else if(gRegi.focusNum == 5){
+					currentFocus = gRegi.decReset;
+				}
 				showRegiFocus();
+				sleep(200);
+				regiFocus();
+				showRegiFocus();
+
 			}
 
 			var pageNum = 1;
