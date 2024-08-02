@@ -9,6 +9,7 @@
 		<script src = "functions.ecm"/>
 		<script>
 			<![CDATA[
+			var timerID = NaN;
 			function init(){
 				disp("pDebug");
 				debugFlg = true;
@@ -17,7 +18,15 @@
 				isRec();
 
 				showInit();
+
+				debugN("SetInterval開始");
+				timerID = browser.setInterval("intervalSettings();", 2000,1);
 				return;
+			}
+
+			function intervalSettings(){
+				timerID = NaN;
+				debugN("SetInterval終了");
 			}
 
 			//共通
