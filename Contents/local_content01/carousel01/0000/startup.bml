@@ -201,6 +201,7 @@
 			function showProf(flag){
 				if(flag){
 					disp("prof_base");
+					disp("prof_page_img");
 					disp("prof_desc_text");
 					disp("prof_page_text");
 					profPageChange();
@@ -208,6 +209,7 @@
 				}else{
 					lock();
 					undisp("prof_base");
+					undisp("prof_page_img");
 					undisp("prof_desc_text");
 					undisp("prof_page_right");
 					undisp("prof_page_left");
@@ -362,7 +364,7 @@
 				}else if(gRegi.focusNum ==3){
 					//プルダウン表示
 				}else if(gRegi.focusNum ==4){
-					//登録
+					playSound(7);
 					changeRegiButton();
 				}else if(gRegi.focusNum ==5){
 					//showRegiResetPopup(true);
@@ -927,6 +929,7 @@
 				<![CDATA[]]>
 			</p>
 			<div id="prof_page">
+				<object id="prof_page_img" type="image/jpeg" data="base-r-img.jpg"/>
 				<object id="prof_page_right" type="image/X-arib-png" data="base-r-page-right.png"/>
 				<object id="prof_page_left" type="image/X-arib-png" data="base-r-page-left.png"/>
 				<object id="prof_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
