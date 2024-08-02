@@ -429,7 +429,11 @@
 				changeRegiFlag = false;
 			}
 
+			var nvValueName = "¥²¥¹¥È";
+			var nvValueEnegy = 1;
+			var nvValueLevel = 1;
 			var nvValueAge = 6;
+			var nvValueAddress = "ËÌ³¤Æ»";
 			function getRegiNv(){
 				var value = browser.readPersistentArray( nvUrl, nvStrct );
 				if(value == null){
@@ -445,7 +449,11 @@
 			}
 
 			function showInitRegiScene(){
+				setData("regi_name_text" , nvValueName);
+				setData("regi_enagy_text" , nvValueEnegy);
+				setData("regi_level_text" , nvValueLevel);
 				setData("regi_age_text" , overAgeSettings(nvValueAge, false));
+				setData("regi_address_text" , nvValueAddress);
 			}
 
 			function overAgeSettings(age, setFlag){
@@ -933,19 +941,19 @@
 		<div id="regi_scene">
 			<object id="regi_base" type="image/X-arib-png" data="base-g.png"/>
 			<p id="regi_name_text">
-				<![CDATA[Ì¾Á°¡»¡»¡»¡»¡»]]>
+				<![CDATA[]]>
 			</p>
 			<p id="regi_enagy_text">
-				<![CDATA[123]]>
+				<![CDATA[]]>
 			</p>
 			<p id="regi_level_text">
-				<![CDATA[123]]>
+				<![CDATA[]]>
 			</p>
 			<p id="regi_age_text">
 				<![CDATA[]]>
 			</p>
 			<p id="regi_address_text">
-				<![CDATA[ÅìµþÅÔ]]>
+				<![CDATA[]]>
 			</p>
 			<object id="regi_list_focus_top" type="image/X-arib-png" data="base-g-list-focus-top.png"/>
 			<object id="regi_list_decision_focus_top" type="image/X-arib-png" data="base-g-list-decision-top.png"/>
