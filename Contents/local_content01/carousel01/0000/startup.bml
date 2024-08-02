@@ -401,11 +401,13 @@
 				var j = 0;
 				for(var i = 0; i < 9; i++ ){
 					j = nowStartNum + i;
+
 					if(j <= 0){
 						j = maxNum + j;
 					}
+					
 					if(j == maxNum){
-						setData("regi_pulldown_item_" + i , j + "以上");
+						setData("regi_pulldown_item_" + i , overAgeSettings(j,false));
 					}else{
 						if(j > maxNum){
 							j = j - 100;
@@ -419,6 +421,7 @@
 				var nvStrct = "U:1B,S:1V";
 			function changeRegiButton(){
 				var age = getData("regi_pulldown_item_4");
+				age = overAgeSettings(age, true);
 				var regiData = new Array(1, age);
 				var value = browser.writePersistentArray( nvUrl, nvStrct, regiData );
 				if(value >0){
@@ -427,18 +430,36 @@
 				changeRegiFlag = false;
 			}
 
-			var valueAge = 6;
+			var nvValueAge = 6;
 			function getRegiNv(){
 				var value = browser.readPersistentArray( nvUrl, nvStrct );
 				if(value == null){
 					return;
 				}
-				valueAge = value[1];
-				debugN("valueAge: " + valueAge);
+				nvValueAge = value[1];
+				var tmpAge = nvValueAge - 4;
+				if(tmpAge <= 0){
+					tmpAge = maxNum + tmpAge;
+				}
+				nowStartNum = tmpAge;
+				debugN("valueAge: " + tmpAge);
 			}
 
 			function showInitRegiScene(){
-				setData("regi_age_text" , valueAge);
+				setData("regi_age_text" , overAgeSettings(nvValueAge, false));
+			}
+
+			function overAgeSettings(age, setFlag){
+				if(setFlag){
+					if(age == "100以上"){
+						age = 100;
+					}
+				}else{
+					if(age == 100){
+						age = "100以上";
+					}
+				}
+				return age;
 			}
 
 			function showRegiAgePullDown(show){
@@ -454,6 +475,7 @@
 					disp("regi_pulldown_item_7");
 					disp("regi_pulldown_item_8");
 					disp("regi_pulldown_focus_age");
+
 				}else{
 					undisp("regi_pulldown");
 					undisp("regi_pulldown_item_0");
