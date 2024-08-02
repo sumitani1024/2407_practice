@@ -444,7 +444,7 @@
 					debugN("½ñ¹þ¤ß´°Î»");
 				}
 
-				var randomNum = (browser.random(5)) * 1000;
+				var randomNum = (browser.random(50)) * 100;
 				debugN("randomNum: " + randomNum);
 				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
