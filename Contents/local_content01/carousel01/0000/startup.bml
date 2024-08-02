@@ -218,6 +218,7 @@
 
 			function showRegi(flag){
 				if(flag){
+					getRegiNv();
 					disp("regi_base");
 					disp("regi_name_text");
 					disp("regi_enagy_text");
@@ -230,6 +231,7 @@
 					disp("regi_button_balloon");
 					currentFocus = gRegi.focusName;
 					gRegi.focusNum = 1;
+					showInitRegiScene();
 					showRegiFocus();
 					unlock();
 				}else{
@@ -412,9 +414,9 @@
 				}
 			}
 
-			function changeRegiButton(){
 				var nvUrl = "nvram://local/8";
 				var nvStrct = "U:1B,S:1V";
+			function changeRegiButton(){
 				var age = getData("regi_pulldown_item_4");
 				var regiData = new Array(1, age);
 				var value = browser.writePersistentArray( nvUrl, nvStrct, regiData );
@@ -422,6 +424,20 @@
 					debugN("½ñ¹þ¤ß´°Î»");
 				}
 				changeRegiFlag = false;
+			}
+
+			var valueAge = 6;
+			function getRegiNv(){
+				var value = browser.readPersistentArray( nvUrl, nvStrct );
+				if(value == null){
+					return;
+				}
+				valueAge = value[1];
+				debugN("valueAge: " + valueAge);
+			}
+
+			function showInitRegiScene(){
+				setData("regi_age_text" , valueAge);
 			}
 
 			function showRegiAgePullDown(show){
@@ -903,7 +919,7 @@
 				<![CDATA[123]]>
 			</p>
 			<p id="regi_age_text">
-				<![CDATA[123]]>
+				<![CDATA[]]>
 			</p>
 			<p id="regi_address_text">
 				<![CDATA[ÅìµþÅÔ]]>
