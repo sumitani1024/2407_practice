@@ -925,11 +925,11 @@
 		<!-- ¤Æ¤ì¤ÓÀï»Î¾Ò²ð -->
 		<div id="prof_scene">
 			<object id="prof_base" type="image/X-arib-png" data="base-r.png"/>
+			<object id="prof_page_img" type="image/jpeg" data="base-r-img.jpg"/>
 			<p id="prof_desc_text">
 				<![CDATA[]]>
 			</p>
 			<div id="prof_page">
-				<object id="prof_page_img" type="image/jpeg" data="base-r-img.jpg"/>
 				<object id="prof_page_right" type="image/X-arib-png" data="base-r-page-right.png"/>
 				<object id="prof_page_left" type="image/X-arib-png" data="base-r-page-left.png"/>
 				<object id="prof_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>

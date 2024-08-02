@@ -107,6 +107,7 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 /** ¤Æ¤ì¤ÓÀï»Î¾Ò²ð **/
 #prof_scene{ left:543px; top:48px; width:352px; height:398px; visibility:visible; }
 #prof_base{ left:0px; top:0px; width:352px; height:398px; visibility:hidden; }
+#prof_page_img{ left:65px; top:248px; width:219px; height:123px; visibility:hidden; }
 #prof_desc_text{
 	left:46px;
 	top: 91px;
@@ -120,7 +121,6 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 }
 
 #prof_page{ left:115px; top:211px; width:120px; height:33px; visibility:visible; }
-#prof_page_img{ left:65px; top:248px; width:219px; height:123px; visibility:hidden; }
 #prof_page_right{ left:99px; top:4px; width:18px; height:26px; visibility:hidden; }
 #prof_page_left{ left:4px; top:4px; width:18px; height:26px; visibility:hidden; }
 #prof_page_focus{ left:95px; top:0px; width:25px; height:33px; visibility:hidden; }
