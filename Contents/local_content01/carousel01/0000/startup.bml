@@ -248,6 +248,7 @@
 					undisp("regi_button_balloon");
 					currentFocus = null;
 					showRegiFocus();
+					showRegiAgePullDown(false);
 				}
 			}
 
@@ -941,15 +942,15 @@
 				<object id="regi_button_right_decision" type="image/X-arib-png" data="base-g-button-right-decision.png"/>
 			</div>
 			<div id="regi_pulldown">
-				<p id="regi_pulldown_item_0" style="top:10px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_1" style="top:30px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_2" style="top:50px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_3" style="top:70px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_4" style="top:90px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_5" style="top:110px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_6" style="top:130px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_7" style="top:150px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_8" style="top:170px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_0" style="top:9px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_1" style="top:29px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_2" style="top:49px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_3" style="top:69px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_4" style="top:89px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_5" style="top:109px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_6" style="top:129px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_7" style="top:149px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_8" style="top:169px;"><![CDATA[]]></p>
 			</div>
 			<object id="regi_pulldown_focus_age" type="image/X-arib-png" data="base-g-list-focus.png"/>
 			<object id="regi_pulldown_decision_age" type="image/X-arib-png" data="base-g-list-decision.png"/>
