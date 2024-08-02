@@ -896,10 +896,10 @@
 		<div id="top_scene">
 			<object id="top_base" type="image/X-arib-png" data="base-top.png"/>
 			<p id="top_title_text">
-				<![CDATA[¥¿¥¤¥È¥ë_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
+				<![CDATA[]]>
 			</p>
 			<p id="top_desc_text">
-				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
+				<![CDATA[]]>
 			</p>
 		</div>
 
@@ -907,7 +907,7 @@
 		<div id="how_join_scene">
 			<object id="how_join_base" type="image/X-arib-png" data="base-b.png"/>
 			<p id="how_join_desc_text">
-				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
+				<![CDATA[]]>
 			</p>
 			<div id="how_join_page">
 				<object id="how_join_page_right" type="image/X-arib-png" data="base-b-page-right.png"/>
@@ -915,7 +915,7 @@
 				<object id="how_join_page_focus_right" type="image/X-arib-png" data="page-next-focus.png"/>
 				<object id="how_join_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/>
 				<p id="how_join_page_text">
-					<![CDATA[1/2]]>
+					<![CDATA[]]>
 				</p>
 			</div>
 		</div>
@@ -924,7 +924,7 @@
 		<div id="prof_scene">
 			<object id="prof_base" type="image/X-arib-png" data="base-r.png"/>
 			<p id="prof_desc_text">
-				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
+				<![CDATA[]]>
 			</p>
 			<div id="prof_page">
 				<object id="prof_page_right" type="image/X-arib-png" data="base-r-page-right.png"/>
@@ -932,7 +932,7 @@
 				<object id="prof_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
 				<object id="prof_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/>
 				<p id="prof_page_text">
-					<![CDATA[1/2]]>
+					<![CDATA[]]>
 				</p>
 			</div>
 		</div>
@@ -994,19 +994,19 @@
 			<object id="regi_pop_button_reset_cancel_focus" type="image/X-arib-png" data="button-focus.png"/>
 			<object id="regi_pop_button_reset_cancel_decision" type="image/X-arib-png" data="button-decision.png"/>
 			<p id="regi_pop_reset_text">
-				<![CDATA[Ãã¤Î´ÖÀï»Î¾ðÊó¤ò¥ê¥»¥Ã¥È¤·¤Þ¤¹]]>
+				<![CDATA[]]>
 			</p>
 			<object id="regi_pop_button_comp_close" type="image/X-arib-png" data="popup-reset-button-cancel.png"/>
 			<object id="regi_pop_button_comp_close_focus" type="image/X-arib-png" data="button-focus.png"/>
 			<object id="regi_pop_button_comp_close_decision" type="image/X-arib-png" data="button-decision.png"/>
 			<p id="regi_pop_comp_text">
-				<![CDATA[ÅÐÏ¿¤¬´°Î»¤·¤Þ¤·¤¿]]>
+				<![CDATA[]]>
 			</p>
 		</div>
 		<div id="regi_error_popup">
 			<object id="regi_popup_error_wp" type="image/X-arib-png" data="popup-error.png"/>
 			<p id="regi_pop_error_text">
-				<![CDATA[¾ðÊó¤Î½ñ¤­¹þ¤ß¤Ë¼ºÇÔ¤·¤Þ¤·¤¿]]>
+				<![CDATA[]]>
 			</p>
 		</div>
 
@@ -1014,7 +1014,7 @@
 		<div id="net_scene">
 			<object id="net_base" type="image/X-arib-png" data="base-y.png"/>
 			<p id="net_desc_text">
-				<![CDATA[ÀâÌÀÊ¸_TEST¡»¡»¡»¡»¡»¡ü¡»¡»¡»¡»¡ü¡»¡»¡»¡»]]>
+				<![CDATA[]]>
 			</p>
 			<div id="net_page">
 				<object id="net_page_right" type="image/X-arib-png" data="base-y-page-right.png"/>
@@ -1022,7 +1022,7 @@
 				<object id="net_page_focus" type="image/X-arib-png" data="page-next-focus.png"/>
 				<object id="net_page_focus_left" type="image/X-arib-png" data="page-next-focus-left.png"/>
 				<p id="net_page_text">
-					<![CDATA[1/2]]>
+					<![CDATA[]]>
 				</p>
 			</div>
 		</div>
