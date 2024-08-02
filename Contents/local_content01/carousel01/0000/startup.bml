@@ -395,7 +395,6 @@
 					sleep(200);
 					undisp("regi_pulldown_decision_age");
 					showRegiAgePullDown(false);
-					changeRegiFlag = false;
 				}
 
 				var j = 0;
@@ -489,6 +488,7 @@
 					undisp("regi_pulldown_item_8");
 					undisp("regi_pulldown_focus_age");
 					undisp("regi_pulldown_decision_age");
+					changeRegiFlag = false;
 				}
 			}
 
