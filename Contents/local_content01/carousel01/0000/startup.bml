@@ -72,8 +72,11 @@
 				{
 					footerButtonChange(buttonKey);
 				}else if(buttonKey == 19){
-					browser.clearTimer(timerID);
-					TimerID = NaN;
+					debugN("timerID: " + timerID);
+					if(!isNaN(timerID) ){
+						browser.clearTimer(timerID);
+						TimerID = NaN;
+					}
 					//todo: else ifでNHKトップへ戻る処理追加
 					if(gStatusNum != 19){
 						footerButtonChange(buttonKey);
