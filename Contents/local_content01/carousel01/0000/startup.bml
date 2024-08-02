@@ -25,6 +25,7 @@
 			}
 
 			function intervalSettings(){
+				browser.clearTimer(timerID);
 				timerID = NaN;
 				debugN("SetInterval½ªÎ»");
 			}
