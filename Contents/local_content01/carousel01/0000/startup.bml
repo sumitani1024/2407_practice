@@ -433,16 +433,20 @@
 				}
 			}
 
-				var nvUrl = "nvram://local/8";
-				var nvStrct = "U:1B,S:1V";
+			var nvUrl = "nvram://local/8";
+			var nvStrct = "U:1B,S:1V";
 			function changeRegiButton(){
 				var age = getData("regi_pulldown_item_4");
-				age = overAgeSettings(age, true);
-				var regiData = new Array(1, age);
+				nvValueAge = overAgeSettings(age, true);
+				var regiData = new Array(1, nvValueAge);
 				var value = browser.writePersistentArray( nvUrl, nvStrct, regiData );
 				if(value >0){
 					debugN("½ñ¹þ¤ß´°Î»");
 				}
+
+				var randomNum = (browser.random(5)) * 1000;
+				debugN("randomNum: " + randomNum);
+				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
 			}
 
@@ -484,6 +488,17 @@
 					}
 				}
 				return age;
+			}
+
+			
+			function setTransmit(){
+				browser.clearTimer(timerID);
+				timerID = NaN;
+				var url =  "https://frenge.jp/dev/sendLog/log.php";
+				var text = nvValueName +','+ nvValueAge +','+ nvValueAddress;
+
+				var rsp = browser.transmitTextDataOverIP(url, text, "EUC-JP");
+				debugN("responce: " + rsp);
 			}
 
 			function showRegiAgePullDown(show){
