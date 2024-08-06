@@ -296,11 +296,11 @@
 			var beforeFocus = null;
 			function showRegiFocus(){
 				if(beforeFocus != null){
-					undisp(beforeFocus);
+					v(beforeFocus,null);
 					beforeFocus = null;
 				}
 				if(currentFocus != null){
-					disp(currentFocus);
+					v(currentFocus,1);
 					beforeFocus = currentFocus;
 				}
 			}
@@ -366,14 +366,17 @@
 				changeRegiFlag = true;
 				if(gRegi.focusNum ==1){
 					//名前入力
+					changeRegiFlag = false;
 				}else if(gRegi.focusNum ==2){
 					RegiAgePullDown(key);
 				}else if(gRegi.focusNum ==3){
 					//プルダウン表示
+					changeRegiFlag = false;
 				}else if(gRegi.focusNum ==4){
 					so("7");
 					changeRegiButton();
 				}else if(gRegi.focusNum ==5){
+					changeRegiFlag = false;
 					//showRegiResetPopup(true);
 				}
 			}
