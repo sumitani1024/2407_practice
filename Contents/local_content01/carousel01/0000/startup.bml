@@ -110,26 +110,26 @@
 				footerButtonReturn();
 				so("7");
 				if(key == 21){
-					undisp("button_blue_off");
-					disp("button_blue_on");
+					v("button_blue_off",null);
+					v("button_blue_on",1);
 
 					gStatusView.STATE_JOINHOW = true;
 					showJoinhow(gStatusView.STATE_JOINHOW);
 				}else if(key == 22){
-					undisp("button_red_off");
-					disp("button_red_on");
+					v("button_red_off",null);
+					v("button_red_on",1);
 
 					gStatusView.STATE_PROFILE = true;
 					showProf(gStatusView.STATE_PROFILE);
 				}else if(key == 23){
-					undisp("button_green_off");
-					disp("button_green_on");
+					v("button_green_off",null);
+					v("button_green_on",1);
 
 					gStatusView.STATE_REGI = true;
 					showRegi(gStatusView.STATE_REGI);
 				}else if(key == 24){
-					undisp("button_yellow_off");
-					disp("button_yellow_on");
+					v("button_yellow_off",null);
+					v("button_yellow_on",1);
 
 					gStatusView.STATE_URGE = true;
 					showNet(gStatusView.STATE_URGE);
@@ -145,32 +145,32 @@
 			function footerButtonReturn()
 			{
 				if(gStatusView.STATE_JOINHOW){
-					undisp("button_blue_on");
-					disp("button_blue_off");
+					v("button_blue_on",null);
+					v("button_blue_off",1);
 
 					gStatusView.STATE_JOINHOW = false;
 					showJoinhow(gStatusView.STATE_JOINHOW);
 				}else if(gStatusView.STATE_PROFILE){
-					undisp("button_red_on");
-					disp("button_red_off");
+					v("button_red_on",null);
+					v("button_red_off",1);
 
 					gStatusView.STATE_PROFILE = false;
 					showProf(gStatusView.STATE_PROFILE);
 				}else if(gStatusView.STATE_REGI){
-					undisp("button_green_on");
-					disp("button_green_off");
+					v("button_green_on",null);
+					v("button_green_off",1);
 
 					gStatusView.STATE_REGI = false;
 					showRegi(gStatusView.STATE_REGI);
 				}else if(gStatusView.STATE_URGE){
-					undisp("button_yellow_on");
-					disp("button_yellow_off");
+					v("button_yellow_on",null);
+					v("button_yellow_off",1);
 
 					gStatusView.STATE_URGE = false;
 					showNet(gStatusView.STATE_URGE);
 				}else if(gStatusView.STATE_TOP){
-					undisp("button_back_housou");
-					disp("button_back_top");
+					v("button_back_housou",null);
+					v("button_back_top",1);
 
 					gStatusView.STATE_TOP = false;
 					showTop(gStatusView.STATE_TOP);
@@ -179,84 +179,84 @@
 
 			function showTop(flag){
 				if(flag){
-					disp("button_back_top");
-					undisp("button_back_housou");
+					v("button_back_top",1);
+					v("button_back_housou",null);
 
-					disp("top_base");
-					disp("top_title_text");
-					disp("top_desc_text");
+					v("top_base",1);
+					v("top_title_text",1);
+					v("top_desc_text",1);
 				}else{
-					undisp("button_back_top");
-					disp("button_back_housou");
+					v("button_back_housou",1);
+					v("button_back_top",null);
 
-					undisp("top_base");
-					undisp("top_title_text");
-					undisp("top_desc_text");
+					v("top_base",null);
+					v("top_title_text",null);
+					v("top_desc_text",null);
 				}
 			}
 
 			function showJoinhow(flag){
 				if(flag){
-					disp("how_join_base");
-					disp("how_join_desc_text");
-					disp("how_join_page_text");
+					v("how_join_base",1);
+					v("how_join_desc_text",1);
+					v("how_join_page_text",1);
 					joinhowPageChange();
 				}else{
-					undisp("how_join_base");
-					undisp("how_join_desc_text");
-					undisp("how_join_page_right");
-					undisp("how_join_page_left");
-					undisp("how_join_page_focus_right");
-					undisp("how_join_page_text");
+					v("how_join_base",null);
+					v("how_join_desc_text",null);
+					v("how_join_page_right",null);
+					v("how_join_page_left",null);
+					v("how_join_page_focus_right",null);
+					v("how_join_page_text",null);
 				}
 			}
 
 			function showProf(flag){
 				if(flag){
-					disp("prof_base");
-					disp("prof_page_img");
-					disp("prof_desc_text");
-					disp("prof_page_text");
+					v("prof_base",1);
+					v("prof_page_img",1);
+					v("prof_desc_text",1);
+					v("prof_page_text",1);
 					profPageChange();
 				}else{
-					undisp("prof_base");
-					undisp("prof_page_img");
-					undisp("prof_desc_text");
-					undisp("prof_page_right");
-					undisp("prof_page_left");
-					undisp("prof_page_focus");
-					undisp("prof_page_text");
+					v("prof_base",null);
+					v("prof_page_img",null);
+					v("prof_desc_text",null);
+					v("prof_page_right",null);
+					v("prof_page_left",null);
+					v("prof_page_focus",null);
+					v("prof_page_text",null);
 				}
 			}
 
 			function showRegi(flag){
 				if(flag){
 					getRegiNv();
-					disp("regi_base");
-					disp("regi_name_text");
-					disp("regi_enagy_text");
-					disp("regi_level_text");
-					disp("regi_age_text");
-					disp("regi_address_text");
-					disp("regi_button_reset");
-					disp("regi_button_change");
-					disp("regi_button_complete");
-					disp("regi_button_balloon");
+					v("regi_base",1);
+					v("regi_name_text",1);
+					v("regi_enagy_text",1);
+					v("regi_level_text",1);
+					v("regi_age_text",1);
+					v("regi_address_text",1);
+					v("regi_button_reset",1);
+					v("regi_button_change",1);
+					v("regi_button_complete",1);
+					v("regi_button_balloon",1);
 					currentFocus = gRegi.focusName;
 					gRegi.focusNum = 1;
 					showInitRegiScene();
 					showRegiFocus();
 				}else{
-					undisp("regi_base");
-					undisp("regi_name_text");
-					undisp("regi_enagy_text");
-					undisp("regi_level_text");
-					undisp("regi_age_text");
-					undisp("regi_address_text");
-					undisp("regi_button_reset");
-					undisp("regi_button_change");
-					undisp("regi_button_complete");
-					undisp("regi_button_balloon");
+					v("regi_base",null);
+					v("regi_name_text",null);
+					v("regi_enagy_text",null);
+					v("regi_level_text",null);
+					v("regi_age_text",null);
+					v("regi_address_text",null);
+					v("regi_button_reset",null);
+					v("regi_button_change",null);
+					v("regi_button_complete",null);
+					v("regi_button_balloon",null);
 					currentFocus = null;
 					showRegiFocus();
 					showRegiAgePullDown(false);
@@ -265,18 +265,18 @@
 
 			function showNet(flag){
 				if(flag){
-					disp("net_base");
-					disp("net_desc_text");
-					disp("net_page_text");
+					v("net_base",1);
+					v("net_desc_text",1);
+					v("net_page_text",1);
 					netPageChange();
 				}else{
-					undisp("net_base");
-					undisp("net_desc_text");
-					undisp("net_page_right");
-					undisp("net_page_left");
-					undisp("net_page_focus");
-					undisp("net_page_focus_left");
-					undisp("net_page_text");
+					v("net_base",null);
+					v("net_desc_text",null);
+					v("net_page_right",null);
+					v("net_page_left",null);
+					v("net_page_focus",null);
+					v("net_page_focus_left",null);
+					v("net_page_text",null);
 				}
 			}
 
