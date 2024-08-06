@@ -207,20 +207,14 @@ function dbg(c_s){if(debug){var c_n=parseInt(s("debug").height)/20;var c_c=Strin
 //////////////////////////////////////////////////////////////////////////////
 function cu(){var i=1;for(; i<=44; i++) {browser.Ureg[i]="";}}
 function getEvent() { return document.currentEvent; }
-function g(id) { return document.getElementById(id); }
 function getID() { return getEvent().target.id; }
 function getKey() { return getEvent().keyCode; }
 function getStatus(){ return getEvent().status; }
 function getModule() { return getEvent().moduleRef; }
 function getStyle(id) { return g(id).normalStyle; }
-
-function setData(id, data) { g(id).firstChild.data = "" + data; }
 function setObject(id, data) { g(id).data = data; }
 function disp(id) { getStyle(id).visibility = "visible"; }
 function succession(id) { getStyle(id).visibility = "inherit"; }
-function undisp(id) { getStyle(id).visibility = "hidden"; }
-function lock() { browser.lockScreen(); }
-function unlock() { browser.unlockScreen(); }
 
 //function jumpUrl(page) { browser.launchDocument(page, "cut"); }
 
@@ -558,7 +552,7 @@ function debugN(msg){
 		tmpStr = g_DebugStr.substring(tmpPos+2);
 	}
 	g_DebugStr = tmpStr==""?g_DebugStr:tmpStr;
-	setData("pDebug",g_DebugStr);
+	p("pDebug",g_DebugStr);
 }
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 以下、NHK様12SEG共通関数

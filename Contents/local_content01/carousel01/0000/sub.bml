@@ -11,7 +11,7 @@
 function getUreg(index) { return browser.Ureg[index]; }
 
 function onload(){
-	disp("pDebug");
+	v("pDebug",1);
 	debugFlg = true;
 
 	getUregData();
@@ -31,6 +31,7 @@ function kd(){
 		browser.launchDocument(startScene, "cut");
 	}
 }
+
 ]]></script>
 
 </head>

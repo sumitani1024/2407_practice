@@ -14,7 +14,7 @@
 			function setUreg(index, data) { browser.Ureg[index] = data.toString(); }
 
 			function init(){
-				disp("pDebug");
+				v("pDebug",1);
 				debugFlg = true;
 
 				updateModule();
@@ -176,6 +176,21 @@
 					v("button_back_top",1);
 
 					gStatusView.STATE_TOP = false;
+					showTop(gStatusView.STATE_TOP);
+				}
+			}
+
+			function refreshScene(){
+				debugN("STATE_JOINHOW: " + gStatusView.STATE_JOINHOW);
+				if(gStatusView.STATE_JOINHOW){
+					showJoinhow(gStatusView.STATE_JOINHOW);
+				}else if(gStatusView.STATE_PROFILE){
+					showProf(gStatusView.STATE_PROFILE);
+				}else if(gStatusView.STATE_REGI){
+					showRegi(gStatusView.STATE_REGI);
+				}else if(gStatusView.STATE_URGE){
+					showNet(gStatusView.STATE_URGE);
+				}else if(gStatusView.STATE_TOP){
 					showTop(gStatusView.STATE_TOP);
 				}
 			}
@@ -752,6 +767,8 @@
 				var textLength = 10;
 				var joinhowbtbPath = ES + "0001/joinhow.btb";
 				var btb = readBtb(joinhowbtbPath, "2,U:1B,S:2V");
+				joinhowBtbData = "";
+				joinhowLengthNum = 0;
 				for(var i = 0; i < btb.length; i++ ){
 					if(i+1 > textLength){
 						joinhowArray[pageNum] = joinhowBtbData;
@@ -849,6 +866,8 @@
 					if(firstShowFlag){
 						showTop(gStatusView.STATE_TOP);
 						firstShowFlag = false;
+					}else{
+						refreshScene();
 					}
 					sl();
 				}
@@ -896,7 +915,27 @@
 				}
 			}
 
-			]]>
+			//////////////////////////////////////////////////////////////////////////
+			//デバッグ表示
+			//////////////////////////////////////////////////////////////////////////
+			var debugFlg = false;
+			var g_DebugLine = 12;//最大表示行
+			var g_DebugStr = "";//表示デバッグ
+			function debugN(msg){
+ 				if (!debugFlg) return;
+ 				var tmpStr = "";
+				var deliStr = (g_DebugStr=="")?"■":"\r\n■";
+				g_DebugStr += deliStr + msg;
+				var dAry = g_DebugStr.split("\r\n");
+				if(dAry.length>g_DebugLine){
+					var tmpPos = g_DebugStr.indexOf("\r\n");
+					tmpStr = g_DebugStr.substring(tmpPos+2);
+				}
+				g_DebugStr = tmpStr==""?g_DebugStr:tmpStr;
+				p("pDebug",g_DebugStr);
+			}
+
+		]]>
 		</script>
 
 		<bevent>
