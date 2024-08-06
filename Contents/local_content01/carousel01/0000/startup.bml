@@ -181,7 +181,6 @@
 			}
 
 			function refreshScene(){
-				debugN("STATE_JOINHOW: " + gStatusView.STATE_JOINHOW);
 				if(gStatusView.STATE_JOINHOW){
 					showJoinhow(gStatusView.STATE_JOINHOW);
 				}else if(gStatusView.STATE_PROFILE){
@@ -801,6 +800,8 @@
 				var textLength = 5;
 				var profbtbPath = ES + "0001/prof.btb";
 				var btb = readBtb(profbtbPath, "1,U:1B,S:1V");
+				profBtbData = "";
+				profLengthNum = 0;
 				for(var i = 0; i < btb.length; i++ ){
 					if(i+1 > textLength){
 						profArray[pageNum] = profBtbData;
@@ -834,6 +835,8 @@
 				var textLength = 10;
 				var netbtbPath = ES + "0001/net.btb";
 				var btb = readBtb(netbtbPath, "2,U:1B,S:2V");
+				netBtbData = "";
+				netLengthNum = 0;
 				for(var i = 0; i < btb.length; i++ ){
 					if(i+1 > textLength){
 						netArray[pageNum] = netBtbData;
