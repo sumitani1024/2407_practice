@@ -82,7 +82,7 @@
 						footerButtonChange(buttonKey);
 					}else{
 						debugN( "NHKトップへ戻る");
-						playSound(7);
+						so("7");
 						//gotoNHKTop();
 					}
 				}else if(changeRegiFlag){
@@ -101,12 +101,14 @@
 			function footerButtonChange(key)
 			{
 				if(gStatusNum == key){
-					debugN( "同ボタン押下");
+					dbg( "同ボタン押下");
 					return;
 				}
 
+				sl("lock");
+				debugN(sll);
 				footerButtonReturn();
-				playSound(7);
+				so("7");
 				if(key == 21){
 					undisp("button_blue_off");
 					disp("button_blue_on");
@@ -119,7 +121,6 @@
 
 					gStatusView.STATE_PROFILE = true;
 					showProf(gStatusView.STATE_PROFILE);
-					unlock();
 				}else if(key == 23){
 					undisp("button_green_off");
 					disp("button_green_on");
@@ -136,6 +137,7 @@
 					gStatusView.STATE_TOP = true;
 					showTop(gStatusView.STATE_TOP);
 				}
+				sl();
 
 				gStatusNum = key;
 			}
@@ -183,9 +185,7 @@
 					disp("top_base");
 					disp("top_title_text");
 					disp("top_desc_text");
-					unlock();
 				}else{
-					lock();
 					undisp("button_back_top");
 					disp("button_back_housou");
 
@@ -201,9 +201,7 @@
 					disp("how_join_desc_text");
 					disp("how_join_page_text");
 					joinhowPageChange();
-					unlock();
 				}else{
-					lock();
 					undisp("how_join_base");
 					undisp("how_join_desc_text");
 					undisp("how_join_page_right");
@@ -220,9 +218,7 @@
 					disp("prof_desc_text");
 					disp("prof_page_text");
 					profPageChange();
-					unlock();
 				}else{
-					lock();
 					undisp("prof_base");
 					undisp("prof_page_img");
 					undisp("prof_desc_text");
@@ -250,9 +246,7 @@
 					gRegi.focusNum = 1;
 					showInitRegiScene();
 					showRegiFocus();
-					unlock();
 				}else{
-					lock();
 					undisp("regi_base");
 					undisp("regi_name_text");
 					undisp("regi_enagy_text");
@@ -275,9 +269,7 @@
 					disp("net_desc_text");
 					disp("net_page_text");
 					netPageChange();
-					unlock();
 				}else{
-					lock();
 					undisp("net_base");
 					undisp("net_desc_text");
 					undisp("net_page_right");
@@ -316,17 +308,17 @@
 			function controlFocusKey(buttonNum){
 				if(buttonNum == 1 && gRegi.focusNum != 1 && gRegi.focusNum != 5){
 					gRegi.focusNum--;
-					playSound(9);
+					so("9");
 				}else if(buttonNum == 2 && gRegi.focusNum != 4 && gRegi.focusNum != 5){
 					gRegi.focusNum++;
-					playSound(9);
+					so("9");
 				}
 				else if(buttonNum == 3 && gRegi.focusNum == 4){
 					gRegi.focusNum++;
-					playSound(9);
+					so("9");
 				}else if(buttonNum == 4 && gRegi.focusNum == 5){
 					gRegi.focusNum--;
-					playSound(9);
+					so("9");
 				}else{
 					return;
 				}
@@ -379,7 +371,7 @@
 				}else if(gRegi.focusNum ==3){
 					//プルダウン表示
 				}else if(gRegi.focusNum ==4){
-					playSound(7);
+					so("7");
 					changeRegiButton();
 				}else if(gRegi.focusNum ==5){
 					//showRegiResetPopup(true);
@@ -392,13 +384,13 @@
 			function RegiAgePullDown(key){
 				showRegiAgePullDown(true);
 				if(key == 1){
-					playSound(9);
+					so("9");
 					nowStartNum--;
 					if(nowStartNum == 0){
 						nowStartNum = maxNum;
 					}	
 				}else if(key == 2){
-					playSound(9);
+					so("9");
 					if(nowStartNum > maxNum){
 						nowStartNum = nowStartNum - maxNum;
 					}
@@ -406,7 +398,7 @@
 				}
 				else if(key == 18){
 					disp("regi_pulldown_decision_age");
-					playSound(7);
+					so("7");
 					var ageText = getData("regi_pulldown_item_4");
 					setData("regi_age_text", ageText);
 					sleep(200);
@@ -566,14 +558,14 @@
 					return;
 				}
 				if(buttonNum == 3){
-					playSound(9);
+					so("9");
 					if(currentPageNum == 1){
 						currentPageNum = pageNum;
 					}else{
 						currentPageNum--;
 					}
 				}else if(buttonNum ==4){
-					playSound(9);
+					so("9");
 					if(currentPageNum >= pageNum){
 						currentPageNum = 1;
 					}else{
@@ -583,7 +575,7 @@
 				
 				PageArrowFocus(buttonNum, true);
 				sleep(200);
-				lock();
+				sl("lock");
 				if(gStatusView.STATE_JOINHOW){
 					setJoinhowPageText();
 				}else if(gStatusView.STATE_PROFILE){
@@ -592,7 +584,7 @@
 					setNetPageText();
 				}
 				PageArrowFocus(buttonNum, false);
-				unlock();
+				sl();
 			}
 
 			//ページ送り
@@ -841,13 +833,13 @@
 			function mLocked0001(){
 				var eventStatus = document.currentEvent.status;
 				if(eventStatus == 0){
-					lock();
+					sl("lock");
 					readBtbData();
 					if(firstShowFlag){
 						showTop(gStatusView.STATE_TOP);
 						firstShowFlag = false;
 					}
-					unlock();
+					sl();
 				}
 			}
 
@@ -861,7 +853,7 @@
 
 			function Dpressed(){
 				debugN("dボタン押下");
-				playSound(7);
+				so("7");
 				gotoTV();
 			}
 
@@ -876,7 +868,7 @@
 				}
 				if(pData == "you_game_standby"){
 					setUreg(1, "startup.bmlから遷移");
-					browser.launchDocument(subScene, "cut");
+					lu(subScene);
 				}
 			}
 

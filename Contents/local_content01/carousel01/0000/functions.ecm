@@ -29,6 +29,10 @@ var g_link = new Object();
 	g_link.nhkTop     = "/40/0000/top.bml";     // NHKTOP
 	g_link.programTop = "/50/0000/startup.bml"; // 番組TOP
 
+//copypaste.ecm
+var startBML="/40/0000/startup.bml";
+var topBML="/40/0000/top.bml";
+
 //////////////////////////////////////////////////////////////////////////
 //　全画面表示へ遷移
 //////////////////////////////////////////////////////////////////////////
@@ -158,6 +162,46 @@ if(isDVHS()) {
 	debugN("NV="+gNV.data);
 }
 */
+
+// 必須関数(放送)
+var me=browser.getActiveDocument();
+var ES=me.substring(0,4);
+var startBML="/40/0000/startup.bml";
+var topBML="/40/0000/top.bml";
+var sll=0;
+var mll=new Array();
+var kr=true;
+var mc=parseInt(browser.getProgramID(2),16);
+if(mc>999)
+mc=(mc&8?20:10)+(mc&7)+1;
+var back="";
+function so(c_n){browser.playRomSound("romsound://"+c_n);}
+function g(c_id){return(document.getElementById(c_id));}
+function p(c_id,c_s){g(c_id).firstChild.data=c_s;}
+function o(c_id,c_s){g(c_id).data=c_s;}
+function s(c_id){return(g(c_id).normalStyle);}
+function v(c_id,c_n){if(!c_n)s(c_id).visibility="hidden";else if(c_n==1)s(c_id).visibility="visible";}
+function iv(c_id){return s(c_id).visibility=="visible";}
+function re(){ml("",2);browser.reloadActiveDocument();}
+function lu(c_uri){browser.launchDocument(c_uri,"cut");}
+function luSTARTUP(){ml("",2);cu();if(back.length)g(back).remain=false;lu(startBML);}
+function luTOP(){ml("",2);cu();if(back.length)g(back).remain=false;lu(topBML);}
+function sl(c_n){if(c_n){if(!sll)browser.lockScreen();sll++;}else{sll--;if(!sll)browser.unlockScreen();}}
+function cu(){for(var c_n=1;c_n<45;c_n++){browser.Ureg[c_n]="";}}
+function dec(){var c_s=document.currentEvent.status;if(c_s==1||!c_s&&ES=="/50/")luSTARTUP();else if(!c_s)luTOP();}
+function ss(c_id,c_uri,c_n){if(c_n){g(c_id).moduleRef=c_uri;g(c_id).subscribe=true;}else g(c_id).subscribe=false;}
+function ml(c_uri,c_n){if(c_n<2){mll[c_uri]=c_n|(mc<100&&c_uri.substring(0,4)!=ES&&(c_uri.substring(1,3)=="40"||c_uri.substring(1,3)=="50"||c_uri.substring(1,3)=="60")?2:0);if(mll[c_uri]&2)return c_n?browser.lockModuleOnMemoryEx(c_uri):browser.unlockModuleOnMemoryEx(c_uri);else return c_n?browser.lockModuleOnMemory(c_uri):browser.unlockModuleOnMemory(c_uri);}else{for(var c_m in mll)if(mll[c_m])mll[c_m]&2?browser.unlockModuleOnMemoryEx(c_m):browser.unlockModuleOnMemory(c_m);mll=new Array();return 1;}}
+function muSRC(){var c_s=document.currentEvent.status;if(!c_s)re();else if(c_s==1)luSTARTUP();}
+function d(){so(7);luSTARTUP();}
+function kt(){kr=true;}
+function ks(){if(!kr)return true;kr=false;return false;}
+function ke(){browser.setInterval("kt();",100,1);sll=0;}
+function ca(c_d,c_s){for(var c_n=0;c_n<c_s.length;c_n++)c_d[c_n]=c_s[c_n];}
+
+var debug=browser.Ureg[53]=="debug"?1:0;
+var ard=new Array();
+function dbg(c_s){if(debug){var c_n=parseInt(s("debug").height)/20;var c_c=String(c_s);while(c_c.length){ard[debug-1]=strL(c_c,parseInt(s("debug").width)/10);c_c=c_c.substring(ard[debug-1].length);debug=(debug)%c_n+1;}var c_p="";for(var c_m=ard.length-1;c_m>=0;c_m--)c_p+=ard[(debug-2-c_m+c_n)%c_n]+"\r\n";p("debug",c_p);}}
+
 //////////////////////////////////////////////////////////////////////////////
 // 共通関数
 //////////////////////////////////////////////////////////////////////////////
@@ -179,7 +223,9 @@ function succession(id) { getStyle(id).visibility = "inherit"; }
 function undisp(id) { getStyle(id).visibility = "hidden"; }
 function lock() { browser.lockScreen(); }
 function unlock() { browser.unlockScreen(); }
-function jumpUrl(page) { browser.launchDocument(page, "cut"); }
+
+//function jumpUrl(page) { browser.launchDocument(page, "cut"); }
+
 function toInt(str) { return parseInt(str, 10); }
 function getTop(id) { return pxDel(getStyle(id).top); }
 function getLeft(id) { return pxDel(getStyle(id).left); }
@@ -194,7 +240,9 @@ function setBackColor(id, data) { getStyle(id).backgroundColorIndex = data; }
 function setColor(id, data) { getStyle(id).colorIndex = data; }
 function setGrayscale(id, data) { getStyle(id).grayscaleColorIndex = data; }
 function pxDel(str) { return toInt(str.substring(0, (str.length - 2))); }
-function playSound(id) { browser.playRomSound("romsound://" + id.toString()); }
+
+//function playSound(id) { browser.playRomSound("romsound://" + id.toString()); }
+
 function playAif(id) { g(id).streamStatus = "stop";g(id).streamStatus = "play"; }
 function startTimer(fun, mse, ite) { return browser.setInterval(fun, mse, ite); }
 function stopTimer(id) { browser.clearTimer(id); }
