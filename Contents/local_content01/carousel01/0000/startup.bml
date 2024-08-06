@@ -631,7 +631,7 @@
 					if(button == 3){
 						v(pageFocusRight,null);
 						v(pageFocusLeft,1);
-					}else{
+					}else if(button == 4){
 						v(pageFocusLeft,null);
 						v(pageFocusRight,1);
 					}
