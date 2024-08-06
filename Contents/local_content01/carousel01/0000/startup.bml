@@ -403,7 +403,7 @@
 					v("regi_pulldown_decision_age",1);
 					so("7");
 					var ageText = getData("regi_pulldown_item_4");
-					setData("regi_age_text", ageText);
+					p("regi_age_text", ageText);
 					sleep(200);
 					v("regi_pulldown_decision_age",null);
 					showRegiAgePullDown(false);
@@ -420,12 +420,12 @@
 					}
 					
 					if(j == maxNum){
-						setData("regi_pulldown_item_" + i , overAgeSettings(j,false));
+						p("regi_pulldown_item_" + i , overAgeSettings(j,false));
 					}else{
 						if(j > maxNum){
 							j = j - 100;
 						}
-						setData("regi_pulldown_item_" + i , j);
+						p("regi_pulldown_item_" + i , j);
 					}
 				}
 			}
@@ -469,11 +469,11 @@
 			}
 
 			function showInitRegiScene(){
-				setData("regi_name_text" , nvValueName);
-				setData("regi_enagy_text" , nvValueEnegy);
-				setData("regi_level_text" , nvValueLevel);
-				setData("regi_age_text" , overAgeSettings(nvValueAge, false));
-				setData("regi_address_text" , nvValueAddress);
+				p("regi_name_text" , nvValueName);
+				p("regi_enagy_text" , nvValueEnegy);
+				p("regi_level_text" , nvValueLevel);
+				p("regi_age_text" , overAgeSettings(nvValueAge, false));
+				p("regi_address_text" , nvValueAddress);
 			}
 
 			function overAgeSettings(age, setFlag){
@@ -658,7 +658,7 @@
 
 			function setJoinhowPageText(){
 				var page = currentPageNum + "/" + pageNum;
-				setData("how_join_page_text", page);
+				p("how_join_page_text", page);
 				setHowJoinText(currentPageNum-1);
 			}
 
@@ -684,7 +684,7 @@
 
 			function setProfPageText(){
 				var page = currentPageNum + "/" + pageNum;
-				setData("prof_page_text", page);
+				p("prof_page_text", page);
 				setProfText(currentPageNum-1);
 			}
 
@@ -710,7 +710,7 @@
 
 			function setNetPageText(){
 				var page = currentPageNum + "/" + pageNum;
-				setData("net_page_text", page);
+				p("net_page_text", page);
 				setNetText(currentPageNum-1);
 			}
 
@@ -737,8 +737,8 @@
 							}
 						}
 					}
-					setData("top_title_text", topBtbTitle);
-					setData("top_desc_text", topBtbDisp);
+					p("top_title_text", topBtbTitle);
+					p("top_desc_text", topBtbDisp);
 			}
 
 			var joinhowBtbData = "";
@@ -770,7 +770,7 @@
 			}
 
 			function setHowJoinText(pageId){
-				setData("how_join_desc_text", joinhowArray[pageId]);
+				p("how_join_desc_text", joinhowArray[pageId]);
 			}
 
 			var profBtbData = "";
@@ -803,7 +803,7 @@
 			}
 
 			function setProfText(pageId){
-				setData("prof_desc_text", profArray[pageId]);
+				p("prof_desc_text", profArray[pageId]);
 			}
 
 			var netBtbData = "";
@@ -835,7 +835,7 @@
 			}
 
 			function setNetText(pageId){
-				setData("net_desc_text", netArray[pageId]);			
+				p("net_desc_text", netArray[pageId]);		
 			}
 
 			function mLocked0001(){
