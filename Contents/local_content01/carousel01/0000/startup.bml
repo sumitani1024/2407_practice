@@ -10,8 +10,15 @@
 		<script>
 			<![CDATA[
 			var timerID = NaN;
+			var ES = me.substring(0,4);
+			var MODULE = me.substring(4,8);
+
 			function getData(id) { return g(id).firstChild.data; }
 			function setUreg(index, data) { browser.Ureg[index] = data.toString(); }
+			function readBtb(tbl, strac) {var result = new Array();var btb = new BinaryTable(tbl, strac);if (btb == null) return null;result = btb.toArray(0, btb.nrow);if (btb.nrow && (result != null && typeof(result[0][0]) == "object")) {for (var i=0; i<btb.nrow; i++) {for(var j=0; j<btb.ncolumn; j++) result[i][j] = result[i][j].valueOf();}}btb.close();return result;}
+			function getKey() { return getEvent().keyCode; }
+			function getEvent() { return document.currentEvent; }
+			function sleep(i_val){browser.sleep(i_val);}
 
 			function init(){
 				v("pDebug",1);
@@ -936,6 +943,25 @@
 				}
 				g_DebugStr = tmpStr==""?g_DebugStr:tmpStr;
 				p("pDebug",g_DebugStr);
+			}
+
+			function srcUpdated(){
+				var evtStatus;
+				evtStatus = document.currentEvent.status;
+				if ( evtStatus == 2 ){//起動直後
+				}
+				else if ( evtStatus == 0 ){// モジュールの更新
+				  browser.reloadActiveDocument();}
+				else if ( evtStatus == 1 ){// モジュールの消滅
+				  gotoTV();} // 全画面表示
+				else if( evtStatus == -1 ){// エラー
+				  gotoTV(); // 全画面表示
+				}
+			  }
+
+			function gotoTV(){
+				cu();//Uregクリア
+				  browser.launchDocument( g_link.tv, "cut" );
 			}
 
 		]]>

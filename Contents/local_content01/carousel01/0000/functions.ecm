@@ -1,167 +1,172 @@
+// 基本ルール
+// 新しいプロジェクトには他のプロジェクトの共通関数をコピーせず、必ずオリジナルからコピーする(亜流防止)
+// 使う際は、自由に変更して組み込んで構わない(バグ修正、有用な改修はオリジナルにも反映すること)
+// 共通関数はデバッグする必要がないため関数毎に一行に最適化する
+// 必須関数は必ずコピーする(改修などで使う可能性があるため)
+// 任意関数は必要な部分だけをコピーする
 
-// ボディ非表示の場合
-if( browser.Ureg[5] == "invisible" || browser.Ureg[5] == "JISHIN_12SEG") {
- g( "Body" ).normalStyle.usedKeyList = "none";
- g( "Body" ).invisible = "invisible"; // ボディの消去
-}
-// ボディ表示の場合
-else {
- g( "Body" ).invisible = false; // ボディの表示
- g( "Body" ).normalStyle.usedKeyList = "basic data-button";
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-// 共通定数群
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// 自コンテンツが送出されているＥＳを取得
-var me = browser.getActiveDocument();
-var ES = me.substring(0,4);
-var MODULE = me.substring(4,8);
-
-var g_modulePath = new Object();
-//	g_modulePath.M0 = ES + "0000";
-	g_modulePath.M1 = ES + "0001";
-	g_modulePath.M2 = ES + "0002";
-	g_modulePath.M3 = ES + "0003";
-
-var g_link = new Object();
-	g_link.tv         = "/40/0000/startup.bml"; // 全画面
-	g_link.nhkTop     = "/40/0000/top.bml";     // NHKTOP
-	g_link.programTop = "/50/0000/startup.bml"; // 番組TOP
-
-//copypaste.ecm
-var startBML="/40/0000/startup.bml";
-var topBML="/40/0000/top.bml";
-
-//////////////////////////////////////////////////////////////////////////
-//　全画面表示へ遷移
-//////////////////////////////////////////////////////////////////////////
-function gotoTV(){
-	cu();//Uregクリア
-  	browser.launchDocument( g_link.tv, "cut" );
-}
-//////////////////////////////////////////////////////////////////////////
-//　ＮＨＫトップへ遷移
-//////////////////////////////////////////////////////////////////////////
-function gotoNHKTop(){
-	cu();//Uregクリア
-	browser.launchDocument( g_link.nhkTop, "cut" );
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-// データイベントチェンジ
-//////////////////////////////////////////////////////////////////////////////////////////
-function dataEvtChanged()
-{
-  var evtStatus;
-  evtStatus = document.currentEvent.status;
-  if( evtStatus == 0 ){
-    gotoNHKTop();}
-  else if( evtStatus == 1 ){
-    gotoTV();}
-  else if( evtStatus == -1 ){
-    gotoTV();
-  }
-}
-//////////////////////////////////////////////////////////////////////////
-//　自モジュールアップデート
-//////////////////////////////////////////////////////////////////////////
-function srcUpdated(){
-  var evtStatus;
-  evtStatus = document.currentEvent.status;
-  if ( evtStatus == 2 ){//起動直後
-  }
-  else if ( evtStatus == 0 ){// モジュールの更新
-    browser.reloadActiveDocument();}
-  else if ( evtStatus == 1 ){// モジュールの消滅
-    gotoTV();} // 全画面表示
-  else if( evtStatus == -1 ){// エラー
-    gotoTV(); // 全画面表示
-  }
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// NV
-//////////////////////////////////////////////////////////////////////////////////////////
-var nvI = new Object();
-	nvI.data = new Array();
-	nvI.fmt = "";
-	nvI.nid = 1;
-	nvI.def = new Array();
-	nvI.url = "";
-	nvI.blk = "";
-function NV_F(url,blk,fmt,nid,def,data){
-	this.url = url;
-	this.blk = blk;
-	this.fmt = fmt;
-	this.nid = nid;
-	this.def = def;
-	this.data = data;
-	this.write = writeNV;
-	this.read = readNV;
-}
-function writeNV(ary){
-	debugN("□---ＮＶ書込");
-	if(isDVHS()) {debugN("NV書込みなし(録画再生)");return;}
-//	if(gComIniAry["com_saihoso"]=="1") {debugN("NV書込みなし(再放送)");return;}
-	if(isUnde(ary) || ary==null){
-		ary = this.data;
-	}
-	for(var i=0;i<3;i++){
-		var value = browser.writePersistentArray( this.url+this.blk, this.fmt, ary );
-		if(value>0){
-			break;
-		}else{
-			debugN("（！）書込失敗");
-			browser.sleep(500);
-			continue;
-		}
-	}
-	return value;//エラーならNaN
-}
-function readNV(){
-	debugN("□---ＮＶ読込");
-	for(var i=0;i<3;i++){
-		var value = browser.readPersistentArray( this.url+this.blk, this.fmt );
-		if(value!=null){
-			if( value[0] != this.nid ) {
-				debugN("（！）NVID不一致");
-				value[0] = 255;
-		    }
-			break;
-		}else{
-			debugN("（！）読込失敗！");
-			browser.sleep(500);
-			continue;
-		}
-	}
-	return value;//エラーならnull
-}
-/*
-//以下使用例
-//NVデータセット
-nvI.blk = gComIniAry["com_renNV-block"];
-nvI.nid = gComIniAry["com_renNV-id"];
-nvI.fmt = gComIniAry["com_renNV-struct"].split("|").join(",");
-var td = gComIniAry["com_renNV-default"].split("|");
-for(var di=0;di<td.length;di++){
-	nvI.def[di] = td[di];
-}
-//NVインスタンス生成
-gNV = new NV_F(nvI.url,nvI.blk,nvI.fmt,nvI.nid,nvI.def,nvI.data);
-//REC時はNVを読まない
-if(isDVHS()) {
-	gNV.data[14]="";
-}else{
-	//NV読み込み
-	gNV.data = gNV.read();
-	if(gNV.data == null || gNV.data[0] == 255){
-		gNV.def[0] = gNV.nid;
-		gNV.write(gNV.def);
-		gNV.data = gNV.read();
-	}
-	debugN("NV="+gNV.data);
-}
-*/
+// 必須関数
+// ・背景JPEGを利用するときは変数backにidを代入する
+//		back = "back";
+// ・キー連打対策の例
+//		function okd()
+//		{
+//			if (ks()) {
+//				return;
+//			}
+//			var key = document.currentEvent.keyCode;
+//			if (key == 18) {
+//			...
+//			}
+//			ke();
+//		}
+// ・画面ロックはsl(1)とsl(0)の呼び出す回数を合わせること
+// ・beventでソースモジュールのModuleUpdatedはmuSRC()を指定する
+// ・beventでDataEventChangedはdec()を指定する
+// ・beventでDataButtonPressedはd()を指定する
+//
+// グローバル変数
+// ・me(自分自身)
+//   放送の場合は"/40/0000/startup.bml"など、通信の場合は"/bmltop/startup.bml"など
+// ・ES(自ES)※放送のみ
+//   "/40/"など
+// ・startupBML
+// ・topBML
+// ・sll
+//   lockScreen()の深さを保持
+// ・mll
+//   lockModuleOnMemory()したモジュールを保持
+// ・kr
+//   キー連打対策
+// ・mc(メディアコード)
+//   11:総合(サブチャンネルは12)
+//   21:教育(サブチャンネルは23)
+//   100:BSのどれか(レガシーのため不明)
+//   101:BS1(マルチ編成は102)
+//   103:BSP(マルチ編成は104)
+//   700:DD1
+//   701:DD2
+// ・back※放送のみ
+//   背景JPEGのidを保持
+//
+// NVRAM
+// ・mNVc()、mNVr()、mNVw()はメンバー関数なのでコールできない
+// ・初期化(内部で自動読み込みと初期化実施)
+//		var nv = new NV("nvram://00;group/0", 1, "U:1B,U:1B,S:1V", new Array(1, 0, ""));
+//		初期化配列が空(new Array())だと読み込み失敗/id違いのときに上書きしない
+//		(このとき読み込み失敗だと配列がないので書き込めない)
+//		(読み込み成功なら配列があるので書き込みもできるが、id違いのデータが入っているので注意)
+//		NVIDに関わらず読みたいときは、一度ダミーのNVIDで読み出して(NVIDだけは読める)、読み出したNVIDで再度読む
+// ・値の参照
+//		var foo = nv.data[1];
+// ・書き込み
+//		nv.data[1] = 1;
+//		nv.data[2] = "bar";
+//		nv.write();
+//
+// 郵便番号取得
+// ・必ず7桁で返す(取得できないときは"0000000")
+//
+// 録画判定
+// ・判定終了後はデフォルトの「再生時絶対時刻」(現在時刻)になっている
+//
+// 通信判定
+// ・IP接続機能があるかどうかを返す
+//
+// 接続判定
+// ・IP接続が確立されているかどうかを返す
+//
+// DOL遷移の記述例
+// ・dol.nhk.or.jp、dol9.nhk.or.jp、bml.nhk.jpがあること、直接遷移することがあることから以下の仕様となっている
+//		if (isEther()) {
+//			if (isIP()) {
+//				browser.Ureg[55] = "bmltop/startup.bml,545,30,360,202";
+//				luHTTP("http://bml.nhk.jp/startup.bml");
+//				// 通信確認の結果、エラーで返ってくることがあるので想定して処理を継続すること
+//			}
+//			else {
+//				// LAN接続されていないとき(促し画面など)
+//			}
+//		}
+//		else {
+//			// IP機能がないとき(通常はボタンなども出さない)
+//		}
+//
+// アクトビラ判定
+// ・IPTV対応(放送通信連携対応)しているかどうかを返す
+//   0:非対応
+//   1:アクトビラ対応
+//   2:J:COM対応
+//
+// NODトップ遷移
+// ・直接、NODトップに遷移する(初回だけことわり画面へ遷移)
+// ※通常はこの関数ではなくDOLのNOD見逃し番組表経由で遷移する演出が多い
+//
+// 高画質動画遷移(放送通信連携フェーズ1(IPTV Phase1))
+// ・直接、高画質動画へ遷移する(初回だけことわり画面へ遷移)
+//
+// PPP判定
+// ・ダイヤルアップ設定が行われているかどうかを返す
+//
+// BS判定
+// ・受信しているサービスがBSかどうかを返す
+//
+// 地上受信可能判定
+// ・地上デジタル放送を受信する機能があるかどうかを返す
+//
+// ネットワークID取得
+// ・ネットワークIDを16進数4桁の小文字文字列で返す
+//
+// ブラウザーバージョン取得
+// ・必ず20桁で返す(取得できないときは"____________________")
+//
+// Foliage判定
+// ・Folidageで実行されているかどうかを返す(デバッグ用)
+//
+// 数値を"0"で桁数指定パディング
+// ・表示用に桁数を固定した文字列を返す
+//		p("foo", num0(123, 5)); // "00123"と表示される
+//
+// 数値を" "で桁数指定パディング
+// ・表示用に桁数を固定した文字列を返す
+//		p("foo", nums(123, 5)); // "  123"と表示される
+//
+// 1桁の数値を全角化
+// ・数字が1桁のときは全角化した文字列を返す
+//		p("foo", numz(1)); // "１"と表示される
+//		p("foo", numz(10)); // "10"と表示される
+//
+// Ureg[50]にフラグを多重
+// ・一度しか表示したくないときなどの制御用フラグをUreg[50]に多重する
+// ・idはクロスメディア部に申請して発行してもらう
+//
+// UTS送信
+// ・使用例
+//		var r = us("http://itvas.nhk.jp/mileage/denbun", "nhk__animemile01", "RECORDS", new Array(privacy(id), "00000669", "0001", "9999"), "");
+//		if (r.length) {
+//			var ar = r.substring(5).split(":");
+//		}
+// 文字列の長さ(全角を2文字としてカウント)
+// ・文字列の長さをバイト単位で返す
+//
+// 文字列の先頭から指定した文字を取得(全角を2文字としてカウント)
+// ・文字列の先頭からバイト単位で指定した長さの文字列を返す
+//
+// シンプルデバッグ
+// ・デバッグ表示タグのidは"debug"
+// ・通常はUreg[53]が"debug"になっていると自動的にデバッグ表示となる
+//   強制的に表示開始するときだけ以下の初期化を行う
+//		debug = 1;
+// ・出力
+//		dbg("foo");
+//
+// デバッグ(複数id可)
+// ・初期化
+//		var dbg = new DEBUG("debug");
+//		dbg.flg(true);
+// ・出力
+//		dbg.prn("foo");
+//
 
 // 必須関数(放送)
 var me=browser.getActiveDocument();
@@ -197,393 +202,118 @@ function kt(){kr=true;}
 function ks(){if(!kr)return true;kr=false;return false;}
 function ke(){browser.setInterval("kt();",100,1);sll=0;}
 function ca(c_d,c_s){for(var c_n=0;c_n<c_s.length;c_n++)c_d[c_n]=c_s[c_n];}
+/*
+// 必須関数(通信)※ml()は地上の40/50/60のみ利用可
+var me=browser.getActiveDocument();
+var startBML="arib-dc://-1.-1.-1/40/0000/startup.bml";
+var topBML="arib-dc://-1.-1.-1/40/0000/top.bml";
+var sll=0;
+var mll=new Array();
+var kr=true;
+var mc=parseInt(browser.getProgramID(2),16);
+if(mc>999)
+mc=(mc&8?20:10)+(mc&7)+1;
+function so(c_n){browser.playRomSound("romsound://"+c_n);}
+function g(c_id){return(document.getElementById(c_id));}
+function p(c_id,c_s){g(c_id).firstChild.data=c_s;}
+//function o(c_id,c_s){g(c_id).data=c_s;}
+function s(c_id){return(g(c_id).normalStyle);}
+function v(c_id,c_n){if(!c_n)s(c_id).visibility="hidden";else if(c_n==1)s(c_id).visibility="visible";}
+function iv(c_id){return s(c_id).visibility=="visible";}
+function re(){ml("",2);browser.reloadActiveDocument();}
+function lu(c_uri){browser.launchDocument(c_uri,"cut");}
+function luSTARTUP(){ml("",2);cu();lu(startBML);}
+function luTOP(){ml("",2);cu();lu(topBML);}
+function sl(c_n){if(c_n){if(!sll)browser.lockScreen();sll++;}else{sll--;if(!sll)browser.unlockScreen();}}
+function cu(){for(var c_n=1;c_n<45;c_n++){browser.Ureg[c_n]="";}}
+function ss(c_id,c_uri,c_n){if(c_n){g(c_id).moduleRef=c_uri;g(c_id).subscribe=true;}else g(c_id).subscribe=false;}
+function ml(c_uri,c_n){if(c_n<2){mll[c_uri]=c_n;return c_n?browser.lockModuleOnMemoryEx(c_uri):browser.unlockModuleOnMemoryEx(c_uri);}else{for(var c_m in mll)if(mll[c_m])browser.unlockModuleOnMemoryEx(c_m);mll=new Array();return 1;}}
+function d(){so(7);luSTARTUP();}
+function kt(){kr=true;}
+function ks(){if(!kr)return true;kr=false;return false;}
+function ke(){browser.setInterval("kt();",100,1);sll=0;}
+function ca(c_d,c_s){for(var c_n=0;c_n<c_s.length;c_n++)c_d[c_n]=c_s[c_n];}
+*/
 
+// 以下、任意関数
+// NVRAM(isDVHS、isBSが必要)
+var br=0;
+if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Version")){var c_bv=browser.getBrowserVersion();if(c_bv&&c_bv.length==4){if(c_bv[0].indexOf("13")!=-1&&c_bv[1].indexOf("MMDOCUMENTENGINE")!=-1||c_bv[0].indexOf("14")!=-1&&c_bv[1].indexOf("BAISBROWSERT")!=-1)br=1;if(c_bv[0].indexOf("19")!=-1&&c_bv[1].indexOf("PANAIBROWSER")!=-1)br=2;}}
+function NV(c_uri,c_id,c_str,c_ini){this.uri=c_uri;this.id=c_id;this.str=c_str;this.data=new Array();this.clear=mNVc;this.read=mNVr;this.write=mNVw;if(!this.read()&&c_ini.length){ca(this.data,c_ini);this.write();}}
+function mNVc(){return !isNaN(browser.writePersistentArray(this.uri,"U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B",new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)));}
+function mNVr(){this.data=new Array();var c_as=String(this.str).split(",");var c_n=br?(br==1?1:15):5;if(isBS()&&(this.uri.indexOf("local/")>=0||this.uri.indexOf("group/")>=0))c_n=1;var c_ar;while(!(c_ar=browser.readPersistentArray(this.uri,c_as[0]))){if(!--c_n)return false;browser.sleep(2000);}if(c_ar[0]!=this.id){this.data[0]=c_ar[0];return false;}while(!(c_ar=browser.readPersistentArray(this.uri,this.str))){if(!--c_n)return false;browser.sleep(2000);}for(c_n=0;c_n<c_as.length;c_n++)this.data[c_n]=c_ar[c_n];return true;}
+function mNVw(){if(isDVHS())return false;if(isNaN(browser.writePersistentArray(this.uri,this.str,this.data)))return false;var c_ar=browser.readPersistentArray(this.uri,this.str);return c_ar&&c_ar[0]==this.id;}
+// 郵便番号取得(NVRAM関数が必要)
+function getZip(){var c_nv=new NV("nvram://receiverinfo/zipcode",0,"S:7B",new Array());return c_nv.data.length?(c_nv.data[0]+"0000000").substring(0,7):"0000000";}
+// 録画判定
+function isDVHS(){if(isNaN(browser.setCurrentDateMode(1)))return true;var c_r=new Date();browser.setCurrentDateMode(0);var c_d=browser.subDate(c_r,new Date(),0);return isNaN(c_d)||c_d<-10000||c_d>10000;}
+// 通信判定
+function isEther(){if(browser.getBrowserSupport("ARIB","BMLversion","3.0")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.GetType")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.Transmit")){var c_n=browser.getConnectionType();if(!isNaN(c_n))return (c_n==402||c_n==403);}return false;}
+// 接続判定
+function isIP(){if(browser.getBrowserSupport("ARIB","BMLversion","3.0")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.GetType")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.Transmit"))return browser.isIPConnected()==1;return false;}
+// DOL遷移(isDVHSが必要)
+function luHTTP(c_uri){if(isDVHS())return;if(browser.Ureg[59]!="ok"){var c_r=new Array();c_r=browser.transmitTextDataOverIP("http://beacon.nhk.jp/","","EUC-JP");if(c_r[0]!=1||c_r[1]!=200){browser.Ureg[59]="ng";return;}browser.Ureg[59]="ok";}ml("",2);lu(c_uri);}
+// 放送通信連携タイプ1(IPTV TYPE1)判定
+function isIPTV(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.startExtraBrowser")&&browser.getBrowserSupport("ARIB","ResidentApp","netTVBrowser")&&browser.getBrowserSupport("ARIB","ExtraBrowserFunction","netTVVOD")){var c_v=new Array();if(c_v=browser.getResidentAppVersion("netTVBrowser")){var c_s=c_v[4].substring(0,6);if(c_s=="AAA003"||c_s=="AAA004"||c_s=="AAA005"||c_s=="AAA006")return 1;if(c_s=="AAB001")return 2;}}return 0;}
+// NODトップ遷移(NVRAM関数が必要)
+function luNOD(){var c_nv=new NV("nvram://local_web/0",1,"U:1B,U:2B,U:2B,S:18B,S:18B,U:1B,U:2B,U:1B,U:1B,S:1V,U:1B,U:1B,U:1B,U:1B,U:1B,U:1B",new Array());lu("/bmltop/nod/"+(Number(c_nv.data[14])?"lu":"")+(isIPTV()==1?"act":"catv")+".bml");}
+// 高画質動画遷移(放送通信連携タイプ1(IPTV TYPE1))(放送)(NVRAM関数が必要)
+function luIPTV(uri_r,uri_a,uri_j){var c_iptv=isIPTV();if(c_iptv==1){var c_nv=new NV("nvram://local_web/0",1,"U:1B,U:2B,U:2B,S:18B,S:18B,U:1B,U:2B,U:1B,U:1B,S:1V,U:1B,U:1B,U:1B,U:1B,U:1B,U:1B",new Array());if(!c_nv.data.length){browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;browser.Ureg[55]="bml-act/jump.bml";luHTTP("http://bml.nhk.jp/startup.bml");}else if(!Number(c_nv.data[14])){c_nv.data[14]=1;c_nv.write();browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;browser.Ureg[55]="bml-act/jump.bml";luHTTP("http://bml.nhk.jp/startup.bml");}browser.startExtraBrowser("netTVBrowser",0,"",uri_a);}else if(c_iptv==2)browser.startExtraBrowser("netTVBrowser",0,"",uri_j);}
+/*
+// 高画質動画遷移(放送通信連携タイプ1(IPTV TYPE1))(通信)(NVRAM関数が必要)
+function luIPTV(uri_r,uri_a,uri_j){var c_iptv=isIPTV();if(c_iptv==1){var c_nv=new NV("nvram://local_web/0",1,"U:1B,U:2B,U:2B,S:18B,S:18B,U:1B,U:2B,U:1B,U:1B,S:1V,U:1B,U:1B,U:1B,U:1B,U:1B,U:1B",new Array());if(!c_nv.data.length){browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;lu("/bml-act/jump.bml");}else if(!Number(c_nv.data[14])){c_nv.data[14]=1;c_nv.write();browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;lu("/bml-act/jump.bml");}browser.startExtraBrowser("netTVBrowser",0,"",uri_a);}else if(c_iptv==2)browser.startExtraBrowser("netTVBrowser",0,"",uri_j);}
+*/
+// 放送通信連携タイプ2(IPTV TYPE2)判定
+function isIPTV2(){return browser.getBrowserSupport("ARIB","ResidentApp","VOD")==1;}
+// 高画質動画遷移(放送通信連携タイプ2(IPTV TYPE2))(放送)※lu("/60/1000/vod??.bml")でもOK!
+function luIPTV2(uri_r,c_lid){var c_ar=browser.getResidentAppVersion("VOD");if(c_ar){var c_term=browser.getIRDID("0xE0001");var c_nv=new NV("nvram://00;group/62",1,"U:1B,S:1V,U:2B,S:1V",new Array(1,"",0,""));c_ar=browser.transmitTextDataOverIP("http://dol.nhk.or.jp/bml-act-vod/adv.cgi","terminal_id="+c_term+(c_nv.data[1]==""?"":"&device_id="+c_nv.data[1]),"EUC-JP");if(c_ar[0]==1||c_ar[1]==200){browser.Ureg[49]=c_ar[2].substring(8,40);if(c_nv.data[1]==""){c_ar=c_ar[2].split("&device=");if(c_ar.length>1){c_nv.data[1]=c_ar[1];c_nv.write();}}browser.Ureg[1]=uri_r;browser.Ureg[2]=c_lid;browser.Ureg[55]="bml-act-vod/play.bml";luHTTP("http://dol.nhk.or.jp/startup.bml");}}}
+/*
+// 高画質動画遷移(放送通信連携タイプ2(IPTV TYPE2))(通信)
+function luIPTV2(uri_r,c_lid,c_size){browser.Ureg[1]=uri_r;browser.Ureg[2]=c_lid;if(browser.Ureg[49]==""){lu("arib-dc://-1.-1.-1/60/1000/vod"+c_size+".bml");}else{lu("/bml-act-vod/play.bml");}}
+*/
+// Hybridcast対応判定(0:非対応/1:フェーズ0対応)
+function isHC(){return(browser.getBrowserSupport('ARIB','APIGroup','AITControlledApp.Start')==1&&browser.getBrowserSupport("ARIB","AITControlledAppEngineFunction","IPTV-F","HTML5_ph0")==1&&browser.getBrowserSupport('ARIB','AITTransportMethod','XML','HTTP')==1)?1:0;}
+// Hybridcast遷移
+function luHC(c_appid,c_uri){browser.startAITControlledApp("10",c_appid,c_uri);}
+// PPP判定
+function isPPP(){if(browser.getBrowserSupport("ARIB","APIGroup","Com.IP.Params")){var c_p=browser.getISPParams();return (c_p&&c_p[1]&&c_p[3]&&c_p[4]);}return false;}
+// BS判定
+function isBS(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Basic"))return browser.getProgramID(3)=="0x0004";return true;}
+// 地上受信可能判定
+function canT(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Media"))return browser.isSupportedMedia("4");return false;}
+// ネットワークID取得
+function getNID(){return browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Basic")?num0(browser.getProgramID(3).substring(2).toLowerCase(),4):"0004";}
+// ブラウザーバージョン取得(フルサイズ)
+function getBrowser(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Version")){var c_r=browser.getBrowserVersion();if(c_r&&c_r.length==4)return c_r[0]+(c_r[1]+"____________________").substring(0,20)+c_r[2]+c_r[3];}return "____________________________";}
+// Foliage判定(getBrowserが必要)
+function isFoliage(){return getBrowser().substring(0,13)=="00FOLIAGETYPE";}
+// 数値を"0"で桁数指定パディング
+function num0(c_n,c_c){var c_r="0000000000000000"+c_n;return c_r.substring(c_r.length-c_c);}
+// 数値を" "で桁数指定パディング
+function nums(c_n,c_c){var c_r="          "+c_n;return c_r.substring(c_r.length-c_c);}
+// 1桁の数値を全角化
+function numz(c_n){if(c_n<10)return "０１２３４５６７８９".charAt(c_n);return c_n;}
+// 【ACASに対応していないため、削除】B-CAS番号を10進数20桁の文字列で取得
+// function getCAS10(){var c_h=browser.getIRDID(5);if(!c_h||c_h.length!=12)return "00000000000000000000";var c_r=parseInt(c_h.substring(5,12),16)%100000+parseInt(c_h.substring(3,5),16)*35456;var c_l=parseInt(c_h.substring(5,12),16)/100000+c_r/100000+parseInt(c_h.substring(3,5),16)*2684;return "0000"+num0(c_l,6)+num0(c_r,5)+num0((parseInt(c_h.substring(0,4),16)^parseInt(c_h.substring(4,8),16))^parseInt(c_h.substring(8,12),16),5);}
+// Ureg[50]にフラグを設定
+function setUreg50(c_c,c_s){var c_ar=browser.Ureg[50].split("_");for(var c_l=0;c_l<c_ar.length;c_l++)if(c_ar[c_l].charAt(0)==c_c){c_ar[c_l]=c_c+c_s;browser.Ureg[50]=c_ar.join("_");return;}if(c_ar.length)browser.Ureg[50]+="_";browser.Ureg[50]+=c_c+c_s;}
+// Ureg[50]のフラグを取得(未登録がわかるようにフラグ自体も返す)
+function getUreg50(c_c){var c_ar=browser.Ureg[50].split("_");for(var c_l=0;c_l<c_ar.length;c_l++)if(c_ar[c_l].charAt(0)==c_c)return c_ar[c_l];return "";}
+// UTS送信(getBrowser()が必要)
+function us(u_url,c_tkt,c_type,c_ar,c_url){if(u_url.length){var now=new Date();var denbun=c_tkt+":"+(now==null?"00000000000000":now.toString().split("T").join("").split("-").join("").split(":").join(""))+":0000:0:E:"+c_type+":"+c_ar.join(":");if(now!=null&&c_tkt.length==16&&c_type.length<=8&&c_type.length){var r=browser.transmitTextDataOverIP(u_url,denbun,"EUC-JP");if(getBrowser().substring(0,2)=="19")browser.sleep(300);if(Number(r[0])==1&&Number(r[1])==200&&String(r[2]).substring(0,5)=="0000:")return r[2];denbun+="/"+r[1]+"/"+r[2];}if(c_url.length){browser.transmitTextDataOverIP(c_url,denbun+"/"+getBrowser(),"EUC-JP");if(getBrowser().substring(0,2)=="19")browser.sleep(300);}}return"";}
+// 文字列の長さ(全角を2文字としてカウント)
+function strlen(c_s){var c_n=0;for(var c_l=0;c_l<c_s.length;c_l++)c_n+=c_s.charCodeAt(c_l)>0xff?2:1;return c_n;}
+// 文字列の先頭から指定した文字を取得(全角を2文字としてカウント)
+function strL(c_s,c_n){var c_m=0;for(var c_l=0;c_l<c_s.length;c_l++){c_m+=c_s.charCodeAt(c_l)>0xff?2:1;if(c_m>c_n)return c_s.substring(0,c_l);}return c_s;}
+// シンプルデバッグ(strLが必要)
 var debug=browser.Ureg[53]=="debug"?1:0;
 var ard=new Array();
 function dbg(c_s){if(debug){var c_n=parseInt(s("debug").height)/20;var c_c=String(c_s);while(c_c.length){ard[debug-1]=strL(c_c,parseInt(s("debug").width)/10);c_c=c_c.substring(ard[debug-1].length);debug=(debug)%c_n+1;}var c_p="";for(var c_m=ard.length-1;c_m>=0;c_m--)c_p+=ard[(debug-2-c_m+c_n)%c_n]+"\r\n";p("debug",c_p);}}
+// デバッグ(複数id可)
+function DEBUG(c_id){this.id=c_id;this.f=false;this.ar=new Array();this.ln=parseInt(s(c_id).height)/16;for(var c_n=0;c_n<=this.ln;c_n++)this.ar[c_n]="";this.po=0;this.flg=mDEBUGf;this.prn=mDEBUGp;}
+function mDEBUGf(c_f){this.f=c_f;v(this.id,c_f?1:0);}
+function mDEBUGp(c_s){if(this.f){this.ar[this.po%this.ln]=c_s;this.po++;var c_p="";for(var c_n=0;c_n<this.ln;c_n++)c_p+=this.ar[this.po>this.ln?(this.po+c_n)%this.ln:c_n]+"\r\n";p(this.id,c_p);}}
 
-//////////////////////////////////////////////////////////////////////////////
-// 共通関数
-//////////////////////////////////////////////////////////////////////////////
-function cu(){var i=1;for(; i<=44; i++) {browser.Ureg[i]="";}}
-function getEvent() { return document.currentEvent; }
-function getID() { return getEvent().target.id; }
-function getKey() { return getEvent().keyCode; }
-function getStatus(){ return getEvent().status; }
-function getModule() { return getEvent().moduleRef; }
-function getStyle(id) { return g(id).normalStyle; }
-function setObject(id, data) { g(id).data = data; }
-function disp(id) { getStyle(id).visibility = "visible"; }
-function succession(id) { getStyle(id).visibility = "inherit"; }
-
-//function jumpUrl(page) { browser.launchDocument(page, "cut"); }
-
-function toInt(str) { return parseInt(str, 10); }
-function getTop(id) { return pxDel(getStyle(id).top); }
-function getLeft(id) { return pxDel(getStyle(id).left); }
-function getWidth(id) { return pxDel(getStyle(id).width); }
-function getHeight(id) { return pxDel(getStyle(id).height); }
-function setTop(id, data) { getStyle(id).top = data + "px"; }
-function setLeft(id, data) { getStyle(id).left = data + "px"; }
-function setHeight(id, data) { getStyle(id).height = data + "px"; }
-function setWidth(id, data) { getStyle(id).width = data + "px"; }
-function getVisi(id) { return g(id).normalStyle.visibility; }
-function setBackColor(id, data) { getStyle(id).backgroundColorIndex = data; }
-function setColor(id, data) { getStyle(id).colorIndex = data; }
-function setGrayscale(id, data) { getStyle(id).grayscaleColorIndex = data; }
-function pxDel(str) { return toInt(str.substring(0, (str.length - 2))); }
-
-//function playSound(id) { browser.playRomSound("romsound://" + id.toString()); }
-
-function playAif(id) { g(id).streamStatus = "stop";g(id).streamStatus = "play"; }
-function startTimer(fun, mse, ite) { return browser.setInterval(fun, mse, ite); }
-function stopTimer(id) { browser.clearTimer(id); }
-function lockModule(moduleRef,_lock){browser.unlockModuleOnMemory(moduleRef);if(_lock){browser.lockModuleOnMemory(moduleRef);}}
-function readBtb(tbl, strac) {var result = new Array();var btb = new BinaryTable(tbl, strac);if (btb == null) return null;result = btb.toArray(0, btb.nrow);if (btb.nrow && (result != null && typeof(result[0][0]) == "object")) {for (var i=0; i<btb.nrow; i++) {for(var j=0; j<btb.ncolumn; j++) result[i][j] = result[i][j].valueOf();}}btb.close();return result;}
-function trimL0(str){var tStr = "";tStr=""+str;if(tStr=="")return tStr;for(var i=0;i<str.length;i++){if(tStr.length>1&&tStr.charAt(0)=="0"){tStr=tStr.substring(1);}else{break;}}return tStr;}
-function isUnde(st){if(typeof st == "undefined"){return true;}else{return false;}}
-function vSt(val){
-	if(val==2){
-		setWidth("Vstream", "240");
-		setHeight("Vstream", "135");
-		setLeft("Vstream", "666");
-		setTop("Vstream", "30");
-	}else if(val==3){
-	}else if(val==4){
-	}else if(val==5){
-	}else if(val==6){
-		setWidth("Vstream", "720");
-		setHeight("Vstream", "405");
-		setLeft("Vstream", "120");
-		setTop("Vstream", "30");
-	}else if(val==7){
-	}else if(val==8){
-		setLeft("Vstream", "0");
-		setTop("Vstream", "0");
-		setWidth("Vstream", "960");
-		setHeight("Vstream", "540");
-	}
-}
-function sleep(i_val){browser.sleep(i_val);}
-function getBrowser(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Version")){var c_r=browser.getBrowserVersion();if(c_r&&c_r.length==4)return c_r[0]+(c_r[1]+"____________________").substring(0,20)+c_r[2]+c_r[3];}return "____________________________";}
-// AIF再生チェックシャープ機チェック
-//var gAiffOk=(getBrowser().indexOf("11")==0)?false:true;
-// Hybridcast対応判定(0:非対応/1:フェーズ0対応)
-function isHC(){return(browser.getBrowserSupport('ARIB','APIGroup','AITControlledApp.Start')==1&&browser.getBrowserSupport("ARIB","AITControlledAppEngineFunction","IPTV-F","HTML5_ph0")==1&&browser.getBrowserSupport('ARIB','AITTransportMethod','XML','HTTP')==1)?1:0;}
-//////////////////////////////////////////////////////////////////////////
-//　半角数字→全角数字変換
-//////////////////////////////////////////////////////////////////////////
-function stringChecker(str) {dbg(str);
-	var c = "0123456789";
-	var cr = "０１２３４５６７８９";
-	var moji=""+str;
-	var zenkaku="";
-	if(null==moji || moji=="null" || moji==""){
-		return moji;
-	}
-	for (var i=0; i<moji.length; i++){
-		zenkaku += (c.indexOf( moji.charAt(i) ) != -1)?cr.charAt(moji.charAt(i)):moji.charAt(i); 
-	}
-	return zenkaku;
-}
-
-function stringChecker(str) {
-	var c = "0123456789";
-	var cr = "０１２３４５６７８９";
-	var temp=0;
-	var moji="";
-	var zenkaku="";
-	if(null==str || str=="null" || str==""){
-		return "";
-	}
-	for (var i=0; i<str.length; i++){
-		for (var j=0; j<c.length; j++){
-			if(str.substring(i,i+1) == c.substring(j,j+1)){
-				temp=1;
-				zenkaku = cr.substring(j,j+1);
-				break;
-			}else{
-				temp=0;
-			}
-		}
-
-		if(temp==0){
-			moji += str.substring(i,i+1);
-		}else if(temp==1){
-			moji += zenkaku;
-		}
-	}
-	return moji;
-}
-//////////////////////////////////////////////////////////////////////////
-//　文字列置き換え
-//////////////////////////////////////////////////////////////////////////
-function repStr(i_str,i_key,i_dem){
-	var rt = i_str;
-	while(rt.indexOf(i_key)!=-1){
-		rt = rt.split(i_key).join(i_dem);
-	}
-	return rt;
-}
-//////////////////////////////////////////////////////////////////////////
-//　文字列置き換え(旧)
-//////////////////////////////////////////////////////////////////////////
-function replace_F(word,key,dem){
-	var ret = "";
-	var keyLen = String(key).length;
-	word = String(word);
-	key = String(key);
-	dem = String(dem);
-	var pointer = word.indexOf(key);
-	if(pointer!=-1){
-		ret += word.substring(0, pointer);
-		ret += dem;
-		ret += word.substring(pointer+keyLen);
-	}else{
-		ret = word;
-	}
-	return ret;
-}
-
-//////////////////////////////////////////////////////////////////////////
-//　バイナリ（2進数）→整数（10進数）NV格納時等に使用
-//////////////////////////////////////////////////////////////////////////
-function toNum(val){
-	var ret=0;
-	var _lb=0;
-	var _bb=1;
-	var _tb=1;
-	for(var _xb=val.length;_xb>=1;_xb--){
-		ret+=Number(val.substring(_xb-1,_xb))*_bb;
-		_bb=_tb*2;_tb=_bb;
-	}
-	return ret;
-}
-//////////////////////////////////////////////////////////////////////////
-//　整数（10進数）→バイナリ（2進数）NVから読み込み後コンテンツで使用する際等に使用
-//////////////////////////////////////////////////////////////////////////
-function toBin(val,len){
-	var ret="";
-	var _rn=val;
-	while(_rn>0){ret=String(_rn%2)+ret;_rn=_rn/2;}
-	return num0(ret,len);
-}
-/*
-ストラクチャを決める際は、
-格納する10進数、もしくは２進数（フラグ）の桁数から判断する。
-U:1B =                 ~255 = 11111111 (8bit)
-U:2B =              ~65,535 = 1111111111111111 (16bit)
-U:3B =          ~16,777,215 = 111111111111111111111111 (24bit)
-U:4B =       ~4,294,967,295 = 11111111111111111111111111111111 (32bit)
-U:5B =   ~1,099,511,627,775 = 1111111111111111111111111111111111111111 (40bit)
-U:6B = ~281,474,976,710,655 = 111111111111111111111111111111111111111111111111 (48bit)
-*/
-//************************************************************************
-// マップ列インデックス16進｜10進数変換（Ureg格納抽出）
-//************************************************************************
-// ・i_val：変換値
-// ・i_key：変換進数（10 or 16）
-//************************************************************************
-function conv16(i_val, i_key){
-	var rt;
-	var t10 = new Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
-	var t16 = "0123456789abcdef";
-	if(i_key==10){
-		var ts = t16.indexOf(i_val,0);
-		if(ts!=-1){
-			rt = t10[ts];
-		}else{
-			rt = i_val;
-		}
-	}else if(i_key==16){
-		if(i_val>=0 && i_val<=15){
-			rt = t16.charAt(i_val);
-		}else{
-			rt = i_val;
-		}
-	}else{
-			rt = i_val;
-	}
-	return rt;
-}
-// -----------------------------------------------------------------------------------
-// 62進数への変換
-// -----------------------------------------------------------------------------------
-function cnvt62(val){
-	var num62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	var a = "";
-	var b = Number(val);
-	while ( b > 0 ){
-		a = num62.charAt(b % 62)+a;
-		b = b / 62 ;
-	}
-	return a;
-}
-// -----------------------------------------------------------------------------------
-// 文字列の入れ替え
-// -----------------------------------------------------------------------------------
-function shuffle(val){
-	var chkC = "";
-	var cnt = String(val).length;
-	var cntNum = null;
-	var sfrStr = "";
-	for(var c=0;c<cnt;c++){
-		cntNum = browser.random(cnt);
-		while(chkC.indexOf(String(cntNum)) != -1){cntNum = browser.random(cnt);}
-		chkC += cntNum;
-		sfrStr += val.charAt(cntNum-1);
-	}
-	return sfrStr;
-}
-// -----------------------------------------------------------------------------------
-// 通信確認処理
-// -----------------------------------------------------------------------------------
-function check_IP(){
-	//IP機能（isIPConnected()を除く）の有無を行う
-	var ipFunc = null;
-	var ret = new Array(0, 0);
-	ipFunc = check_IP_Function();
-	if(ipFunc!=null){
-		if(ipFunc == 0){
-			ret[0] = 1;
-		}else{
-			debugN("check_IP_Function()=>"+ipFunc);
-		}
-	}
-	//受信機の物理的なIP接続（isIPConnected()）のチェックをする
-	var ipConnect = null;
-	ipConnect = check_IP_Connection();
-	if(ipConnect!=null){
-		if(ipConnect == 0){
-			ret[1] = 1;
-		}else{
-			debugN("check_IP_Connection()=>"+ipConnect);
-		}
-	}
-	return ret;
-}
-//------------------------------------------------------------------------
-//  受信機のIP機能（isIPConnected()を除く）の有無をチェックする
-//  戻り値が 0（ゼロ）ならば IP機能ＯＫ!
-//------------------------------------------------------------------------
-function check_IP_Function()
-{
-	var ispParam = new Array();
-	var id  = 0x04; //ルート証明書ID
-	var ver = 0x01; //ルート証明書バージョン
-
-	if(browser.getBrowserSupport("ARIB", "BMLversion", "3.0") != 1) // BML Version 3.0 のサポートチェック
-		return(100);
-	if(browser.getBrowserSupport("ARIB", "APIGroup", "Com.IP.GetType") != 1) // getConnectionType() のサポートチェック
-		return(101);
-	if(browser.getBrowserSupport("ARIB", "APIGroup", "Com.IP") != 1) // isIPConnected() のサポートチェック
-		return(104);
-	if(browser.getBrowserSupport("ARIB", "APIGroup", "Com.IP.Transmit") != 1) // transmitTextDataOverIP() のサポートチェック
-		return(105);
-
-	var n = browser.getConnectionType(); // ISP接続の優先利用回線種別の取得
-	if(isNaN(n)) // 失敗
-		return(300);
-	else if((n != 402) && (n != 403)) // 402:固定IP  403:DHCP  これら以外はDialUP携帯とPHS
-		return(301);
-	else return(0);//上記の条件以外はすべてOK
-}
-//------------------------------------------------------------------------
-//  受信機の物理的なIP接続（isIPConnected()）のチェックする
-//  戻り値が 0（ゼロ）ならば IP接続ＯＫ!
-//------------------------------------------------------------------------
-function check_IP_Connection()
-{
-	if( browser.isIPConnected() != 1) { // ネットワーク接続の確認
-		return(-1);
-	}
-	else {
-		return(0);
-	}
-}
-var isIP = "ok";
-var ipAry = check_IP();
-if(ipAry[0] != 1 || ipAry[1] != 1){
-	isIP = "ng";
-}
-
-
-//////////////////////////////////////////////////////////////////////////
-//　ネットワークIDの取得
-//////////////////////////////////////////////////////////////////////////
-function getNID(){
-	var nid = (browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Basic")==1)? browser.getProgramID(3) : "0x0004";
-	if(nid == null)return "0000";
-	var ret = nid.substring(2,6);//ネットワークIDを取得(0x以降4桁)
-	return ret.toUpperCase();
-}
-//////////////////////////////////////////////////////////////////////////
-//　都道府県テーブルから、ネットワークIDを元に地域コードの取得
-//////////////////////////////////////////////////////////////////////////
-function getACode()
-{
-	var ret;
-	var bt;
-	var result = new Array();
-	bt = new BinaryTable( g_btbPath.net, g_btbFmt.net );
-	g_btbData.net = bt.toArray(0, bt.nrow);
-	ret = g_btbData.net[bt.search(0,0,g_netID,32,true,1,result)][3];
-	bt.close();
-
-	return ret;
-
-	//地域コード50以上で48に丸める？
-	//if(g_areaCode > 50){g_areaCode = 48;}
-}
-//////////////////////////////////////////////////////////////////////////
-//デバッグ表示
-//////////////////////////////////////////////////////////////////////////
-var debugFlg = false;
-var g_DebugLine = 12;//最大表示行
-var g_DebugStr = "";//表示デバッグ
-function debugN(msg){
- 	if (!debugFlg) return;
- 	var tmpStr = "";
-	var deliStr = (g_DebugStr=="")?"■":"\r\n■";
-	g_DebugStr += deliStr + msg;
-	var dAry = g_DebugStr.split("\r\n");
-	if(dAry.length>g_DebugLine){
-		var tmpPos = g_DebugStr.indexOf("\r\n");
-		tmpStr = g_DebugStr.substring(tmpPos+2);
-	}
-	g_DebugStr = tmpStr==""?g_DebugStr:tmpStr;
-	p("pDebug",g_DebugStr);
-}
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 以下、NHK様12SEG共通関数
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 数値を"0"で桁数指定パディング
-function num0(c_n,c_c){
-	var r="00000000000000000000"+c_n;
-	return r.substring(r.length-c_c);
-}
-// 録画判定
-function isDVHS(){
-	if(isNaN(browser.setCurrentDateMode(1)))return true;
-	var c_r=new Date();browser.setCurrentDateMode(0);
-	var c_d=browser.subDate(c_r,new Date(),0);
-	return isNaN(c_d)||c_d<-3000||c_d>3000;
-}
-// UTS送信
-function us(u_url,c_tkt,c_type,c_ar,c_url){
-	if(u_url.length){
-		var now=new Date();
-		var denbun=c_tkt+":"+(now==null?"00000000000000":now.toString().split("T").join("").split("-").join("").split(":").join(""))+":0000:0:E:"+c_type+":"+c_ar.join(":");
-		if(now!=null&&c_tkt.length==16&&c_type.length<=8&&c_type.length){
-			var r=browser.transmitTextDataOverIP(u_url,denbun,"EUC-JP");
-			if(getBrowser().substring(0,2)=="19")browser.sleep(300);
-			if(Number(r[0])==1&&Number(r[1])==200&&String(r[2]).substring(0,5)=="0000:")return r[2];
-			denbun+="/"+r[1]+"/"+r[2];
-		}
-		if(c_url.length){
-			browser.transmitTextDataOverIP(c_url,denbun+"/"+getBrowser(),"EUC-JP");
-			if(getBrowser().substring(0,2)=="19")browser.sleep(300);
-		}
-	}
-	return"";
-}
+// 各トップ用関数(各トップ以外は削除すること)
+// 受信機ID生成
+// function userID(){var c_mag=new Array(0x131,0x753,0x395,0x519,0x977,0x935,0xf45,0x75d,0x175,0xdb1,0x319,0x157,0xb31,0x513,0x19b,0x777);var c_ar=new Array("0");var c_sum=0;var c_cas=browser.getIRDID(5);if(!c_cas||c_cas==""){c_cas=browser.getIRDID(13);if(!c_cas){c_cas=browser.getIRDID(0xF0001);if(!c_cas)c_cas="";else{c_ar[0]=2;c_sum=0x904;}}else{c_ar[0]=1;c_sum=0xc82;}}if(c_ar[0]==2){c_cas=c_cas.substring(0,24).toLowerCase();var c_i;var c_o=0;for(var c_n=0;c_n<24*4;c_n++){if(!(c_n%4)){c_i="0123456789abcdef".indexOf(c_cas.charAt(c_n/4));}c_o+=(c_i&(0x8>>(c_n%4)))?(0x20>>(c_n%6)):0;if(c_n%6==5){c_ar[c_n/6%8*2+c_n/6/8+1]=c_o;c_sum+=c_o*c_mag[c_n/6%8*2+c_n/6/8];c_o=0;}}}else{c_cas=num0(c_cas,16).toLowerCase();for(var c_n=0;c_n<16;c_n++){c_ar[c_n+1]="0123456789abcdef".indexOf(c_cas.charAt(c_n/2+(c_n%2?8:0)));c_sum+=c_ar[c_n+1]*c_mag[c_n];}}for(var c_n=0;c_n<3;c_n++){c_ar[c_n+17]=c_sum%16;c_sum/=16;}var c_id="";for(var c_n=0;c_n<20;c_n++){c_ar[c_n]=(c_ar[c_n]+c_n*7)%(c_ar[0]==2&&c_n<17?64:16);c_id+="wertypasfghjklxnquiodzcvbmWERTYPASFGHJKLXNQUIODZCVBM0123456789-_".charAt(c_ar[c_n]);}if(!isDVHS()){var c_nv=new NV("nvram://local_web/6",1,"U:1B,S:1V,S:1V,S:1V,S:1V,U:1B,U:1B",new Array(1,"00000000000000000000","0000000000","","",0,0));if(c_id!=c_nv.data[1])if(c_cas!="0000000000000000"){c_nv.data[1]=c_id;c_nv.write();}else c_id=c_nv.data[1];}return c_id;}
