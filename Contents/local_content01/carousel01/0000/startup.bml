@@ -10,6 +10,9 @@
 		<script>
 			<![CDATA[
 			var timerID = NaN;
+			function getData(id) { return g(id).firstChild.data; }
+			function setUreg(index, data) { browser.Ureg[index] = data.toString(); }
+
 			function init(){
 				disp("pDebug");
 				debugFlg = true;

@@ -8,6 +8,8 @@
 <link href="startup.css" />
 <script src = "functions.ecm"/>
 <script><![CDATA[
+function getUreg(index) { return browser.Ureg[index]; }
+
 function onload(){
 	disp("pDebug");
 	debugFlg = true;
@@ -17,7 +19,7 @@ function onload(){
 
 function getUregData(){
 	var uregData = getUreg(1);
-	setUreg(1, "");
+	cu();
 	debugN("ureg: " + uregData);
 }
 
@@ -25,7 +27,7 @@ function kd(){
 	var buttonKey = getKey();
 	if(buttonKey == 19){
 		var startScene = ES + MODULE + "/startup.bml";
-		playSound(7);
+		so("7");
 		browser.launchDocument(startScene, "cut");
 	}
 }

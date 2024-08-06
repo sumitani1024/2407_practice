@@ -213,9 +213,7 @@ function getKey() { return getEvent().keyCode; }
 function getStatus(){ return getEvent().status; }
 function getModule() { return getEvent().moduleRef; }
 function getStyle(id) { return g(id).normalStyle; }
-function getUreg(index) { return browser.Ureg[index]; }
-function setUreg(index, data) { browser.Ureg[index] = data.toString(); }
-function getData(id) { return g(id).firstChild.data; }
+
 function setData(id, data) { g(id).firstChild.data = "" + data; }
 function setObject(id, data) { g(id).data = data; }
 function disp(id) { getStyle(id).visibility = "visible"; }
