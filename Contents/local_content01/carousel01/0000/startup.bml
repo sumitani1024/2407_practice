@@ -400,12 +400,12 @@
 					nowStartNum++;
 				}
 				else if(key == 18){
-					disp("regi_pulldown_decision_age");
+					v("regi_pulldown_decision_age",1);
 					so("7");
 					var ageText = getData("regi_pulldown_item_4");
 					setData("regi_age_text", ageText);
 					sleep(200);
-					undisp("regi_pulldown_decision_age");
+					v("regi_pulldown_decision_age",null);
 					showRegiAgePullDown(false);
 				}else if(key == 0){
 					so("7");
@@ -502,58 +502,59 @@
 
 			function showRegiAgePullDown(show){
 				if(show){
-					disp("regi_pulldown");
-					disp("regi_pulldown_item_0");
-					disp("regi_pulldown_item_1");
-					disp("regi_pulldown_item_2");
-					disp("regi_pulldown_item_3");
-					disp("regi_pulldown_item_4");
-					disp("regi_pulldown_item_5");
-					disp("regi_pulldown_item_6");
-					disp("regi_pulldown_item_7");
-					disp("regi_pulldown_item_8");
-					disp("regi_pulldown_focus_age");
+					v("regi_pulldown",1);
+					v("regi_pulldown_item_0",1);
+					v("regi_pulldown_item_1",1);
+					v("regi_pulldown_item_2",1);
+					v("regi_pulldown_item_3",1);
+					v("regi_pulldown_item_4",1);
+					v("regi_pulldown_item_5",1);
+					v("regi_pulldown_item_6",1);
+					v("regi_pulldown_item_7",1);
+					v("regi_pulldown_item_8",1);
+					v("regi_pulldown_focus_age",1);
 
 				}else{
-					undisp("regi_pulldown");
-					undisp("regi_pulldown_item_0");
-					undisp("regi_pulldown_item_1");
-					undisp("regi_pulldown_item_2");
-					undisp("regi_pulldown_item_3");
-					undisp("regi_pulldown_item_4");
-					undisp("regi_pulldown_item_5");
-					undisp("regi_pulldown_item_6");
-					undisp("regi_pulldown_item_7");
-					undisp("regi_pulldown_item_8");
-					undisp("regi_pulldown_focus_age");
-					undisp("regi_pulldown_decision_age");
+					v("regi_pulldown",null);
+					v("regi_pulldown_item_0",null);
+					v("regi_pulldown_item_1",null);
+					v("regi_pulldown_item_2",null);
+					v("regi_pulldown_item_3",null);
+					v("regi_pulldown_item_4",null);
+					v("regi_pulldown_item_5",null);
+					v("regi_pulldown_item_6",null);
+					v("regi_pulldown_item_7",null);
+					v("regi_pulldown_item_8",null);
+					v("regi_pulldown_focus_age",null);
+
 					changeRegiFlag = false;
 				}
 			}
 
 			function regiResetPopup(key){
 				if(key == 3){
-					disp("regi_pop_button_reset_focus");
-					undisp("regi_pop_button_reset_cancel_focus");
+					v("regi_pop_button_reset_focus",1);
+					v("regi_pop_button_reset_cancel_focus",null);
+
 				}else if(key == 4){
-					disp("regi_pop_button_reset_cancel_focus");
-					undisp("regi_pop_button_reset_focus");
+					v("regi_pop_button_reset_cancel_focus",1);
+					v("regi_pop_button_reset_focus",null);
 				}
 			}
 
 			function showRegiResetPopup(show){
 				if(show){
-					disp("regi_popup_wp");
-					disp("regi_pop_button_reset");
-					disp("regi_pop_button_reset_cancel");
-					disp("regi_pop_reset_text");
-					disp("regi_pop_button_reset_cancel_focus");
-
+					v("regi_popup_wp",1);
+					v("regi_pop_button_reset",1);
+					v("regi_pop_button_reset_cancel",1);
+					v("regi_pop_reset_text",1);
+					v("regi_pop_button_reset_cancel_focus",1);
 				}else{
-					undisp("regi_popup_wp");
-					undisp("regi_pop_button_reset");
-					undisp("regi_pop_button_reset_cancel");
-					undisp("regi_pop_reset_text");
+					v("regi_popup_wp",null);
+					v("regi_pop_button_reset",null);
+					v("regi_pop_button_reset_cancel",null);
+					v("regi_pop_reset_text",null);
+
 				}
 			}
 
@@ -611,15 +612,15 @@
 
 				if(showFlag){
 					if(button == 3){
-						undisp(pageFocusRight);
-						disp(pageFocusLeft);
+						v(pageFocusRight,null);
+						v(pageFocusLeft,1);
 					}else{
-						undisp(pageFocusLeft);
-						disp(pageFocusRight);
+						v(pageFocusLeft,null);
+						v(pageFocusRight,1);
 					}
 				}else{
-					undisp(pageFocusRight);
-					undisp(pageFocusLeft);
+					v(pageFocusRight,null);
+					v(pageFocusLeft,null);
 				}
 			}
 
@@ -644,13 +645,13 @@
 				currentPageNum = 1;
 				pageNum = countPageMax(maxPage, maxPageLength, joinhowLengthNum);
 				if(pageNum == 1){
-					undisp("how_join_page_right");
-					undisp("how_join_page_left");
-					undisp("how_join_page_focus_right");
-					undisp("how_join_page_focus_left");
+					v("how_join_page_right",null);
+					v("how_join_page_left",null);
+					v("how_join_page_focus_right",null);
+					v("how_join_page_focus_left",null);
 				}else{
-					disp("how_join_page_right");
-					disp("how_join_page_left");
+					v("how_join_page_right",1);
+					v("how_join_page_left",1);
 				}
 				setJoinhowPageText();
 			}
@@ -670,13 +671,13 @@
 				pageNum = countPageMax(maxPage, maxPageLength, profLengthNum);
 
 				if(pageNum == 1){
-					undisp("prof_page_right");
-					undisp("prof_page_left");
-					undisp("prof_page_focus");
-					undisp("prof_page_focus_left");
+					v("prof_page_right",null);
+					v("prof_page_left",null);
+					v("prof_page_focus",null);
+					v("prof_page_focus_left",null);
 				}else{
-					disp("prof_page_right");
-					disp("prof_page_left");
+					v("prof_page_right",1);
+					v("prof_page_left",1);
 				}
 				setProfPageText();
 			}
@@ -696,13 +697,13 @@
 				pageNum = countPageMax(maxPage, maxPageLength, netLengthNum);
 
 				if(pageNum == 1){
-					undisp("net_page_right");
-					undisp("net_page_left");
-					undisp("net_page_focus");
-					undisp("net_page_focus_left");
+					v("net_page_right",null);
+					v("net_page_left",null);
+					v("net_page_focus",null);
+					v("net_page_focus_left",null);
 				}else{
-					disp("net_page_right");
-					disp("net_page_left");
+					v("net_page_right",1);
+					v("net_page_left",1);
 				}
 				setNetPageText();
 			}
