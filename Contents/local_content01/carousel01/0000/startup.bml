@@ -355,7 +355,7 @@
 				}
 				showRegiFocus();
 				sleep(200);
-				changeRegiInfo();
+				changeRegiInfo(0);
 				regiFocus();
 				showRegiFocus();
 
@@ -404,6 +404,8 @@
 					sleep(200);
 					undisp("regi_pulldown_decision_age");
 					showRegiAgePullDown(false);
+				}else if(key == 0){
+					so("7");
 				}
 
 				var j = 0;
@@ -449,16 +451,18 @@
 			var nvValueAddress = "ËÌ³¤Æ»";
 			function getRegiNv(){
 				var value = browser.readPersistentArray( nvUrl, nvStrct );
-				if(value == null){
-					return;
+				if(value){
+					nvValueAge = value[1];
 				}
-				nvValueAge = value[1];
+				if(nvValueAge == ""){
+					nvValueAge = 6;
+				}
 				var tmpAge = nvValueAge - 4;
 				if(tmpAge <= 0){
 					tmpAge = maxNum + tmpAge;
 				}
 				nowStartNum = tmpAge;
-				debugN("valueAge: " + tmpAge);
+				debugN("valueAge: " + nvValueAge);
 			}
 
 			function showInitRegiScene(){
