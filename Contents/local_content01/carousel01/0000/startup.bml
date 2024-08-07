@@ -21,7 +21,7 @@
 			function sleep(i_val){browser.sleep(i_val);}
 
 			function init(){
-				v("pDebug",1);
+				debug = 1;
 				debugFlg = true;
 
 				updateModule();
@@ -29,7 +29,9 @@
 
 				showInit();
 
-				debugN("SetInterval開始");
+				//debugN("SetInterval開始");
+				debugN("debug: " + debug);
+				dbg("SetInterval開始");
 				timerID = browser.setInterval("intervalSettings();", 2000,1);
 				return;
 			}
@@ -463,7 +465,7 @@
 				var regiData = new Array(1, nvValueAge);
 				nv.data[1] = nvValueAge;
 				var value = nv.write();
-				if(value >0){
+				if(value){
 					debugN("書込み完了");
 				}
 
@@ -1160,8 +1162,8 @@
 		</div>
 
 		<!-- デバッグ用 -->
-		<div id="d_debug" style="left:52px;top:30px;width:900px;height:400px;" >
-			<p id="pDebug" ><![CDATA[]]></p>
+		<div id="pDebug">
+			<p id="debug" ><![CDATA[]]></p>
 		</div>
 	</body>
 </bml>

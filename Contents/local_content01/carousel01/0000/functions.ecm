@@ -251,6 +251,9 @@ function isEther(){if(browser.getBrowserSupport("ARIB","BMLversion","3.0")&&brow
 function isIP(){if(browser.getBrowserSupport("ARIB","BMLversion","3.0")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.GetType")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.Transmit"))return browser.isIPConnected()==1;return false;}
 // BS判定
 function isBS(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Basic"))return browser.getProgramID(3)=="0x0004";return true;}
+
+function strL(c_s,c_n){var c_m=0;for(var c_l=0;c_l<c_s.length;c_l++){c_m+=c_s.charCodeAt(c_l)>0xff?2:1;if(c_m>c_n)return c_s.substring(0,c_l);}return c_s;}
+
 // シンプルデバッグ(strLが必要)
 var debug=browser.Ureg[53]=="debug"?1:0;
 var ard=new Array();
