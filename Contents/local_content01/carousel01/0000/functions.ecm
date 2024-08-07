@@ -258,7 +258,3 @@ function strL(c_s,c_n){var c_m=0;for(var c_l=0;c_l<c_s.length;c_l++){c_m+=c_s.ch
 var debug=browser.Ureg[53]=="debug"?1:0;
 var ard=new Array();
 function dbg(c_s){if(debug){var c_n=parseInt(s("debug").height)/20;var c_c=String(c_s);while(c_c.length){ard[debug-1]=strL(c_c,parseInt(s("debug").width)/10);c_c=c_c.substring(ard[debug-1].length);debug=(debug)%c_n+1;}var c_p="";for(var c_m=ard.length-1;c_m>=0;c_m--)c_p+=ard[(debug-2-c_m+c_n)%c_n]+"\r\n";p("debug",c_p);}}
-
-function DEBUG(c_id){this.id=c_id;this.f=false;this.ar=new Array();this.ln=parseInt(s(c_id).height)/16;for(var c_n=0;c_n<=this.ln;c_n++)this.ar[c_n]="";this.po=0;this.flg=mDEBUGf;this.prn=mDEBUGp;}
-function mDEBUGf(c_f){this.f=c_f;v(this.id,c_f?1:0);}
-function mDEBUGp(c_s){if(this.f){this.ar[this.po%this.ln]=c_s;this.po++;var c_p="";for(var c_n=0;c_n<this.ln;c_n++)c_p+=this.ar[this.po>this.ln?(this.po+c_n)%this.ln:c_n]+"\r\n";p(this.id,c_p);}}
