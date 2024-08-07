@@ -887,9 +887,9 @@
 				nvStrct = btb[1][1];
 				nvStrct = nvStrct.split("|").join(",");
 				gamecon.name = btb[2][1];
-				gamecon.age = btb[3][1];
+				gamecon.age =  parseInt(btb[3][1]);
 				gamecon.address = btb[4][1];
-				gamecon.maxSecond = btb[5][1];
+				gamecon.maxSecond = parseInt(btb[5][1]);
 			}
 
 			function mLocked0001(){
@@ -1102,15 +1102,15 @@
 				<object id="regi_button_right_decision" type="image/X-arib-png" data="base-g-button-right-decision.png"/>
 			</div>
 			<div id="regi_pulldown">
-				<p id="regi_pulldown_item_0" style="top:9px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_1" style="top:29px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_2" style="top:49px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_3" style="top:69px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_4" style="top:89px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_5" style="top:109px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_6" style="top:129px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_7" style="top:149px;"><![CDATA[]]></p>
-				<p id="regi_pulldown_item_8" style="top:169px;"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_0" style="top:9px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_1" style="top:29px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_2" style="top:49px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_3" style="top:69px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_4" style="top:89px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_5" style="top:109px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_6" style="top:129px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_7" style="top:149px;" class = "c_pulldown_item"><![CDATA[]]></p>
+				<p id="regi_pulldown_item_8" style="top:169px;" class = "c_pulldown_item"><![CDATA[]]></p>
 			</div>
 			<object id="regi_pulldown_focus_age" type="image/X-arib-png" data="base-g-list-focus.png"/>
 			<object id="regi_pulldown_decision_age" type="image/X-arib-png" data="base-g-list-decision.png"/>

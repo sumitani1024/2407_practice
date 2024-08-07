@@ -214,15 +214,7 @@ p{font-family:"´Ý¥´¥·¥Ã¥¯";}
 #regi_list_decision_focus_address{ left:161px; top:275px; width:198px; height:41px; visibility:hidden; }
 
 #regi_pulldown{ left:168px; top:165px; width:150px; height:190px; background-color-index:16; visibility:hidden; }
-#regi_pulldown_item_0{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_1{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_2{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_3{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_4{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_5{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_6{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_7{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
-#regi_pulldown_item_8{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
+.c_pulldown_item{ left: 32px; width: 80px; height: 16px; font-size: 16px; text-align: center; color-index: 7; grayscale-color-index:20 21; visibility:hidden; }
 
 #regi_pulldown_focus_age{ left:161px; top:240px; width:198px; height:41px; visibility:hidden; }
 #regi_pulldown_decision_age{ left:161px; top:240px; width:198px; height:41px; visibility:hidden; }
