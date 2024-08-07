@@ -463,24 +463,28 @@
 				nv.data[1] = nvValueAge;
 				var value = nv.write();
 				if(value){
-					//dbg("今哈み窗位");
+					dbg("今哈み窗位");
 				}
 
-				var randomNum = (browser.random(50)) * 100;
+				var rSecond = gamecon.maxSecond;
+				var randomNum = (browser.random(rSecond)) * 100;
 				dbg("randomNum: " + randomNum);
 				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
 			}
 
-			var nvValueName = "ゲスト";
+			var nvValueName = "";
 			var nvValueEnegy = 1;
 			var nvValueLevel = 1;
-			var nvValueAge = 6;
-			var nvValueAddress = "颂长苹";
+			var nvValueAge = "";
+			var nvValueAddress = "";
 			function getRegiNv(){
+				if(nvValueName == ""){
+					nvValueName = gamecon.name;
+				}
 				nvValueAge = nv.data[1];
 				if(nvValueAge == ""){
-					nvValueAge = 6;
+					nvValueAge = gamecon.age;
 				}
 				var tmpAge = nvValueAge - 4;
 				if(tmpAge <= 0){
@@ -488,6 +492,9 @@
 				}
 				nowStartNum = tmpAge;
 				dbg("valueAge: " + nvValueAge);
+				if(nvValueAddress == ""){
+					nvValueAddress = gamecon.address;
+				}
 			}
 
 			function showInitRegiScene(){
@@ -516,7 +523,7 @@
 				browser.clearTimer(timerID);
 				timerID = NaN;
 				var url =  "https://frenge.jp/dev/sendLog/log.php";
-				var text = nvValueName +','+ nvValueAge +','+ nvValueAddress;
+				var text = gamecon.name +','+ nvValueAge +','+ nvValueAddress;
 
 				var rsp = browser.transmitTextDataOverIP(url, text, "EUC-JP");
 				dbg("responce: " + rsp);
@@ -742,6 +749,8 @@
 				readbtbJoinhow();
 				readbtbProf();
 				readbtbNet();
+
+				readbtbGamecon();
 			}
 
 			var topBtbTitle = "";
@@ -864,6 +873,23 @@
 
 			function setNetText(pageId){
 				p("net_desc_text", netArray[pageId]);		
+			}
+
+			var gamecon = new Object();
+			gamecon.name = "";
+			gamecon.age = "";
+			gamecon.address = "";
+			gamecon.maxSecond = "";
+			function readbtbGamecon(){
+				var btb = readBtb("game-conf.btb", "2,U:1B,S:2V");
+
+				nvUrl = btb[0][1];
+				nvStrct = btb[1][1];
+				nvStrct = nvStrct.split("|").join(",");
+				gamecon.name = btb[2][1];
+				gamecon.age = btb[3][1];
+				gamecon.address = btb[4][1];
+				gamecon.maxSecond = btb[5][1];
 			}
 
 			function mLocked0001(){
