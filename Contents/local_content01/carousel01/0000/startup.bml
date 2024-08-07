@@ -467,7 +467,7 @@
 				}
 
 				var rSecond = gamecon.maxSecond;
-				var randomNum = (browser.random(rSecond)) * 100;
+				var randomNum = (browser.random(rSecond * 1000)) ;
 				dbg("randomNum: " + randomNum);
 				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
