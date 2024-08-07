@@ -22,15 +22,12 @@
 
 			function init(){
 				debug = 1;
-				debugFlg = true;
 
 				updateModule();
 				isRec();
 
 				showInit();
 
-				//debugN("SetInterval開始");
-				debugN("debug: " + debug);
 				dbg("SetInterval開始");
 				timerID = browser.setInterval("intervalSettings();", 2000,1);
 				return;
@@ -39,7 +36,7 @@
 			function intervalSettings(){
 				browser.clearTimer(timerID);
 				timerID = NaN;
-				debugN("SetInterval終了");
+				dbg("SetInterval終了");
 			}
 
 			//共通
@@ -79,12 +76,12 @@
 			{
 				var buttonKey = getKey();
 
-				debugN( "番組ボタン押下: " + buttonKey);
+				dbg( "番組ボタン押下: " + buttonKey);
 				if(buttonKey == 21 || buttonKey == 22 || buttonKey == 23 || buttonKey == 24)
 				{
 					footerButtonChange(buttonKey);
 				}else if(buttonKey == 19){
-					debugN("timerID: " + timerID);
+					dbg("timerID: " + timerID);
 					if(!isNaN(timerID) ){
 						browser.clearTimer(timerID);
 						TimerID = NaN;
@@ -93,7 +90,7 @@
 					if(gStatusNum != 19){
 						footerButtonChange(buttonKey);
 					}else{
-						debugN( "NHKトップへ戻る");
+						//dbg( "NHKトップへ戻る");
 						so("7");
 						//gotoNHKTop();
 					}
@@ -118,7 +115,7 @@
 				}
 
 				sl("lock");
-				debugN(sll);
+				//dbg(sll);
 				footerButtonReturn();
 				so("7");
 				if(key == 21){
@@ -466,11 +463,11 @@
 				nv.data[1] = nvValueAge;
 				var value = nv.write();
 				if(value){
-					debugN("書込み完了");
+					//dbg("書込み完了");
 				}
 
 				var randomNum = (browser.random(50)) * 100;
-				debugN("randomNum: " + randomNum);
+				dbg("randomNum: " + randomNum);
 				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
 			}
@@ -490,7 +487,7 @@
 					tmpAge = maxNum + tmpAge;
 				}
 				nowStartNum = tmpAge;
-				debugN("valueAge: " + nvValueAge);
+				dbg("valueAge: " + nvValueAge);
 			}
 
 			function showInitRegiScene(){
@@ -522,7 +519,7 @@
 				var text = nvValueName +','+ nvValueAge +','+ nvValueAddress;
 
 				var rsp = browser.transmitTextDataOverIP(url, text, "EUC-JP");
-				debugN("responce: " + rsp);
+				dbg("responce: " + rsp);
 			}
 
 			function showRegiAgePullDown(show){
@@ -651,12 +648,12 @@
 
 			function countPageMax(maxPage, maxPageLength, lengthNum){
 				pageNum = 1;
-				debugN("行数:" + lengthNum);
+				dbg("行数:" + lengthNum);
 				while(lengthNum > maxPageLength ){
 					lengthNum = lengthNum - maxPageLength;
 					pageNum++;
 				}
-				debugN("行数(計算後):" + pageNum);
+				dbg("行数(計算後):" + pageNum);
 				if(pageNum > maxPage){
 					pageNum = maxPage;
 				}
@@ -893,7 +890,7 @@
 			}
 
 			function Dpressed(){
-				debugN("dボタン押下");
+				dbg("dボタン押下");
 				so("7");
 				gotoTV();
 			}
@@ -920,19 +917,20 @@
 				var now = new Date();
 				var subDateTime = browser.subDate(now, broadcastTime, 0);
 				if(subDateTime >= 10000){
-					debugN("録画再生");
+					dbg("録画再生");
 				}else{
-					debugN("放送");
+					dbg("放送");
 				}
 			}
 
 			//////////////////////////////////////////////////////////////////////////
 			//デバッグ表示
 			//////////////////////////////////////////////////////////////////////////
+			/*
 			var debugFlg = false;
 			var g_DebugLine = 12;//最大表示行
 			var g_DebugStr = "";//表示デバッグ
-			function debugN(msg){
+			function dbg(msg){
  				if (!debugFlg) return;
  				var tmpStr = "";
 				var deliStr = (g_DebugStr=="")?"■":"\r\n■";
@@ -945,6 +943,7 @@
 				g_DebugStr = tmpStr==""?g_DebugStr:tmpStr;
 				p("pDebug",g_DebugStr);
 			}
+				*/
 
 			function srcUpdated(){
 				var evtStatus;
