@@ -100,6 +100,9 @@ X_NHK_number_of_schedules CDATA #IMPLIED
 				<resource name="sub.bml" type="text/X-arib-bml;charset=&quot;euc-jp&quot;">
 					<editable name="sub.bml" type="text/X-arib-bml;charset=&quot;Shift_JIS&quot;" />
 				</resource>
+				<resource name="game-conf.btb" type="application/X-arib-btable">
+					<editable name="game-conf.btf" type="text/plain;charset=&quot;Shift_JIS&quot;" />
+				</resource>
 			</module>
 			<module compress="FORCE" compression_type="ZLIB" module_id="0001" name="0001" original_size="1024000" priority="1" version_up_flag="FALSE">
 				<resource name="joinhow.btb" type="application/X-arib-btable">
