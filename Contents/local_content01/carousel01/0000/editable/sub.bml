@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!DOCTYPE bml PUBLIC "+//ARIB STD-B24:1999//DTD BML Document//JA" "http://www.arib.or.jp/B24/DTD/bml_1_1.dtd">
+<?bml bml-version="3.0" ?>
+<bml>
+<head>
+<title>test</title>
+
+<link href="startup.css" />
+<script src = "functions.ecm"/>
+<script><![CDATA[
+	var ES = me.substring(0,4);
+	var MODULE = me.substring(4,8);
+
+	function getUreg(index) { return browser.Ureg[index]; }
+	function getEvent() { return document.currentEvent; }
+	function getKey() { return getEvent().keyCode; }
+
+	function onload(){
+		v("pDebug",1);
+		debugFlg = true;
+
+		getUregData();
+	}
+
+	function getUregData(){
+		var uregData = getUreg(1);
+		cu();
+		//debugN("ureg: " + uregData);
+	}
+
+	function kd(){
+		var buttonKey = getKey();
+		if(buttonKey == 19){
+			var startScene = ES + MODULE + "/startup.bml";
+			so("7");
+			browser.launchDocument(startScene, "cut");
+		}
+	}
+
+	var debugFlg = false;
+	var g_DebugLine = 12;//ｺﾇﾂ酲ｽｼｨｹﾔ
+	var g_DebugStr = "";//ﾉｽｼｨ･ﾇ･ﾐ･ﾃ･ｰ
+	function debugN(msg){
+		 if (!debugFlg) return;
+		 var tmpStr = "";
+		var deliStr = (g_DebugStr=="")?"｢｣":"\r\n｢｣";
+		g_DebugStr += deliStr + msg;
+		var dAry = g_DebugStr.split("\r\n");
+		if(dAry.length>g_DebugLine){
+			var tmpPos = g_DebugStr.indexOf("\r\n");
+			tmpStr = g_DebugStr.substring(tmpPos+2);
+		}
+		g_DebugStr = tmpStr==""?g_DebugStr:tmpStr;
+		p("pDebug",g_DebugStr);
+	}
+
+]]></script>
+
+</head>
+<body id="Body" onload="onload();">
+	<div id = "DIV1" style = "width:960px; height:540px;">
+		<object id="bg" type="image/jpeg" data="BG.jpg" style="left:0px;top:0px;width:960px;height:540px;"/>
+		<object id="Vstream" style="left:52px;top:30px;width:480px;height:270px;" type="video/X-arib-mpeg2" data="/-1" remain="remain"/>
+		<object id="Astream" type="audio/X-arib-mpeg2-aac" data="/-1" streamstatus="play" remain="remain"/>
+	</div>
+	<div id="footer_button_top">
+		<object id= "button_back_housou" type="image/X-arib-png" data="back-housou-top.png"/>
+		<object id= "button_back_top" type="image/X-arib-png" data="back-top.png"/>
+	</div>
+
+	<div id="foc0" onkeydown="kd();" style="nav-index:0;" />
+
+	<div id="d_debug" style="left:52px;top:30px;width:900px;height:400px;" >
+		<p id="pDebug" ><![CDATA[]]></p>
+	</div>
+</body>
+</bml>
