@@ -6,7 +6,7 @@
     <order_info X_NHK_min_bitrate="32" program_content_id="C1001000-000"/>
   </content_info>
 
-  <!-- ¢§¢§¢§¢§¢§Ç¼ÉÊ»þ¤Ïºï½ü¤¹¤ë¤³¤È¢§¢§¢§¢§¢§ -->
+  <!-- Ž¢Ž§Ž¢Ž§Ž¢Ž§Ž¢Ž§Ž¢Ž§ŽÇŽ¼ŽÉŽÊŽ»?Ž¤ŽÏŽº?Ž½?Ž¤Ž¹Ž¤?Ž¤Ž³Ž¤ŽÈŽ¢Ž§Ž¢Ž§Ž¢Ž§Ž¢Ž§Ž¢Ž§ -->
   <!-- ES40 --> 
 	<data_es auto_start_flag="TRUE" component_tag="40" document_resolution="960x540_16v9" entry_point_flag="TRUE" file_storable_flag="FALSE" format_type="BML" format_version="3.0" independent_flag="TRUE" name="local_content00" ondemand_retrieval_flag="TRUE" style_for_tv_flag="TRUE">
 		<carousel data_event_changed_flag="TRUE" name="carousel01" return_to_entry_flag="FALSE" start_time="00:00:00">
@@ -16,7 +16,7 @@
 			</module>
 		</carousel>
 	</data_es>
-	<!-- ¢¥¢¥¢¥¢¥¢¥Ç¼ÉÊ»þ¤Ïºï½ü¤¹¤ë¤³¤È¢¥¢¥¢¥¢¥¢¥ -->
+	<!-- Ž¢Ž¥Ž¢Ž¥Ž¢Ž¥Ž¢Ž¥Ž¢Ž¥ŽÇŽ¼ŽÉŽÊŽ»?Ž¤ŽÏŽº?Ž½?Ž¤Ž¹Ž¤?Ž¤Ž³Ž¤ŽÈŽ¢Ž¥Ž¢Ž¥Ž¢Ž¥Ž¢Ž¥Ž¢Ž¥ -->
 
 	<data_es component_tag="50" document_resolution="960x540_16v9" duration="01:00:00" entry_point_flag="FALSE" file_storable_flag="FALSE" format_version="3.0" name="local_content01" ondemand_retrieval_flag="TRUE">
 		<carousel name="carousel01" start_time="00:00:00">

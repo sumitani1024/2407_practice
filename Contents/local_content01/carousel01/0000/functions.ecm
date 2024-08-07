@@ -243,77 +243,15 @@ function NV(c_uri,c_id,c_str,c_ini){this.uri=c_uri;this.id=c_id;this.str=c_str;t
 function mNVc(){return !isNaN(browser.writePersistentArray(this.uri,"U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B,U:4B",new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)));}
 function mNVr(){this.data=new Array();var c_as=String(this.str).split(",");var c_n=br?(br==1?1:15):5;if(isBS()&&(this.uri.indexOf("local/")>=0||this.uri.indexOf("group/")>=0))c_n=1;var c_ar;while(!(c_ar=browser.readPersistentArray(this.uri,c_as[0]))){if(!--c_n)return false;browser.sleep(2000);}if(c_ar[0]!=this.id){this.data[0]=c_ar[0];return false;}while(!(c_ar=browser.readPersistentArray(this.uri,this.str))){if(!--c_n)return false;browser.sleep(2000);}for(c_n=0;c_n<c_as.length;c_n++)this.data[c_n]=c_ar[c_n];return true;}
 function mNVw(){if(isDVHS())return false;if(isNaN(browser.writePersistentArray(this.uri,this.str,this.data)))return false;var c_ar=browser.readPersistentArray(this.uri,this.str);return c_ar&&c_ar[0]==this.id;}
-// 郵便番号取得(NVRAM関数が必要)
-function getZip(){var c_nv=new NV("nvram://receiverinfo/zipcode",0,"S:7B",new Array());return c_nv.data.length?(c_nv.data[0]+"0000000").substring(0,7):"0000000";}
 // 録画判定
 function isDVHS(){if(isNaN(browser.setCurrentDateMode(1)))return true;var c_r=new Date();browser.setCurrentDateMode(0);var c_d=browser.subDate(c_r,new Date(),0);return isNaN(c_d)||c_d<-10000||c_d>10000;}
 // 通信判定
 function isEther(){if(browser.getBrowserSupport("ARIB","BMLversion","3.0")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.GetType")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.Transmit")){var c_n=browser.getConnectionType();if(!isNaN(c_n))return (c_n==402||c_n==403);}return false;}
 // 接続判定
 function isIP(){if(browser.getBrowserSupport("ARIB","BMLversion","3.0")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.GetType")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP")&&browser.getBrowserSupport("ARIB","APIGroup","Com.IP.Transmit"))return browser.isIPConnected()==1;return false;}
-// DOL遷移(isDVHSが必要)
-function luHTTP(c_uri){if(isDVHS())return;if(browser.Ureg[59]!="ok"){var c_r=new Array();c_r=browser.transmitTextDataOverIP("http://beacon.nhk.jp/","","EUC-JP");if(c_r[0]!=1||c_r[1]!=200){browser.Ureg[59]="ng";return;}browser.Ureg[59]="ok";}ml("",2);lu(c_uri);}
-// 放送通信連携タイプ1(IPTV TYPE1)判定
-function isIPTV(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.startExtraBrowser")&&browser.getBrowserSupport("ARIB","ResidentApp","netTVBrowser")&&browser.getBrowserSupport("ARIB","ExtraBrowserFunction","netTVVOD")){var c_v=new Array();if(c_v=browser.getResidentAppVersion("netTVBrowser")){var c_s=c_v[4].substring(0,6);if(c_s=="AAA003"||c_s=="AAA004"||c_s=="AAA005"||c_s=="AAA006")return 1;if(c_s=="AAB001")return 2;}}return 0;}
-// NODトップ遷移(NVRAM関数が必要)
-function luNOD(){var c_nv=new NV("nvram://local_web/0",1,"U:1B,U:2B,U:2B,S:18B,S:18B,U:1B,U:2B,U:1B,U:1B,S:1V,U:1B,U:1B,U:1B,U:1B,U:1B,U:1B",new Array());lu("/bmltop/nod/"+(Number(c_nv.data[14])?"lu":"")+(isIPTV()==1?"act":"catv")+".bml");}
-// 高画質動画遷移(放送通信連携タイプ1(IPTV TYPE1))(放送)(NVRAM関数が必要)
-function luIPTV(uri_r,uri_a,uri_j){var c_iptv=isIPTV();if(c_iptv==1){var c_nv=new NV("nvram://local_web/0",1,"U:1B,U:2B,U:2B,S:18B,S:18B,U:1B,U:2B,U:1B,U:1B,S:1V,U:1B,U:1B,U:1B,U:1B,U:1B,U:1B",new Array());if(!c_nv.data.length){browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;browser.Ureg[55]="bml-act/jump.bml";luHTTP("http://bml.nhk.jp/startup.bml");}else if(!Number(c_nv.data[14])){c_nv.data[14]=1;c_nv.write();browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;browser.Ureg[55]="bml-act/jump.bml";luHTTP("http://bml.nhk.jp/startup.bml");}browser.startExtraBrowser("netTVBrowser",0,"",uri_a);}else if(c_iptv==2)browser.startExtraBrowser("netTVBrowser",0,"",uri_j);}
-/*
-// 高画質動画遷移(放送通信連携タイプ1(IPTV TYPE1))(通信)(NVRAM関数が必要)
-function luIPTV(uri_r,uri_a,uri_j){var c_iptv=isIPTV();if(c_iptv==1){var c_nv=new NV("nvram://local_web/0",1,"U:1B,U:2B,U:2B,S:18B,S:18B,U:1B,U:2B,U:1B,U:1B,S:1V,U:1B,U:1B,U:1B,U:1B,U:1B,U:1B",new Array());if(!c_nv.data.length){browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;lu("/bml-act/jump.bml");}else if(!Number(c_nv.data[14])){c_nv.data[14]=1;c_nv.write();browser.Ureg[1]=uri_r;browser.Ureg[2]=uri_a;lu("/bml-act/jump.bml");}browser.startExtraBrowser("netTVBrowser",0,"",uri_a);}else if(c_iptv==2)browser.startExtraBrowser("netTVBrowser",0,"",uri_j);}
-*/
-// 放送通信連携タイプ2(IPTV TYPE2)判定
-function isIPTV2(){return browser.getBrowserSupport("ARIB","ResidentApp","VOD")==1;}
-// 高画質動画遷移(放送通信連携タイプ2(IPTV TYPE2))(放送)※lu("/60/1000/vod??.bml")でもOK!
-function luIPTV2(uri_r,c_lid){var c_ar=browser.getResidentAppVersion("VOD");if(c_ar){var c_term=browser.getIRDID("0xE0001");var c_nv=new NV("nvram://00;group/62",1,"U:1B,S:1V,U:2B,S:1V",new Array(1,"",0,""));c_ar=browser.transmitTextDataOverIP("http://dol.nhk.or.jp/bml-act-vod/adv.cgi","terminal_id="+c_term+(c_nv.data[1]==""?"":"&device_id="+c_nv.data[1]),"EUC-JP");if(c_ar[0]==1||c_ar[1]==200){browser.Ureg[49]=c_ar[2].substring(8,40);if(c_nv.data[1]==""){c_ar=c_ar[2].split("&device=");if(c_ar.length>1){c_nv.data[1]=c_ar[1];c_nv.write();}}browser.Ureg[1]=uri_r;browser.Ureg[2]=c_lid;browser.Ureg[55]="bml-act-vod/play.bml";luHTTP("http://dol.nhk.or.jp/startup.bml");}}}
-/*
-// 高画質動画遷移(放送通信連携タイプ2(IPTV TYPE2))(通信)
-function luIPTV2(uri_r,c_lid,c_size){browser.Ureg[1]=uri_r;browser.Ureg[2]=c_lid;if(browser.Ureg[49]==""){lu("arib-dc://-1.-1.-1/60/1000/vod"+c_size+".bml");}else{lu("/bml-act-vod/play.bml");}}
-*/
-// Hybridcast対応判定(0:非対応/1:フェーズ0対応)
-function isHC(){return(browser.getBrowserSupport('ARIB','APIGroup','AITControlledApp.Start')==1&&browser.getBrowserSupport("ARIB","AITControlledAppEngineFunction","IPTV-F","HTML5_ph0")==1&&browser.getBrowserSupport('ARIB','AITTransportMethod','XML','HTTP')==1)?1:0;}
-// Hybridcast遷移
-function luHC(c_appid,c_uri){browser.startAITControlledApp("10",c_appid,c_uri);}
-// PPP判定
-function isPPP(){if(browser.getBrowserSupport("ARIB","APIGroup","Com.IP.Params")){var c_p=browser.getISPParams();return (c_p&&c_p[1]&&c_p[3]&&c_p[4]);}return false;}
 // BS判定
 function isBS(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Basic"))return browser.getProgramID(3)=="0x0004";return true;}
-// 地上受信可能判定
-function canT(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Media"))return browser.isSupportedMedia("4");return false;}
-// ネットワークID取得
-function getNID(){return browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Basic")?num0(browser.getProgramID(3).substring(2).toLowerCase(),4):"0004";}
-// ブラウザーバージョン取得(フルサイズ)
-function getBrowser(){if(browser.getBrowserSupport("ARIB","APIGroup","Ctrl.Version")){var c_r=browser.getBrowserVersion();if(c_r&&c_r.length==4)return c_r[0]+(c_r[1]+"____________________").substring(0,20)+c_r[2]+c_r[3];}return "____________________________";}
-// Foliage判定(getBrowserが必要)
-function isFoliage(){return getBrowser().substring(0,13)=="00FOLIAGETYPE";}
-// 数値を"0"で桁数指定パディング
-function num0(c_n,c_c){var c_r="0000000000000000"+c_n;return c_r.substring(c_r.length-c_c);}
-// 数値を" "で桁数指定パディング
-function nums(c_n,c_c){var c_r="          "+c_n;return c_r.substring(c_r.length-c_c);}
-// 1桁の数値を全角化
-function numz(c_n){if(c_n<10)return "０１２３４５６７８９".charAt(c_n);return c_n;}
-// 【ACASに対応していないため、削除】B-CAS番号を10進数20桁の文字列で取得
-// function getCAS10(){var c_h=browser.getIRDID(5);if(!c_h||c_h.length!=12)return "00000000000000000000";var c_r=parseInt(c_h.substring(5,12),16)%100000+parseInt(c_h.substring(3,5),16)*35456;var c_l=parseInt(c_h.substring(5,12),16)/100000+c_r/100000+parseInt(c_h.substring(3,5),16)*2684;return "0000"+num0(c_l,6)+num0(c_r,5)+num0((parseInt(c_h.substring(0,4),16)^parseInt(c_h.substring(4,8),16))^parseInt(c_h.substring(8,12),16),5);}
-// Ureg[50]にフラグを設定
-function setUreg50(c_c,c_s){var c_ar=browser.Ureg[50].split("_");for(var c_l=0;c_l<c_ar.length;c_l++)if(c_ar[c_l].charAt(0)==c_c){c_ar[c_l]=c_c+c_s;browser.Ureg[50]=c_ar.join("_");return;}if(c_ar.length)browser.Ureg[50]+="_";browser.Ureg[50]+=c_c+c_s;}
-// Ureg[50]のフラグを取得(未登録がわかるようにフラグ自体も返す)
-function getUreg50(c_c){var c_ar=browser.Ureg[50].split("_");for(var c_l=0;c_l<c_ar.length;c_l++)if(c_ar[c_l].charAt(0)==c_c)return c_ar[c_l];return "";}
-// UTS送信(getBrowser()が必要)
-function us(u_url,c_tkt,c_type,c_ar,c_url){if(u_url.length){var now=new Date();var denbun=c_tkt+":"+(now==null?"00000000000000":now.toString().split("T").join("").split("-").join("").split(":").join(""))+":0000:0:E:"+c_type+":"+c_ar.join(":");if(now!=null&&c_tkt.length==16&&c_type.length<=8&&c_type.length){var r=browser.transmitTextDataOverIP(u_url,denbun,"EUC-JP");if(getBrowser().substring(0,2)=="19")browser.sleep(300);if(Number(r[0])==1&&Number(r[1])==200&&String(r[2]).substring(0,5)=="0000:")return r[2];denbun+="/"+r[1]+"/"+r[2];}if(c_url.length){browser.transmitTextDataOverIP(c_url,denbun+"/"+getBrowser(),"EUC-JP");if(getBrowser().substring(0,2)=="19")browser.sleep(300);}}return"";}
-// 文字列の長さ(全角を2文字としてカウント)
-function strlen(c_s){var c_n=0;for(var c_l=0;c_l<c_s.length;c_l++)c_n+=c_s.charCodeAt(c_l)>0xff?2:1;return c_n;}
-// 文字列の先頭から指定した文字を取得(全角を2文字としてカウント)
-function strL(c_s,c_n){var c_m=0;for(var c_l=0;c_l<c_s.length;c_l++){c_m+=c_s.charCodeAt(c_l)>0xff?2:1;if(c_m>c_n)return c_s.substring(0,c_l);}return c_s;}
 // シンプルデバッグ(strLが必要)
 var debug=browser.Ureg[53]=="debug"?1:0;
 var ard=new Array();
 function dbg(c_s){if(debug){var c_n=parseInt(s("debug").height)/20;var c_c=String(c_s);while(c_c.length){ard[debug-1]=strL(c_c,parseInt(s("debug").width)/10);c_c=c_c.substring(ard[debug-1].length);debug=(debug)%c_n+1;}var c_p="";for(var c_m=ard.length-1;c_m>=0;c_m--)c_p+=ard[(debug-2-c_m+c_n)%c_n]+"\r\n";p("debug",c_p);}}
-// デバッグ(複数id可)
-function DEBUG(c_id){this.id=c_id;this.f=false;this.ar=new Array();this.ln=parseInt(s(c_id).height)/16;for(var c_n=0;c_n<=this.ln;c_n++)this.ar[c_n]="";this.po=0;this.flg=mDEBUGf;this.prn=mDEBUGp;}
-function mDEBUGf(c_f){this.f=c_f;v(this.id,c_f?1:0);}
-function mDEBUGp(c_s){if(this.f){this.ar[this.po%this.ln]=c_s;this.po++;var c_p="";for(var c_n=0;c_n<this.ln;c_n++)c_p+=this.ar[this.po>this.ln?(this.po+c_n)%this.ln:c_n]+"\r\n";p(this.id,c_p);}}
-
-// 各トップ用関数(各トップ以外は削除すること)
-// 受信機ID生成
-// function userID(){var c_mag=new Array(0x131,0x753,0x395,0x519,0x977,0x935,0xf45,0x75d,0x175,0xdb1,0x319,0x157,0xb31,0x513,0x19b,0x777);var c_ar=new Array("0");var c_sum=0;var c_cas=browser.getIRDID(5);if(!c_cas||c_cas==""){c_cas=browser.getIRDID(13);if(!c_cas){c_cas=browser.getIRDID(0xF0001);if(!c_cas)c_cas="";else{c_ar[0]=2;c_sum=0x904;}}else{c_ar[0]=1;c_sum=0xc82;}}if(c_ar[0]==2){c_cas=c_cas.substring(0,24).toLowerCase();var c_i;var c_o=0;for(var c_n=0;c_n<24*4;c_n++){if(!(c_n%4)){c_i="0123456789abcdef".indexOf(c_cas.charAt(c_n/4));}c_o+=(c_i&(0x8>>(c_n%4)))?(0x20>>(c_n%6)):0;if(c_n%6==5){c_ar[c_n/6%8*2+c_n/6/8+1]=c_o;c_sum+=c_o*c_mag[c_n/6%8*2+c_n/6/8];c_o=0;}}}else{c_cas=num0(c_cas,16).toLowerCase();for(var c_n=0;c_n<16;c_n++){c_ar[c_n+1]="0123456789abcdef".indexOf(c_cas.charAt(c_n/2+(c_n%2?8:0)));c_sum+=c_ar[c_n+1]*c_mag[c_n];}}for(var c_n=0;c_n<3;c_n++){c_ar[c_n+17]=c_sum%16;c_sum/=16;}var c_id="";for(var c_n=0;c_n<20;c_n++){c_ar[c_n]=(c_ar[c_n]+c_n*7)%(c_ar[0]==2&&c_n<17?64:16);c_id+="wertypasfghjklxnquiodzcvbmWERTYPASFGHJKLXNQUIODZCVBM0123456789-_".charAt(c_ar[c_n]);}if(!isDVHS()){var c_nv=new NV("nvram://local_web/6",1,"U:1B,S:1V,S:1V,S:1V,S:1V,U:1B,U:1B",new Array(1,"00000000000000000000","0000000000","","",0,0));if(c_id!=c_nv.data[1])if(c_cas!="0000000000000000"){c_nv.data[1]=c_id;c_nv.write();}else c_id=c_nv.data[1];}return c_id;}

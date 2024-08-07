@@ -68,8 +68,8 @@
 			}
 
 			function showInit(){
-				browser.unlockModuleOnMemory(moduleRef01);
-				browser.lockModuleOnMemory(moduleRef01);
+				ml(moduleRef01, true);
+				ml(moduleRef01, false);
 			}
 
 			// ボタン病布
@@ -456,11 +456,13 @@
 
 			var nvUrl = "nvram://local/8";
 			var nvStrct = "U:1B,S:1V";
+			var nv = new NV(nvUrl,1,nvStrct,new Array(1, ""));
 			function changeRegiButton(){
 				var age = getData("regi_pulldown_item_4");
 				nvValueAge = overAgeSettings(age, true);
 				var regiData = new Array(1, nvValueAge);
-				var value = browser.writePersistentArray( nvUrl, nvStrct, regiData );
+				nv.data[1] = nvValueAge;
+				var value = nv.write();
 				if(value >0){
 					debugN("今哈み窗位");
 				}
@@ -477,10 +479,7 @@
 			var nvValueAge = 6;
 			var nvValueAddress = "颂长苹";
 			function getRegiNv(){
-				var value = browser.readPersistentArray( nvUrl, nvStrct );
-				if(value){
-					nvValueAge = value[1];
-				}
+				nvValueAge = nv.data[1];
 				if(nvValueAge == ""){
 					nvValueAge = 6;
 				}
