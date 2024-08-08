@@ -20,11 +20,12 @@
 			function getEvent() { return document.currentEvent; }
 			function sleep(i_val){browser.sleep(i_val);}
 
+			var recFlag = false;
 			function init(){
 				debug = 1;
 
 				updateModule();
-				isRec();
+				recFlag = isRec();
 
 				showInit();
 
@@ -457,6 +458,10 @@
 			var nvStrct = "U:1B,S:1V";
 			var nv = new NV(nvUrl,1,nvStrct,new Array(1, ""));
 			function changeRegiButton(){
+				if(recFlag){
+					dbg("録画再生");
+					return;
+				}
 				var age = getData("regi_pulldown_item_4");
 				nvValueAge = overAgeSettings(age, true);
 				var regiData = new Array(1, nvValueAge);
@@ -467,7 +472,7 @@
 				}
 
 				var rSecond = gamecon.maxSecond;
-				var randomNum = (browser.random(rSecond * 1000))/100 *100 ;
+				var randomNum = (browser.random(rSecond * 10))*100 ;
 				dbg("randomNum: " + randomNum);
 				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
@@ -944,8 +949,10 @@
 				var subDateTime = browser.subDate(now, broadcastTime, 0);
 				if(subDateTime >= 10000){
 					dbg("録画再生");
+					return true;
 				}else{
 					dbg("放送");
+					return false;
 				}
 			}
 
