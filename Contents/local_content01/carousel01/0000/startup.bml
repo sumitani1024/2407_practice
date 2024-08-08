@@ -478,7 +478,6 @@
 				dbg("randomNum: " + randomNum);
 				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
-				nvwFlag = false;
 			}
 
 			var nvValueName = "";
@@ -535,6 +534,7 @@
 
 				var rsp = browser.transmitTextDataOverIP(url, text, "EUC-JP");
 				dbg("responce: " + rsp);
+				nvwFlag = false;
 			}
 
 			function showRegiAgePullDown(show){
