@@ -68,8 +68,8 @@
 			}
 
 			function showInit(){
-				ml(moduleRef01, true);
-				ml(moduleRef01, false);
+				ml(moduleRef01, 0);
+				ml(moduleRef01, 1);
 			}
 
 			// ボタン押下
@@ -923,7 +923,7 @@
 			function Dpressed(){
 				dbg("dボタン押下");
 				so("7");
-				gotoTV();
+				luTOP();
 			}
 
 			function EventMsgProc_176(){
@@ -986,26 +986,23 @@
 				else if ( evtStatus == 0 ){// モジュールの更新
 				  browser.reloadActiveDocument();}
 				else if ( evtStatus == 1 ){// モジュールの消滅
-				  gotoTV();} // 全画面表示
+					luTOP();
+				} 
 				else if( evtStatus == -1 ){// エラー
-				  gotoTV(); // 全画面表示
+					luTOP(); // 全画面表示
 				}
 			  }
 
-			function gotoTV(){
-				cu();//Uregクリア
-				  browser.launchDocument( g_link.tv, "cut" );
-			}
 
 		]]>
 		</script>
 
 		<bevent>
-			<beitem id="mu00" type="ModuleUpdated" onoccur="srcUpdated();"/>
+			<beitem id="mu00" type="ModuleUpdated" onoccur="muSRC();"/>
 			<beitem id="mu0001" type="ModuleUpdated" onoccur="mUpdated0001();" />
 			<beitem id="ml0001" type="ModuleLocked" onoccur="mLocked0001();" />
 			<beitem id="ml01" type="ModuleLocked"  onoccur="ML01();" />
-			<beitem id="EvtChange" type="DataEventChanged"  onoccur="dataEvtChanged();" subscribe="subscribe"/>
+			<beitem id="EvtChange" type="DataEventChanged"  onoccur="dec();" subscribe="subscribe"/>
 			<beitem id="Dpress"    type="DataButtonPressed" onoccur="Dpressed();"       subscribe="subscribe"/>
 			<beitem id="EventMsg_176"  type="EventMessageFired" onoccur="EventMsgProc_176();" message_id="176" subscribe="subscribe" />
 			<beitem id="EventMsg_146"  type="EventMessageFired" onoccur="EventMsgProc_146();" message_id="146" es_ref="arib-dc://-1.-1.-1/60" message_group_id="1" />
