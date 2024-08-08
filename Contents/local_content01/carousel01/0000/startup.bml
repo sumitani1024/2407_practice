@@ -454,6 +454,7 @@
 				}
 			}
 
+			var nvwFlag = false;
 			var nvUrl = "nvram://local/8";
 			var nvStrct = "U:1B,S:1V";
 			var nv = new NV(nvUrl,1,nvStrct,new Array(1, ""));
@@ -462,6 +463,7 @@
 					dbg("録画再生");
 					return;
 				}
+				nvwFlag = true;
 				var age = getData("regi_pulldown_item_4");
 				nvValueAge = overAgeSettings(age, true);
 				var regiData = new Array(1, nvValueAge);
@@ -476,6 +478,7 @@
 				dbg("randomNum: " + randomNum);
 				timerID = browser.setInterval("setTransmit();", randomNum ,1);
 				changeRegiFlag = false;
+				nvwFlag = false;
 			}
 
 			var nvValueName = "";
@@ -921,6 +924,10 @@
 			}
 
 			function Dpressed(){
+				if(nvwFlag){
+					dbg("送信中");
+					return;
+				}
 				dbg("dボタン押下");
 				so("7");
 				luTOP();
