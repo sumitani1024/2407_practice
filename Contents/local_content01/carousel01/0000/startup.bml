@@ -68,8 +68,12 @@
 			}
 
 			function showInit(){
-				ml(moduleRef01, 0);
+				dbg("showInit" + moduleRef01);
+				dbg("mll:" + mll);
+				//ml(moduleRef01, 0);
+				dbg("mll2:" + mll);
 				ml(moduleRef01, 1);
+				dbg("mll3:" + mll);
 			}
 
 			// ボタン押下
@@ -918,14 +922,16 @@
 			function mUpdated0001(){
 				var eventStatus = document.currentEvent.status;
 				if(eventStatus == 0){
-					browser.unlockModuleOnMemory(moduleRef01);
-					browser.lockModuleOnMemory(moduleRef01);
+					ml(moduleRef01, 0);
+					ml(moduleRef01, 1);
+					//browser.unlockModuleOnMemory(moduleRef01);
+					//browser.lockModuleOnMemory(moduleRef01);
 				}
 			}
 
 			function Dpressed(){
 				if(nvwFlag){
-					dbg("送信中");
+					dbg("送信中(dボタン押下無効)");
 					return;
 				}
 				dbg("dボタン押下");
