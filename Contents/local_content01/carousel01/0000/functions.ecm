@@ -172,8 +172,7 @@
 var me=browser.getActiveDocument();
 var ES=me.substring(0,4);
 var startBML="/40/0000/startup.bml";
-//var topBML="/40/0000/top.bml";
-var topBML="/40/0000/startup.bml";
+var topBML="/40/0000/top.bml";
 var sll=0;
 var mll=new Array();
 var kr=true;

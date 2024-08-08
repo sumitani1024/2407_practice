@@ -97,6 +97,7 @@
 					}else{
 						//dbg( "NHKトップへ戻る");
 						so("7");
+						luTOP();
 						//gotoNHKTop();
 					}
 				}else if(changeRegiFlag){
