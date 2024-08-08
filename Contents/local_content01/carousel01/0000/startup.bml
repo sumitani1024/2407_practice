@@ -89,7 +89,7 @@
 					dbg("timerID: " + timerID);
 					if(!isNaN(timerID) ){
 						browser.clearTimer(timerID);
-						TimerID = NaN;
+						timerID = NaN;
 					}
 					//todo: else ifでNHKトップへ戻る処理追加
 					if(gStatusNum != 19){
